@@ -1,13 +1,13 @@
 ﻿using System.Reflection.Metadata.Ecma335;
 
-class BurrowWheelerTransform
+static class BurrowWheelerTransform
 {
     public static (string, int) Transform(string text)
     {
         List<string> suffixes = new List<string>();
         for (int i = text.Length - 1; i >= 0; --i)
         {
-            suffixes.Add(text.Substring(i));
+            suffixes.Add(text[i..]);
         }
         suffixes.Sort();
 
