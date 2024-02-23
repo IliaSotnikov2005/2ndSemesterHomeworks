@@ -4,7 +4,7 @@ static class BurrowWheelerTransform
 {
     public static (string, int) Transform(string text)
     {
-        List<string> suffixes = new List<string>();
+        List<string> suffixes = [];
         for (int i = text.Length - 1; i >= 0; --i)
         {
             suffixes.Add(text[i..]);
@@ -22,7 +22,7 @@ static class BurrowWheelerTransform
 
             if (text.Length - suffixes[i].Length == 0)
             {
-                result += text[text.Length - 1];
+                result += text[^1];
                 continue;
             }
 
