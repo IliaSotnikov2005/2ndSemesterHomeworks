@@ -1,7 +1,13 @@
-﻿using System.Reflection.Metadata.Ecma335;
-
-static class BurrowWheelerTransform
+﻿/// <summary>
+/// Class <c>BurrowWheelerTransform</c> contains methods for direct and reverse BWT string conversion.
+/// </summary>
+public static class BurrowWheelerTransform
 {
+    /// <summary>
+    /// This method transforms given string using BWT.
+    /// </summary>
+    /// <param name="text"></param>
+    /// <returns>The converted string and the index of the position from which the original string begins.</returns>
     public static (string, int) Transform(string text)
     {
         List<string> suffixes = [];
@@ -12,16 +18,12 @@ static class BurrowWheelerTransform
         suffixes.Sort();
 
         string result = "";
-        int index = -1;
+        int indexOfStart = -1;
         for (int i = 0; i < text.Length; ++i)
         {
             if (suffixes[i].Length == text.Length)
             {
-                index = i;
-            }
-
-            if (text.Length - suffixes[i].Length == 0)
-            {
+                indexOfStart = i;
                 result += text[^1];
                 continue;
             }
@@ -29,55 +31,59 @@ static class BurrowWheelerTransform
             result += text[text.Length - suffixes[i].Length - 1];
         }
 
-        return (result, index);
+        return (result, indexOfStart);
     }
 
-    public static string TransformBack(string text, int index)
+    /// <summary>
+    /// This method restores the string from the converted one using BWT.
+    /// </summary>
+    /// <param name="text"></param>
+    /// <param name="indexOfStart"></param>
+    /// <returns>Original string.</returns>
+    public static string TransformBack(string text, int indexOfStart)
     {
-        char[] charArray = text.ToCharArray();
-
-        char[] sortedChars = new char[text.Length];
-        Array.Copy(charArray, sortedChars, text.Length);
+        char[] sortedChars = text.ToCharArray();
         Array.Sort(sortedChars);
 
-        int[] counts = new int[256];
-
-        int[] occurences = new int[256];
+        Dictionary<char, int> occurences = [];
         for (int i = 0; i < sortedChars.Length; ++i)
         {
-            counts[sortedChars[i]]++;
-            if (occurences[sortedChars[i]] == 0)
+            if (!occurences.ContainsKey(sortedChars[i]))
             {
-                occurences[sortedChars[i]] = i;
+                occurences[sortedChars[i]] = i + 1;
             }
         }
 
         int[] next = new int[sortedChars.Length];
-        next[0] = occurences[text[0]];
+        next[0] = occurences[text[0]] - 1;
         occurences[text[0]]++;
 
         for (int i = 1; i < text.Length; ++i)
         {
-            next[i] = occurences[text[i]];
+            next[i] = occurences[text[i]] - 1;
             occurences[text[i]]++;
         }
 
         char[] originalString = new char[text.Length];
 
-        for (int i = 0; i < charArray.Length; ++i)
+        for (int i = 0; i < text.Length; ++i)
         {
-            originalString[i] = charArray[index];
-            index = next[index];
+            originalString[i] = text[indexOfStart];
+            indexOfStart = next[indexOfStart];
         }
-        
+
         Array.Reverse(originalString);
 
         return new string(originalString);
     }
 
-    static void Main()
+    /// <summary>
+    /// this method performs user interaction through the console.
+    /// </summary>
+    public static void Main()
     {
-        string inputString = Console.ReadLine() + "$";
+        Console.Write("Enter the sting to transform: ");
+        string inputString = Console.ReadLine() ?? string.Empty;
         (string transformedString, int index) = Transform(inputString);
         string transformedBackString = TransformBack(transformedString, index);
         if (transformedBackString != inputString)
@@ -86,6 +92,6 @@ static class BurrowWheelerTransform
         }
 
         Console.WriteLine($"\nInput: {inputString}");
-        Console.WriteLine($"Output: {transformedString}");
+        Console.WriteLine($"Output: {transformedString}, {transformedBackString}");
     }
 }
