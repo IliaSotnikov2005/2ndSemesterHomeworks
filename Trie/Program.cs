@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.ComponentModel.Design;
+using System.Drawing;
 using System.Reflection.PortableExecutable;
 using static System.Net.Mime.MediaTypeNames;
 public class Trie
@@ -7,13 +8,13 @@ public class Trie
     {
         private Dictionary<char, Vertex> childs;
         private bool isTerminal;
-        private int countOfTerminals;
+        private int countOfTerminalsFarther;
 
         public Vertex()
         {
             childs = new Dictionary<char, Vertex>();
             isTerminal = false;
-            countOfTerminals = 0;
+            countOfTerminalsFarther = 0;
         }
 
         public bool BuildNext(string text)
@@ -26,7 +27,7 @@ public class Trie
                 }
 
                 isTerminal = true;
-                countOfTerminals++;
+                countOfTerminalsFarther++;
                 return true;
             }
 
@@ -37,7 +38,7 @@ public class Trie
 
             if (childs[text[0]].BuildNext(text[1..]))
             {
-                countOfTerminals++;
+                countOfTerminalsFarther++;
                 return true;
             }
 
@@ -64,7 +65,7 @@ public class Trie
                 {
                     return false;
                 }
-                countOfTerminals--;
+                countOfTerminalsFarther--;
                 isTerminal = false;
                 return true;
             }
@@ -75,10 +76,10 @@ public class Trie
 
             if (childs[text[0]].Remove(text[1..]))
             {
-                countOfTerminals--;
-                if (childs[text[0]].CountOfTerminals == 0)
+                countOfTerminalsFarther--;
+                if (childs[text[0]].CountOfTerminalsFarther == 0)
                 {
-                    countOfTerminals--;
+                    countOfTerminalsFarther--;
                     childs.Remove(text[0]);
                 }
                 return true;
@@ -90,7 +91,7 @@ public class Trie
         {
             if (prefix.Length == 0)
             {
-                return countOfTerminals;
+                return countOfTerminalsFarther;
             }
             if (!childs.ContainsKey(prefix[0]))
             {
@@ -99,13 +100,13 @@ public class Trie
 
             return childs[prefix[0]].FindCountStartsWithPrefix(prefix[1..]);
         }
-        public int CountOfTerminals
+        public int CountOfTerminalsFarther
         {
-            get { return countOfTerminals; }
+            get { return countOfTerminalsFarther; }
         }
     }
 
-    private Vertex root;
+    private readonly Vertex root;
 
     public Trie()
     {
@@ -129,7 +130,7 @@ public class Trie
     }
     public int Size
     {
-        get { return root.CountOfTerminals; }
+        get { return root.CountOfTerminalsFarther; }
     }
 }
 
@@ -137,6 +138,11 @@ public static class Program
 {
     public static void Main()
     {
+        if (!TrieTest.Test())
+        {
+            Console.WriteLine("Test failed");
+        }
+
         Trie trie = new Trie();
         Console.WriteLine(trie.Add("huita"));
         Console.WriteLine(trie.Add("hui"));
@@ -152,5 +158,46 @@ public static class Program
         Console.WriteLine(trie.Remove("hui"));
         Console.WriteLine(trie.HowManyStartsWithPrefix("h"));
         Console.WriteLine(trie.Size);
+    }
+}
+
+public static class TrieTest
+{
+    public static bool Test()
+    {
+        Trie trie = new Trie();
+        string[] patterns = { "he", "she", "his", "hers" };
+        foreach (var pattern in patterns)
+        {
+            if (!trie.Add(pattern))
+            {
+                return false;
+            }
+        }
+        foreach (var pattern in patterns)
+        {
+            if (!trie.Contains(pattern))
+            {
+                return false;
+            }
+        }
+
+        int[] expected = { 3, 2, 1, 0 };
+        string[] prefixes = { "h", "he", "s", "d" };
+        for (int i = 0; i < 4; ++i )
+        {
+            if (trie.HowManyStartsWithPrefix(prefixes[i]) != expected[i])
+            {
+                return false;
+            }
+        }
+
+        trie.Remove("he");
+        if (trie.Size != 3)
+        {
+            return false;
+        }
+
+        return true;
     }
 }
