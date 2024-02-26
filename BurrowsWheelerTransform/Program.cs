@@ -3,6 +3,23 @@
 /// </summary>
 public static class BurrowWheelerTransform
 {
+    private static int CompareShifts(string inputString, int shift1, int shift2)
+    {
+        for (int i = 0; i < inputString.Length; ++i)
+        {
+            if (inputString[(shift1 + i) % inputString.Length] > inputString[(shift2 + i) % inputString.Length])
+            {
+                return 1;
+            }
+            if (inputString[(shift1 + i) % inputString.Length] < inputString[(shift2 + i) % inputString.Length])
+            {
+                return -1;
+            }
+        }
+
+        return 0;
+    }
+
     /// <summary>
     /// This method transforms given string using BWT.
     /// </summary>
@@ -10,25 +27,18 @@ public static class BurrowWheelerTransform
     /// <returns>The converted string and the index of the position from which the original string begins.</returns>
     public static (string, int) Transform(string text)
     {
-        List<string> suffixes = [];
-        for (int i = text.Length - 1; i >= 0; --i)
-        {
-            suffixes.Add(text[i..]);
-        }
-        suffixes.Sort();
+        int[] shifts = Enumerable.Range(0, text.Length).ToArray();
+        Array.Sort(shifts, (shift1, shift2) => CompareShifts(text, shift1, shift2));
 
         string result = "";
         int indexOfStart = -1;
         for (int i = 0; i < text.Length; ++i)
         {
-            if (suffixes[i].Length == text.Length)
+            if (shifts[i] == 0)
             {
                 indexOfStart = i;
-                result += text[^1];
-                continue;
             }
-
-            result += text[text.Length - suffixes[i].Length - 1];
+            result += text[(shifts[i] + text.Length - 1) % text.Length];
         }
 
         return (result, indexOfStart);
