@@ -1,7 +1,6 @@
-﻿using System.ComponentModel.Design;
-using System.Drawing;
-using System.Reflection.PortableExecutable;
-using static System.Net.Mime.MediaTypeNames;
+﻿/// <summary>
+/// Trie class.
+/// </summary>
 public class Trie
 {
     private class Vertex
@@ -10,6 +9,9 @@ public class Trie
         private bool isTerminal;
         private int countOfTerminalsFarther;
 
+        /// <summary>
+        /// Vertex constructor.
+        /// </summary>
         public Vertex()
         {
             childs = new Dictionary<char, Vertex>();
@@ -17,6 +19,11 @@ public class Trie
             countOfTerminalsFarther = 0;
         }
 
+        /// <summary>
+        /// Builds next vertex.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns>True if vertex is not in trie, else false.</returns>
         public bool BuildNext(string text)
         {
             if (text.Length == 0)
@@ -44,6 +51,12 @@ public class Trie
 
             return false;
         }
+
+        /// <summary>
+        /// Finds given string in trie.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns>True if string in trie, else false.</returns>
         public bool Find(string text)
         {
             if (text.Length == 0)
@@ -57,6 +70,12 @@ public class Trie
 
             return childs[text[0]].Find(text[1..]);
         }
+
+        /// <summary>
+        /// Removes given string from trie.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns>True if success, else false.</returns>
         public bool Remove(string text)
         {
             if (text.Length == 0)
@@ -79,7 +98,6 @@ public class Trie
                 countOfTerminalsFarther--;
                 if (childs[text[0]].CountOfTerminalsFarther == 0)
                 {
-                    countOfTerminalsFarther--;
                     childs.Remove(text[0]);
                 }
                 return true;
@@ -87,6 +105,12 @@ public class Trie
 
             return false;
         }
+
+        /// <summary>
+        /// Finds count of elements starting with given prefix.
+        /// </summary>
+        /// <param name="prefix"></param>
+        /// <returns>Count of elements starting with given prefix.</returns>
         public int FindCountStartsWithPrefix(string prefix)
         {
             if (prefix.Length == 0)
@@ -100,6 +124,9 @@ public class Trie
 
             return childs[prefix[0]].FindCountStartsWithPrefix(prefix[1..]);
         }
+        /// <summary>
+        /// Getter for count of terminal vertexes farther this vertex.
+        /// </summary>
         public int CountOfTerminalsFarther
         {
             get { return countOfTerminalsFarther; }
@@ -108,34 +135,71 @@ public class Trie
 
     private readonly Vertex root;
 
+    /// <summary>
+    /// Constructor for trie.
+    /// </summary>
     public Trie()
     {
         root = new Vertex();
     }
+
+    /// <summary>
+    /// Adds element to trie.
+    /// </summary>
+    /// <param name="element"></param>
+    /// <returns>True if success, else false.</returns>
     public bool Add(string element)
     {
         return root.BuildNext(element);
     }
+
+    /// <summary>
+    /// Checks if element is contained in trie.
+    /// </summary>
+    /// <param name="element"></param>
+    /// <returns>True if yes, false if not.</returns>
     public bool Contains(string element)
     {
         return root.Find(element);
     }
+
+    /// <summary>
+    /// Removes element from trie.
+    /// </summary>
+    /// <param name="element"></param>
+    /// <returns>True if success, else false.</returns>
     public bool Remove(string element)
     {
         return root.Remove(element);
     }
+
+    /// <summary>
+    /// Gives the number of strings in trie starting with given prefix.
+    /// </summary>
+    /// <param name="prefix"></param>
+    /// <returns>The number of strings in trie starting with given prefix.</returns>
     public int HowManyStartsWithPrefix(string prefix)
     {
         return root.FindCountStartsWithPrefix(prefix);
     }
+
+    /// <summary>
+    /// Getter for trie size.
+    /// </summary>
     public int Size
     {
         get { return root.CountOfTerminalsFarther; }
     }
 }
 
+/// <summary>
+/// Main program class.
+/// </summary>
 public static class Program
 {
+    /// <summary>
+    /// Entry point.
+    /// </summary>
     public static void Main()
     {
         if (!TrieTest.Test())
@@ -144,25 +208,32 @@ public static class Program
         }
 
         Trie trie = new Trie();
-        Console.WriteLine(trie.Add("huita"));
-        Console.WriteLine(trie.Add("hui"));
-        Console.WriteLine(trie.Add("uidfdeee"));
-        Console.WriteLine(trie.Contains("hui"));
-        Console.WriteLine(trie.Contains("hui1"));
+        Console.WriteLine(trie.Add("balda"));
+        Console.WriteLine(trie.Add("babolda"));
+        Console.WriteLine(trie.Add("kniga"));
+        Console.WriteLine(trie.Contains("kniga"));
+        Console.WriteLine(trie.Contains("nekniga"));
         Console.WriteLine(trie.Size);
-        Console.WriteLine(trie.HowManyStartsWithPrefix("h"));
+        Console.WriteLine(trie.HowManyStartsWithPrefix("b"));
         Console.WriteLine(trie.HowManyStartsWithPrefix("u"));
-        Console.WriteLine(trie.HowManyStartsWithPrefix("4"));
-        Console.WriteLine(trie.Remove("dsde"));
-        Console.WriteLine(trie.Remove("hui"));
-        Console.WriteLine(trie.Remove("hui"));
-        Console.WriteLine(trie.HowManyStartsWithPrefix("h"));
+        Console.WriteLine(trie.HowManyStartsWithPrefix("k"));
+        Console.WriteLine(trie.Remove("nekniga"));
+        Console.WriteLine(trie.Remove("balda"));
+        Console.WriteLine(trie.Remove("kniga"));
+        Console.WriteLine(trie.HowManyStartsWithPrefix("b"));
         Console.WriteLine(trie.Size);
     }
 }
 
+/// <summary>
+/// Test trie class.
+/// </summary>
 public static class TrieTest
 {
+    /// <summary>
+    /// Test trie function.
+    /// </summary>
+    /// <returns></returns>
     public static bool Test()
     {
         Trie trie = new Trie();
