@@ -79,23 +79,24 @@ public class StackOnArray<T> : IStack<T>
     /// StackOnArray constructor.
     /// </summary>
     /// <param name="capacity">Maximum size of stack.</param>
-    public StackOnArray(int capacity)
+    public StackOnArray()
     {
         size = 0;
-        array = new T[capacity];
+        array = new T[32];
     }
 
     public void Push(T value)
     {
-        if (size < array.Length)
+        if (size >= array.Length)
         {
+            T[] tempArray = new T[array.Length * 2];
+            Array.Copy(array, tempArray, array.Length);
+            array = tempArray;
             array[size] = value;
-            size++;
         }
-        else
-        {
-            throw new StackOverflowException("Stack is full");
-        }
+
+        array[size] = value;
+        size++;
     }
 
     public T Pop()
@@ -133,7 +134,7 @@ public static class StackCalculaltor
     /// <exception cref="Exception"></exception>
     public static float Calculate(string expression)
     {
-        StackOnList<float> stack = new();
+        StackOnArray<float> stack = new();
 
         List<string> elements = new(expression.Split(' '));
         foreach (string element in elements)
@@ -174,10 +175,15 @@ public static class StackCalculaltor
                         }
                     default:
                         {
-                            throw new Exception("Invalid operator");
+                            throw new ArgumentException("Invalid operator");
                         }
                 }
             }
+        }
+
+        if (stack.Size != 1)
+        {
+            throw new ArgumentException("Invalid expresion");
         }
 
         return stack.Pop();
