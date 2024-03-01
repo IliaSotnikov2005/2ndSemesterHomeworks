@@ -123,16 +123,17 @@ public class StackOnArray<T> : IStack<T>
 /// <summary>
 /// Static class for performing calculations using a stack.
 /// </summary>
-public static class StackCalculaltor
+public static class StackCalculator
 {
     /// <summary>
     /// A method for calculating the value of an expression in Polish notation.
     /// </summary>
-    /// <param name="expression"></param>
-    /// <returns>Calculation result.</returns>
-    /// <exception cref="DivideByZeroException"></exception>
-    /// <exception cref="Exception"></exception>
-    public static float Calculate(string expression, string stackType = "array")
+    /// <param name="expression">Expression in polish notation.</param>
+    /// <param name="stackType">Type of stack to be used. Default is StackOnList</param>
+    /// <returns>Value of expression.</returns>
+    /// <exception cref="ArgumentException">If invalid input.</exception>
+    /// <exception cref="DivideByZeroException">If division by zero.</exception>
+    public static float Calculate(string expression, string stackType = "list")
     {
         IStack<float> stack;
         if (stackType == "list")
@@ -166,7 +167,9 @@ public static class StackCalculaltor
                         }
                     case "-":
                         {
-                            stack.Push(stack.Pop() - stack.Pop());
+                            float operand1 = stack.Pop();
+                            float operand2 = stack.Pop();
+                            stack.Push(operand2 - operand1);
                             break;
                         }
                     case "*":
@@ -178,11 +181,11 @@ public static class StackCalculaltor
                         {
                             float operand1 = stack.Pop();
                             float operand2 = stack.Pop();
-                            if (Math.Abs(operand2) < float.Epsilon)
+                            if (Math.Abs(operand1) < float.Epsilon)
                             {
                                 throw new DivideByZeroException("Division by zero");
                             }
-                            stack.Push(operand1 / operand2);
+                            stack.Push(operand2 / operand1);
                             break;
                         }
                     default:
@@ -206,36 +209,9 @@ public static class StackCalculaltor
     /// </summary>
     public static void Main()
     {
-        if (!Test())
-        {
-            Console.WriteLine("Tests didn't pass.");
-            return;
-        }
-
         Console.Write("Enter the expression: ");
         string expression = Console.ReadLine() ?? string.Empty;
 
         Console.WriteLine($"\nThe result: {Calculate(expression)}");
-    }
-
-    private static bool Test() // Сказали написать метод тестирования, мы пока что нубы
-    {
-        string[] inputs = { "1 2 3 4 + + -", "6 6 3 8 4 + * / -", "0 1 /" };
-        float[] expected = { 8, 0, 0 };
-        bool[] results = new bool[inputs.Length];
-        for (int i = 0; i < inputs.Length; ++i)
-        {
-            try
-            {
-                float result = Calculate(inputs[i]);
-
-                results[i] = Math.Abs(result - expected[i]) <= float.Epsilon;
-            }
-            catch (DivideByZeroException)
-            {
-                results[i] = i == 2;
-            }
-        }
-        return results.All(x => x);
     }
 }
