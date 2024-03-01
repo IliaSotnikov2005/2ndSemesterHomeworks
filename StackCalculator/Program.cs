@@ -132,9 +132,21 @@ public static class StackCalculaltor
     /// <returns>Calculation result.</returns>
     /// <exception cref="DivideByZeroException"></exception>
     /// <exception cref="Exception"></exception>
-    public static float Calculate(string expression)
+    public static float Calculate(string expression, string stackType = "array")
     {
-        StackOnArray<float> stack = new();
+        IStack<float> stack;
+        if (stackType == "list")
+        {
+            stack = new StackOnList<float>();
+        }
+        else if (stackType == "array")
+        {
+            stack = new StackOnArray<float>();
+        }
+        else
+        {
+            throw new ArgumentException("Unsupported stack type");
+        }
 
         List<string> elements = new(expression.Split(' '));
         foreach (string element in elements)
