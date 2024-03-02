@@ -9,8 +9,8 @@ public static class StackCalculatorTests
     /// <returns>True is all tests passed, else false.</returns>
     public static bool Test()
     {
-        string[] inputs = { "1 2 3 4 + + -", "6 216 3 8 4 + * / -", "1 0 /" };
-        float[] expected = { -8, 0, 0 };
+        string[] inputs = ["1 2 3 4 + + -", "6 216 3 8 4 + * / -", "1 0 /"];
+        float[] expected = [-8, 0, 0];
         bool[] results = new bool[inputs.Length];
         for (int i = 0; i < inputs.Length; ++i)
         {
