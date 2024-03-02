@@ -4,7 +4,6 @@
 /// <typeparam name="T">The type of object that the stack will contain.</typeparam>
 public class StackOnArray<T> : IStack<T>
 {
-    private int size;
     private T[] array;
 
     /// <summary>
@@ -12,7 +11,7 @@ public class StackOnArray<T> : IStack<T>
     /// </summary>
     public StackOnArray()
     {
-        this.size = 0;
+        this.Size = 0;
         this.array = new T[32];
     }
 
@@ -22,25 +21,25 @@ public class StackOnArray<T> : IStack<T>
     /// <inheritdoc/>
     public void Push(T value)
     {
-        if (this.size >= this.array.Length)
+        if (this.Size >= this.array.Length)
         {
-            Array.Resize(ref this.array, this.size * 2);
+            Array.Resize(ref this.array, this.Size * 2);
         }
 
-        this.array[this.size] = value;
-        this.size++;
+        this.array[this.Size] = value;
+        this.Size++;
     }
 
     /// <inheritdoc/>
     public T Pop()
     {
-        if (this.size == 0)
+        if (this.Size == 0)
         {
             throw new InvalidOperationException("Stack is empty");
         }
 
-        this.size--;
-        T returningValue = this.array[this.size];
+        this.Size--;
+        T returningValue = this.array[this.Size];
         return returningValue;
     }
 }
