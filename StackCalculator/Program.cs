@@ -7,4 +7,15 @@
 Console.Write("Enter the expression: ");
 string expression = Console.ReadLine() ?? string.Empty;
 
-Console.WriteLine($"\nThe result: {StackCalculator.Calculate(expression, new StackOnList<float>())}");
+try
+{
+    Console.WriteLine($"\nThe result: {StackCalculator.Calculate(expression, new StackOnList<float>())}");
+}
+catch (ArgumentException)
+{
+    Console.WriteLine("Invalid expresion.\nCheck the correctness of the expression.");
+}
+catch (DivideByZeroException)
+{
+    Console.WriteLine("Division by zero appeared.\nYou can't divide by zero.");
+}
