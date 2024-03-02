@@ -7,13 +7,12 @@ public static class StackCalculator
     /// A method for calculating the value of an expression in Polish notation.
     /// </summary>
     /// <param name="expression">Expression in polish notation.</param>
+    /// <param name="stack">Stack to use.</param>
     /// <returns>Value of expression.</returns>
     /// <exception cref="ArgumentException">If invalid input.</exception>
     /// <exception cref="DivideByZeroException">If division by zero.</exception>
-    public static float Calculate(string expression)
+    public static float Calculate(string expression, IStack<float> stack)
     {
-        StackOnList<float> stack = new StackOnList<float>();
-
         List<string> elements = new (expression.Split(' '));
         foreach (string element in elements)
         {

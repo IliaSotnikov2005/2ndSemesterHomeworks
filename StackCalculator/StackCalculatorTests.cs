@@ -16,7 +16,7 @@ public static class StackCalculatorTests
         {
             try
             {
-                float result = StackCalculator.Calculate(inputs[i]);
+                float result = StackCalculator.Calculate(inputs[i], new StackOnList<float>());
 
                 results[i] = Math.Abs(result - expected[i]) <= Math.Abs(result * 0.000001f);
             }
