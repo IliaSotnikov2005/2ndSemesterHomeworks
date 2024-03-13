@@ -1,86 +1,90 @@
-﻿using System.Text;
-using TrieClass;
-
-public static class LZW
+﻿namespace LZWAlgorithm
 {
-    public static void Encode(string inputPath)
+    using System.Text;
+    using TrieClass;
+
+    /// <summary>
+    /// LZW algorithm class.
+    /// </summary>
+    public static class LZW
     {
-        string input = File.ReadAllText(inputPath);
-
-        var dictionary = new Trie();
-        for (int j = 0; j < 256; ++j)
+        /// <summary>
+        /// The method of encoding a string using LZW.
+        /// </summary>
+        /// <param name="input">The string to be encoded.</param>
+        /// <returns>An encoded string, an array of codes.</returns>
+        public static List<int> Encode(string input)
         {
-            dictionary.Add(((char)j).ToString(), j);
-        }
-
-        var bytes = new List<byte>();
-
-        string current = string.Empty;
-
-        foreach (char ch in input)
-        {
-            if (!dictionary.Contains(current + ch))
+            var dictionary = new Trie();
+            for (int i = 0; i < 256; ++i)
             {
-                dictionary.TryGetValue(current, out int value1);
-                bytes.AddRange(BitConverter.GetBytes(value1));
-
-                dictionary.Add(current + ch, dictionary.Size);
-
-                current = ch.ToString();
+                dictionary.Add(((char)i).ToString(), i);
             }
-            else
+
+            var codes = new List<int>();
+
+            string current = string.Empty;
+            int currentCode = 0;
+
+            foreach (char ch in input)
             {
-                current += ch;
+                if (!dictionary.Contains(current + ch))
+                {
+                    dictionary.TryGetValue(current, out currentCode);
+                    codes.Add(currentCode);
+
+                    dictionary.Add(current + ch, dictionary.Size);
+
+                    current = ch.ToString();
+                }
+                else
+                {
+                    current += ch;
+                }
             }
+
+            dictionary.TryGetValue(current, out currentCode);
+            codes.Add(currentCode);
+
+            return codes;
         }
 
-        dictionary.TryGetValue(current, out int value);
-        bytes.AddRange(BitConverter.GetBytes(value));
-
-        File.WriteAllBytes(inputPath + ".zipped", bytes.ToArray());
-    }
-
-    public static void Decode(string inputPath)
-    {
-        byte[] input = File.ReadAllBytes(inputPath);
-        var codes = new List<int>();
-
-        for (int i = 0; i < input.Length; i += 4)
+        /// <summary>
+        /// The method of decoding a string encoded with LZW.
+        /// </summary>
+        /// <param name="codes">Encoded string, an array of codes.</param>
+        /// <returns>A decoded string.</returns>
+        public static string Decode(List<int> codes)
         {
-            byte[] slice = new byte[4];
-            Array.Copy(input, i, slice, 0, 4);
-
-            int code = BitConverter.ToInt32(slice, 0);
-            codes.Add(code);
-        }
-
-        var dictionary = new List<string>();
-        for (int i = 0; i < 256; ++i)
-        {
-            dictionary.Add(((char)i).ToString());
-        }
-
-        var sb = new StringBuilder();
-
-        for (int i = 0; i < codes.Count - 1; ++i)
-        {
-            sb.Append(dictionary[codes[i]]);
-
-            string entry = dictionary[codes[i]];
-
-            if (codes[i + 1] < dictionary.Count)
+            var dictionary = new List<string>();
+            for (int i = 0; i < 256; ++i)
             {
-                entry += dictionary[codes[i + 1]][0];
-                dictionary.Add(entry);
+                dictionary.Add(((char)i).ToString());
             }
-            else
-            {
-                entry += entry[0];
-                dictionary.Add(entry);
-            }
-        }
-        sb.Append(dictionary[codes.Last()]);
 
-        File.WriteAllText(inputPath + ".unzipped", sb.ToString());
+            var stringBuilder = new StringBuilder();
+
+            for (int i = 0; i < codes.Count - 1; ++i)
+            {
+                stringBuilder.Append(dictionary[codes[i]]);
+
+                string entry = dictionary[codes[i]];
+
+                if (codes[i + 1] < dictionary.Count)
+                {
+                    entry += dictionary[codes[i + 1]][0];
+                    dictionary.Add(entry);
+                }
+                else
+                {
+                    entry += entry[0];
+                    dictionary.Add(entry);
+                }
+            }
+
+            stringBuilder.Append(dictionary[codes.Last()]);
+
+            return stringBuilder.ToString();
+        }
     }
 }
