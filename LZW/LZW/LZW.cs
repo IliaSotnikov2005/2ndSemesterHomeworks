@@ -1,5 +1,7 @@
 ﻿namespace LZWAlgorithm
 {
+    using System.Collections.Generic;
+    using System.Security.Cryptography;
     using System.Text;
     using TrieClass;
 
@@ -13,7 +15,7 @@
         /// </summary>
         /// <param name="input">The string to be encoded.</param>
         /// <returns>An encoded string, an array of codes.</returns>
-        public static List<int> Encode(string input)
+        public static List<int> Encode(byte[] input)
         {
             var dictionary = new Trie();
             for (int i = 0; i < 256; ++i)
@@ -49,42 +51,72 @@
             return codes;
         }
 
+        // В общем, нужно либо хранить байтовые последовательности в словаре, либо как то конвертировать строки в байты 255 разрядности
+
         /// <summary>
         /// The method of decoding a string encoded with LZW.
         /// </summary>
         /// <param name="codes">Encoded string, an array of codes.</param>
         /// <returns>A decoded string.</returns>
-        public static string Decode(List<int> codes)
+        public static byte[] Decode(List<int> codes)
         {
-            var dictionary = new List<string>();
+            var dictionary = new List<List<byte>>();
             for (int i = 0; i < 256; ++i)
             {
-                dictionary.Add(((char)i).ToString());
+                dictionary.Add([(byte)i]);
+                Console.WriteLine(dictionary[i][0]);
             }
 
-            var stringBuilder = new StringBuilder();
+            //var stringBuilder = new StringBuilder();
+
+            //for (int i = 0; i < codes.Count - 1; ++i)
+            //{
+            //    stringBuilder.Append(dictionary[codes[i]]);
+
+            //    string entry = dictionary[codes[i]];
+
+            //    if (codes[i + 1] < dictionary.Count)
+            //    {
+            //        entry += dictionary[codes[i + 1]][0];
+            //        dictionary.Add(entry);
+            //    }
+            //    else
+            //    {
+            //        entry += entry[0];
+            //        dictionary.Add(entry);
+            //    }
+            //}
+
+            //stringBuilder.Append(dictionary[codes.Last()]);
+
+            //return Encoding.ASCII.GetBytes(stringBuilder.ToString());
+
+            var bytes = new List<byte>();
 
             for (int i = 0; i < codes.Count - 1; ++i)
             {
-                stringBuilder.Append(dictionary[codes[i]]);
+                for (int j = 0; j < dictionary[codes[i]].Count; ++j)
+                {
+                    bytes.Add(dictionary[codes[i]][j]);
+                }
 
-                string entry = dictionary[codes[i]];
+                List<byte> entry = new List<byte> (dictionary[codes[i]]);
 
                 if (codes[i + 1] < dictionary.Count)
                 {
-                    entry += dictionary[codes[i + 1]][0];
+                    entry.Add(dictionary[codes[i + 1]][0]);
                     dictionary.Add(entry);
                 }
                 else
                 {
-                    entry += entry[0];
+                    entry.Add(entry[0]);
                     dictionary.Add(entry);
                 }
             }
 
-            stringBuilder.Append(dictionary[codes.Last()]);
+            bytes.AddRange(dictionary[codes.Last()]);
 
-            return stringBuilder.ToString();
+            return bytes.ToArray();
         }
     }
 }

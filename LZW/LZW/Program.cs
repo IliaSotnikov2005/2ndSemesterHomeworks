@@ -34,5 +34,5 @@ if (args.Length != 0)
     }
 }
 
-LZWCompressor.Compress("banan.txt");
-LZWCompressor.Decompress("banan.txt.zipped");
+LZWCompressor.Compress("1.pdf");
+LZWCompressor.Decompress("1.pdf.zipped");
