@@ -1,56 +1,32 @@
-﻿public static class LZW
+﻿using ZLWCompressor;
+
+if (args.Length != 0)
 {
-    private static float CalculateCompressionRatio(string originalFilePath, string compressedFilePath)
+    if (args.Length != 2)
     {
-        FileInfo originalFile = new FileInfo(originalFilePath);
-        FileInfo compressedFile = new FileInfo(compressedFilePath);
-
-        return originalFile.Length / compressedFile.Length;
-    }
-    public static int Compress(string filePath)
-    {
-        Trie trie = new Trie();
-
-        string zippedFileName = Path.GetFileName(filePath) + ".zipped";
-        float compressionRatio = CalculateCompressionRatio(filePath, zippedFileName);
-        Console.WriteLine("Compression ratio: " + compressionRatio);
-
-        return 0;
+        throw new ArgumentException("Invalid input.");
     }
 
-    public static int Decompress(string filePath)
+    switch (args[1])
     {
+        case "-c":
+            {
+                Compressor.Compress(args[0]);
+                break;
+            }
 
+        case "-u":
+            {
+                Compressor.Decompress(args[0]);
+                break;
+            }
 
-
-        string originalFileName = Path.GetFileNameWithoutExtension(filePath.Replace(".zipped", ""));
-        float compressionRatio = CalculateCompressionRatio(filePath, originalFileName);
-        Console.WriteLine("Compression ratio: " + compressionRatio);
-        return 0;
-    }
-    public static void Main(string[] args)
-    {
-        if (args.Length != 2)
-        {
-            throw new ArgumentException("Invalid input.");
-        }
-
-        switch (args[1])
-        {
-            case "-c":
-                {
-                    Compress(args[0]);
-                    break;
-                }
-            case "-u":
-                {
-                    Decompress(args[0]);
-                    break;
-                }
-            default:
-                {
-                    throw new ArgumentException("Invalid action. Please use -c to compress or -u to decompress.");
-                }
-        }
+        default:
+            {
+                throw new ArgumentException("Invalid action. Please use -c to compress or -u to decompress.");
+            }
     }
 }
+
+Compressor.Compress("banan.txt");
+Compressor.Decompress("banan.txt.zipped");
