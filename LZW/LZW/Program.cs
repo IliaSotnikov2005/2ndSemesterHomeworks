@@ -1,14 +1,7 @@
 ﻿using Compressor;
-using System.Collections;
-using System.Text;
 
-if (args.Length != 0)
+if (args.Length == 2)
 {
-    if (args.Length != 2)
-    {
-        throw new ArgumentException("Invalid input.");
-    }
-
     if (!File.Exists(args[0]))
     {
         Console.WriteLine("File with this pass doesn't exist");
@@ -19,23 +12,32 @@ if (args.Length != 0)
     {
         case "-c":
             {
-                LZWCompressor.Compress(args[0]);
+                var compressor = new LZWCompressor();
+                compressor.Compress(args[0]);
                 break;
             }
 
         case "-u":
             {
-                LZWCompressor.Decompress(args[0]);
+                if (args[0][^7..] != ".zipped")
+                {
+                    Console.WriteLine($"{args[0]} must be .zipped!");
+                    break;
+                }
+
+                var compressor = new LZWCompressor();
+                compressor.Decompress(args[0]);
                 break;
             }
 
         default:
             {
-                throw new ArgumentException("Invalid action. Please use -c to compress or -u to decompress.");
+                Console.WriteLine("Invalid input. Use -c to compress and -u to uncompress.");
+                break;
             }
     }
 }
-
-string filename = "5001.jpg";
-LZWCompressor.Compress(filename);
-LZWCompressor.Decompress(filename + ".zipped");
+else
+{
+    Console.WriteLine("Invalid count of arguments.");
+}
