@@ -15,7 +15,7 @@
             int[] shifts = Enumerable.Range(0, text.Length).ToArray();
             Array.Sort(shifts, (shift1, shift2) => CompareShifts(text, shift1, shift2));
 
-            string result = "";
+            string result = string.Empty;
             int indexOfStart = -1;
             for (int i = 0; i < text.Length; ++i)
             {
@@ -23,6 +23,7 @@
                 {
                     indexOfStart = i;
                 }
+
                 result += text[(shifts[i] + text.Length - 1) % text.Length];
             }
 

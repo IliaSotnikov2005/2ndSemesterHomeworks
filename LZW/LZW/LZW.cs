@@ -62,7 +62,6 @@
             for (int i = 0; i < 256; ++i)
             {
                 dictionary.Add([(byte)i]);
-                Console.WriteLine(dictionary[i][0]);
             }
 
             var bytes = new List<byte>();

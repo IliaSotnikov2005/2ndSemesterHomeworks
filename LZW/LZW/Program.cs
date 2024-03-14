@@ -1,4 +1,6 @@
 ﻿using Compressor;
+using System.Collections;
+using System.Text;
 
 if (args.Length != 0)
 {
@@ -34,5 +36,6 @@ if (args.Length != 0)
     }
 }
 
-LZWCompressor.Compress("banan.txt");
-LZWCompressor.Decompress("banan.txt.zipped");
+string filename = "5001.jpg";
+LZWCompressor.Compress(filename);
+LZWCompressor.Decompress(filename + ".zipped");

@@ -1,7 +1,10 @@
 ﻿namespace Compressor
 {
+    using System.Collections;
     using System.Text;
     using LZWAlgorithm;
+    using BurrowsWheelerTransform;
+    using System.Globalization;
 
     /// <summary>
     /// Class of LZW compressor.
@@ -14,9 +17,23 @@
         /// <param name="inputPath">File path.</param>
         public static void Compress(string inputPath)
         {
-            byte[] input = File.ReadAllBytes(inputPath);
+            byte[] bytes = File.ReadAllBytes(inputPath);
 
-            List<int> codes = LZW.Encode(input);
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in bytes)
+            {
+                sb.Append((char)b);
+            }
+
+            (string bwtTransformed, int indexOfStart) = BWT.Transform(sb.ToString());
+
+            byte[] res = new byte[bwtTransformed.Length];
+            for (int i = 0; i < res.Length; ++i)
+            {
+                res[i] = (byte)bwtTransformed[i];
+            }
+
+            List<int> codes = LZW.Encode(res);
 
             int minBits = CalculateMinBits(codes);
             string binaryCodes = GenerateBinaryCodes(codes, minBits);
@@ -26,9 +43,10 @@
             using (var binaryWriter = new BinaryWriter(output))
             {
                 binaryWriter.Write(Convert.ToByte(minBits));
+                binaryWriter.Write(BitConverter.GetBytes(indexOfStart));
 
                 int i = 0;
-                for (i = 0; i + 8 < binaryCodes.Length; i += 8)
+                for (i = 0; i + 8 <= binaryCodes.Length; i += 8)
                 {
                     binaryWriter.Write(Convert.ToByte(binaryCodes.Substring(i, 8), 2));
                 }
@@ -51,26 +69,42 @@
         /// <param name="inputPath">.zipped file path.</param>
         public static void Decompress(string inputPath)
         {
-            List<int> codes = ReadCodesFromFile(inputPath);
+            (List<int> codes, int indexOfStart) = ReadCodesFromFile(inputPath);
 
-            byte[] result = LZW.Decode(codes);
+            byte[] bytes = LZW.Decode(codes);
 
-            File.WriteAllBytes(inputPath + ".unzipped", result);
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in bytes)
+            {
+                sb.Append((char)b);
+            }
+
+            string bwtTransformedBack = BWT.TransformBack(sb.ToString(), indexOfStart);
+
+            byte[] res = new byte[bwtTransformedBack.Length];
+            for (int i = 0; i < res.Length; ++i)
+            {
+                res[i] = (byte)bwtTransformedBack[i];
+            }
+
+            File.WriteAllBytes(inputPath + ".unzipped", res);
 
             Console.WriteLine("Successfully decompressed");
         }
 
-        private static List<int> ReadCodesFromFile(string fileName)
+        private static (List<int>, int) ReadCodesFromFile(string fileName)
         {
             byte[] bytes = File.ReadAllBytes(fileName);
             int codeLength = bytes[0];
+            int indexOfStart = BitConverter.ToInt32(bytes[1..5]);
             var codes = new List<int>();
 
             int currentCode = 0;
             int currentCodeLength = 0;
 
-            foreach (byte byteValue in bytes[1..])
+            foreach (byte byteValue in bytes[5..])
             {
+                Console.WriteLine(byteValue);
                 for (int i = 0; i < 8; i++)
                 {
                     if (currentCodeLength == codeLength)
@@ -85,7 +119,13 @@
                 }
             }
 
-            return codes;
+            if (currentCodeLength == codeLength)
+            {
+                codes.Add(currentCode);
+            }
+
+
+            return (codes, indexOfStart);
         }
 
         private static float CalculateCompressionRatio(string inputPath)
