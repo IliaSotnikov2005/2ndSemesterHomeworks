@@ -1,8 +1,6 @@
 ﻿namespace LZWAlgorithm
 {
     using System.Collections.Generic;
-    using System.Security.Cryptography;
-    using System.Text;
     using TrieClass;
 
     /// <summary>
@@ -66,30 +64,6 @@
                 dictionary.Add([(byte)i]);
                 Console.WriteLine(dictionary[i][0]);
             }
-
-            //var stringBuilder = new StringBuilder();
-
-            //for (int i = 0; i < codes.Count - 1; ++i)
-            //{
-            //    stringBuilder.Append(dictionary[codes[i]]);
-
-            //    string entry = dictionary[codes[i]];
-
-            //    if (codes[i + 1] < dictionary.Count)
-            //    {
-            //        entry += dictionary[codes[i + 1]][0];
-            //        dictionary.Add(entry);
-            //    }
-            //    else
-            //    {
-            //        entry += entry[0];
-            //        dictionary.Add(entry);
-            //    }
-            //}
-
-            //stringBuilder.Append(dictionary[codes.Last()]);
-
-            //return Encoding.ASCII.GetBytes(stringBuilder.ToString());
 
             var bytes = new List<byte>();
 
