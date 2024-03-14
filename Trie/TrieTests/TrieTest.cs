@@ -1,3 +1,5 @@
+using TrieClass;
+
 [TestFixture]
 public class TrieTests
 {
