@@ -5,6 +5,7 @@ public class StackCalculatorTests
     [TestCase("5 2 -", 3)]
     [TestCase("-4 6 *", -24)]
     [TestCase("10 2 /", 5)]
+    [TestCase("8 84 21 8 1 1 2 3 * - + + * / -", 7)]
     public void Calculate_ValidExpressions_ReturnsCorrectResult(string expression, float expected)
     {
         float actual = StackCalculator.Calculate(expression, new StackOnList<float>());
