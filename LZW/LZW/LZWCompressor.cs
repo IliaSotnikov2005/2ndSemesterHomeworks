@@ -26,14 +26,26 @@
         /// Method for compressing the given file with LZW.
         /// </summary>
         /// <param name="inputPath">File path.</param>
+        /// <exception cref="FileNotFoundException">If file not found.</exception>
+        /// /// <exception cref="ArgumentException">If file is empty.</exception>
         public void Compress(string inputPath)
         {
+            if (!File.Exists(inputPath))
+            {
+                throw new FileNotFoundException();
+            }
+
             byte[] bytes = File.ReadAllBytes(inputPath);
+
+            if (bytes.Length == 0)
+            {
+                throw new ArgumentException();
+            }
 
             int indexOfStart = 0;
             if (this.UseBWT)
             {
-                StringBuilder sb = new StringBuilder();
+                var sb = new StringBuilder();
                 foreach (byte b in bytes)
                 {
                     sb.Append((char)b);
@@ -50,8 +62,8 @@
 
             List<int> codes = LZW.Encode(bytes);
 
-            int minBits = this.CalculateMinBits(codes);
-            string binaryCodes = this.GenerateBinaryCodes(codes, minBits);
+            int minBits = CalculateMinBits(codes);
+            string binaryCodes = GenerateBinaryCodes(codes, minBits);
 
             var output = new FileStream(inputPath + ".zipped", FileMode.Create);
 
@@ -76,22 +88,37 @@
 
             output.Close();
 
-            Console.WriteLine($"Compression ratio is {this.CalculateCompressionRatio(inputPath)}");
+            Console.WriteLine($"Compression ratio is {CalculateCompressionRatio(inputPath)}");
         }
 
         /// <summary>
         /// Method for decompressing the given file compredded with <see cref="LZWCompressor.Compress(string)"/>.
         /// </summary>
         /// <param name="inputPath">.zipped file path.</param>
+        /// <exception cref="FileNotFoundException">If file not found.</exception>
         public void Decompress(string inputPath)
         {
-            (List<int> codes, int indexOfStart) = this.ReadCodesFromFile(inputPath);
+            if (!File.Exists(inputPath))
+            {
+                throw new FileNotFoundException();
+            }
+
+            var codes = new List<int>();
+            int indexOfStart = 0;
+            try
+            {
+                (codes, indexOfStart) = this.ReadCodesFromFile(inputPath);
+            }
+            catch (IndexOutOfRangeException)
+            {
+                throw new ArgumentException();
+            }
 
             byte[] bytes = LZW.Decode(codes);
 
             if (this.UseBWT)
             {
-                StringBuilder sb = new StringBuilder();
+                var sb = new StringBuilder();
                 foreach (byte b in bytes)
                 {
                     sb.Append((char)b);
@@ -106,25 +133,51 @@
                 }
             }
 
-            File.WriteAllBytes(inputPath + ".unzipped", bytes);
+            File.WriteAllBytes(inputPath[..^7], bytes);
 
             Console.WriteLine("Successfully decompressed");
+        }
+
+        private static float CalculateCompressionRatio(string inputPath)
+        {
+            var originalFile = new FileInfo(inputPath);
+            var compressedFile = new FileInfo(inputPath + ".zipped");
+
+            return (float)compressedFile.Length / originalFile.Length;
+        }
+
+        private static int CalculateMinBits(List<int> codes)
+        {
+            int maxNumber = codes.Max();
+            int minBits = (int)Math.Ceiling(Math.Log2(maxNumber + 1));
+
+            return minBits;
+        }
+
+        private static string GenerateBinaryCodes(List<int> codes, int minBits)
+        {
+            var binaryCodes = new StringBuilder();
+
+            for (int i = 0; i < codes.Count; ++i)
+            {
+                binaryCodes.Append(Convert.ToString(codes[i], 2).PadLeft(minBits, '0'));
+            }
+
+            return binaryCodes.ToString();
         }
 
         private (List<int>, int) ReadCodesFromFile(string fileName)
         {
             byte[] bytes = File.ReadAllBytes(fileName);
             int codeLength = bytes[0];
-            int indexOfStart = this.UseBWT ? BitConverter.ToInt32(bytes[1..5]) : 0;
+            int indexOfStart = BitConverter.ToInt32(bytes[1..5]);
 
             var codes = new List<int>();
 
             int currentCode = 0;
             int currentCodeLength = 0;
 
-            int startIndex = this.UseBWT ? 5 : 1;
-
-            foreach (byte b in bytes[startIndex..])
+            foreach (byte b in bytes[5..])
             {
                 for (int i = 0; i < 8; i++)
                 {
@@ -147,34 +200,6 @@
 
 
             return (codes, indexOfStart);
-        }
-
-        private float CalculateCompressionRatio(string inputPath)
-        {
-            FileInfo originalFile = new FileInfo(inputPath);
-            FileInfo compressedFile = new FileInfo(inputPath + ".zipped");
-
-            return (float)compressedFile.Length / originalFile.Length;
-        }
-
-        private int CalculateMinBits(List<int> codes)
-        {
-            int maxNumber = codes.Max();
-            int minBits = (int)Math.Ceiling(Math.Log2(maxNumber + 1));
-
-            return minBits;
-        }
-
-        private string GenerateBinaryCodes(List<int> codes, int minBits)
-        {
-            var binaryCodes = new StringBuilder();
-
-            for (int i = 0; i < codes.Count; ++i)
-            {
-                binaryCodes.Append(Convert.ToString(codes[i], 2).PadLeft(minBits, '0'));
-            }
-
-            return binaryCodes.ToString();
         }
     }
 }

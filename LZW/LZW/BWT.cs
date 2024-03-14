@@ -81,6 +81,7 @@
                 {
                     return 1;
                 }
+
                 if (inputString[(shift1 + i) % inputString.Length] < inputString[(shift2 + i) % inputString.Length])
                 {
                     return -1;

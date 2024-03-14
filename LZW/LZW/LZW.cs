@@ -1,6 +1,5 @@
 ﻿namespace LZWAlgorithm
 {
-    using System.Collections.Generic;
     using TrieClass;
 
     /// <summary>
@@ -49,8 +48,6 @@
             return codes;
         }
 
-        // В общем, нужно либо хранить байтовые последовательности в словаре, либо как то конвертировать строки в байты 255 разрядности
-
         /// <summary>
         /// The method of decoding a string encoded with LZW.
         /// </summary>
@@ -89,7 +86,7 @@
 
             bytes.AddRange(dictionary[codes.Last()]);
 
-            return bytes.ToArray();
+            return [.. bytes];
         }
     }
 }
