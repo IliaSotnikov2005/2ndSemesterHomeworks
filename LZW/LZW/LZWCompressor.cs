@@ -198,7 +198,6 @@
                 codes.Add(currentCode);
             }
 
-
             return (codes, indexOfStart);
         }
     }

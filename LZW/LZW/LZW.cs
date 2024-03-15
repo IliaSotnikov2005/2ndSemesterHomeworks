@@ -70,7 +70,7 @@
                     bytes.Add(dictionary[codes[i]][j]);
                 }
 
-                List<byte> entry = new List<byte> (dictionary[codes[i]]);
+                var entry = new List<byte>(dictionary[codes[i]]);
 
                 if (codes[i + 1] < dictionary.Count)
                 {
