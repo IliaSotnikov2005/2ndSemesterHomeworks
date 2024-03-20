@@ -5,13 +5,52 @@ namespace ParseTreeSpace
 {
     public class ParseTree
     {
-        private Edge? root = null;
+        public Edge? root = null; // TODO change public -> private readonly
 
-        class Edge(Operand operand)
+        public class Edge(IEdgeContent content) // TODO change public -> private
         {
-            public Operand Operand { get; set; } = operand;
+            public IEdgeContent Content { get; set; } = content;
             public Edge? LeftChild { get; set; } = null;
             public Edge? RightChild {get; set; } = null;
+
+            public Operand Evaluate()
+            {
+                if (Content is Operand operand)
+                {
+                    return operand;
+                }
+                else if (Content is IOperator op)
+                {
+                    Operand leftValue = LeftChild?.Evaluate() ?? new Operand(0);
+                    Operand rightValue = RightChild?.Evaluate() ?? new Operand(0);
+
+                    return op.Calculate(leftValue, rightValue);
+                }
+                else
+                {
+                    throw new ArgumentException();
+                }
+            }
+
+            public override string ToString()
+            {
+                return Content.ToString();
+            }
+
+            public void Print()
+            {
+                if (this.LeftChild == null)
+                {
+                    Console.Write($" {this.ToString()} ");
+                }
+                else
+                {
+                    Console.Write($"( {this.ToString()} ");
+                    this.LeftChild.Print();
+                    this.RightChild.Print();
+                    Console.Write(")");
+                }
+            }
         }
 
         public void BuildFromFile()
@@ -21,21 +60,12 @@ namespace ParseTreeSpace
 
         public void Print()
         {
-            Console.WriteLine(this);
+            root.Print();
         }
 
         public override string ToString()
         {
-            var sb = new StringBuilder();
-
-            Edge? current = root;
-
             return "";
-        }
-
-        public int Evaluate()
-        {
-            return 1;
         }
 
         private void BuildTree(string expression)
