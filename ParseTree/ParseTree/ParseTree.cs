@@ -5,6 +5,7 @@
 namespace ParseTreeSpace
 {
     using System.Text;
+    using System.Text.RegularExpressions;
 
     /// <summary>
     /// Parse tree class.
@@ -31,7 +32,7 @@ namespace ParseTreeSpace
             }
 
             string input = File.ReadAllText(filePath);
-            input = input.Replace("( ", string.Empty).Replace(") ", string.Empty)[..^2];
+            input = Regex.Replace(Regex.Replace(input, @"[()\s]+", " "), @"\s+", " ").Trim();
             string[] expression = input.Split(" ");
 
             ParseTree? root = BuildTree(ref expression) ?? throw new ArgumentException();
@@ -41,25 +42,11 @@ namespace ParseTreeSpace
         /// <summary>
         /// Evaluates expression in the tree.
         /// </summary>
-        /// <returns><see cref="Operand"/> object — result of calculus.</returns>
+        /// <returns>Result of calculus.</returns>
         /// <exception cref="ArgumentException">If content of edge is not operand or operator.</exception>
-        public Operand Evaluate()
+        public int Evaluate()
         {
-            if (this.Content is Operand operand)
-            {
-                return operand;
-            }
-            else if (this.Content is IOperator op)
-            {
-                Operand leftValue = this.LeftChild?.Evaluate() ?? new Operand(0);
-                Operand rightValue = this.RightChild?.Evaluate() ?? new Operand(0);
-
-                return op.Calculate(leftValue, rightValue);
-            }
-            else
-            {
-                throw new ArgumentException("Edge content is not Operator or Operand object.");
-            }
+            return this.EvaluateEdges().Value;
         }
 
         /// <inheritdoc/>
@@ -154,6 +141,25 @@ namespace ParseTreeSpace
                     {
                         throw new ArgumentException();
                     }
+            }
+        }
+
+        private Operand EvaluateEdges()
+        {
+            if (this.Content is Operand operand)
+            {
+                return operand;
+            }
+            else if (this.Content is IOperator op)
+            {
+                Operand leftValue = this.LeftChild?.EvaluateEdges() ?? new Operand(0);
+                Operand rightValue = this.RightChild?.EvaluateEdges() ?? new Operand(0);
+
+                return op.Calculate(leftValue, rightValue);
+            }
+            else
+            {
+                throw new ArgumentException("Edge content is not Operator or Operand object.");
             }
         }
     }

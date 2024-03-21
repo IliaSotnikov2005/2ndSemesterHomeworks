@@ -3,7 +3,7 @@
 // </copyright>
 
 /// <summary>
-/// Interface for content of the <see cref="Edge"/> class.
+/// Interface for content of the ParseTree nodes.
 /// </summary>
 public interface IEdgeContent
 {
