@@ -1,7 +1,29 @@
+// <copyright file="UniqueList.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 namespace UniqueListSpace
 {
-    class UniqueList<T> : SingleLinkedList<T>
+    /// <summary>
+    /// Unique list class.
+    /// </summary>
+    /// <typeparam name="T">Type of elements in list.</typeparam>
+    public class UniqueList<T> : SingleLinkedList<T>
     {
+        /// <summary>
+        /// Gives element of list by index.
+        /// </summary>
+        /// <param name="index">Index of the element.</param>
+        public new T this[int index]
+        {
+            get { return this.GetNode(index).Value; }
+            set { this.TrySet(this.GetNode(index), value); }
+        }
+
+        /// <summary>
+        /// Adds element to the list.
+        /// </summary>
+        /// <param name="element">Element to be added.</param>
         public new void Add(T element)
         {
             if (this.Contains(element))
@@ -12,39 +34,30 @@ namespace UniqueListSpace
             base.Add(element);
         }
 
-        public new T this[int index]
-        {
-            get { return GetNode(index).value; }
-            set { TrySet(GetNode(index), value); }
-        }
-
         private void TrySet(Node element, T value)
         {
-            if (this.Contains(element.value))
+            if (this.Contains(element.Value))
             {
                 throw new ElementIsAlreadyInsideException();
             }
 
-            element.value = value;
+            element.Value = value;
         }
 
         private bool Contains(T element)
         {
-            Node current = head;
-            for (int i = 0; i < Size; ++i)
+            Node? current = this.Head;
+            while (current != null)
             {
-                if (current.value.Equals(element))
+                if (current.Value!.Equals(element))
                 {
                     return true;
                 }
-                current = current.next;
+
+                current = current.Next;
             }
 
             return false;
         }
     }
-}
-
-class ElementIsAlreadyInsideException : Exception
-{
 }

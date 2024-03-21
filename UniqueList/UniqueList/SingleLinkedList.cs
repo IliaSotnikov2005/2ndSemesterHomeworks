@@ -1,88 +1,142 @@
-using System.Text;
+// <copyright file="SingleLinkedList.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace UniqueListSpace;
+
+using System.Text;
+
+/// <summary>
+/// Single linked list class.
+/// </summary>
+/// <typeparam name="T">Type of elements.</typeparam>
 public class SingleLinkedList<T>
 {
+    /// <summary>
+    /// Gets the size of list.
+    /// </summary>
     public int Size { get; private set; }
-    protected Node? head = null;
 
-    protected class Node(T value)
+    /// <summary>
+    /// Gets or sets Head of the list.
+    /// </summary>
+    private protected Node? Head { get; set; }
+
+    /// <summary>
+    /// Gives element of list by index.
+    /// </summary>
+    /// <param name="index">Index of the element.</param>
+    public T this[int index]
     {
-        public T value = value;
-        public Node next;
+        get { return this.GetNode(index).Value; }
+        set { this.GetNode(index).Value = value; }
     }
 
+    /// <summary>
+    /// Adds element to the list.
+    /// </summary>
+    /// <param name="element">Element to be added.</param>
     public void Add(T element)
     {
         var newNode = new Node(element);
-        if (head != null)
+        if (this.Head != null)
         {
-            newNode.next = head;
+            newNode.Next = this.Head;
         }
 
-        head = newNode;
-        Size++;
+        this.Head = newNode;
+        this.Size++;
     }
 
+    /// <summary>
+    /// Removes element from given index.
+    /// </summary>
+    /// <param name="index">Index of the element to be removed.</param>
     public void RemoveAt(int index)
     {
-        if (0 > index || index >= Size)
+        if (index < 0 || index >= this.Size)
         {
             throw new IndexOutOfRangeException("Index out of range.");
         }
 
+        if (this.Head == null)
+        {
+            throw new EmptyListException();
+        }
+
         Node? previous = null;
-        Node current = head;
+        Node current = this.Head;
         for (int i = 0; i < index; ++i)
         {
             previous = current;
-            current = current.next;
+            current = current.Next!;
         }
 
         if (previous == null)
         {
-            head = current.next;
+            this.Head = current.Next!;
         }
         else
         {
-            previous.next = current.next;
+            previous.Next = current.Next!;
         }
 
-        Size--;
+        this.Size--;
     }
 
-    public T this[int index]
+    /// <inheritdoc/>
+    public override string ToString()
     {
-        get { return GetNode(index).value; }
-        set { GetNode(index).value = value; }
+        var sb = new StringBuilder();
+        Node? current = this.Head;
+        while (current != null)
+        {
+            sb.Append(current.Value!.ToString());
+            current = current.Next;
+        }
+
+        return sb.ToString();
     }
 
-    protected Node GetNode(int index)
+    /// <summary>
+    /// Gets node by index.
+    /// </summary>
+    /// <param name="index">Index of the element.</param>
+    /// <returns>Node with given index.</returns>
+    private protected Node GetNode(int index)
     {
-        if (0 > index || index >= Size)
+        if (index < 0 || index >= this.Size)
         {
             throw new IndexOutOfRangeException("Index out of range.");
         }
 
-        Node current = head;
+        if (this.Head == null)
+        {
+            throw new EmptyListException();
+        }
+
+        Node current = this.Head;
         for (int i = 0; i < index; ++i)
         {
-            current = current.next;
+            current = current.Next!;
         }
 
         return current;
     }
 
-    public override string ToString()
+    /// <summary>
+    /// Node class.
+    /// </summary>
+    private protected class Node(T value)
     {
-        var sb = new StringBuilder();
-        Node current = head;
-        while (current != null)
-        {
-            sb.Append(current.value.ToString());
-            current = current.next;
-        }
+        /// <summary>
+        /// Gets or sets value of the node.
+        /// </summary>
+        public T Value { get; set; } = value;
 
-        return sb.ToString();
+        /// <summary>
+        /// Gets or sets next node after this.
+        /// </summary>
+        public Node? Next { get; set; }
     }
 }
