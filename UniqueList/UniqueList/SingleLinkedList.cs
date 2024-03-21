@@ -59,13 +59,8 @@ public class SingleLinkedList<T>
             throw new IndexOutOfRangeException("Index out of range.");
         }
 
-        if (this.Head == null)
-        {
-            throw new EmptyListException();
-        }
-
         Node? previous = null;
-        Node current = this.Head;
+        Node current = this.Head!;
         for (int i = 0; i < index; ++i)
         {
             previous = current;
@@ -110,12 +105,7 @@ public class SingleLinkedList<T>
             throw new IndexOutOfRangeException("Index out of range.");
         }
 
-        if (this.Head == null)
-        {
-            throw new EmptyListException();
-        }
-
-        Node current = this.Head;
+        Node current = this.Head!;
         for (int i = 0; i < index; ++i)
         {
             current = current.Next!;
