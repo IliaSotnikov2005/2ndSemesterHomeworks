@@ -1,5 +1,5 @@
 ﻿using ParseTreeSpace;
 
-ParseTree tree = ParseTree.buildTreeFromFile("expression.txt");
+ParseTree tree = ParseTree.BuildTreeFromFile("expression.txt");
 Console.WriteLine(tree.Evaluate());
 Console.WriteLine(tree);
