@@ -1,8 +1,12 @@
 public class Graph
 {
-    public static Dictionary<int, List<Node>> graph = new ();
+    public HashSet<Vertex> Vertices { get; private set; } = [];
 
-    public static Graph BuildGraphFromTopology(string filename)
+    public List<Edge> Edges { get; private set; } = [];
+
+    public static Dictionary<Vertex, List<Edge>> graph = [];
+
+    public void BuildGraphFromTopology(string filename)
     {
         if (!File.Exists(filename))
         {
@@ -11,49 +15,55 @@ public class Graph
 
         string[] topology = File.ReadAllText(filename).Trim('\n').Split("\n");
 
-        var newGraph = new Graph();
-
         foreach (var input in topology)
         {
             ParseInput(input);
         }
-
-        return newGraph;
     }
 
-    private static void ParseInput(string input)
+    private void ParseInput(string input)
     {
         string[] parts = input.Split(':');
-        int routerId = int.Parse(parts[0]);
+        var router1 = new Vertex(int.Parse(parts[0]));
+        Vertices.Add(router1);
+        
 
         string[] connections = parts[1].Split(',');
 
         foreach (string connection in connections)
         {
             string[] routerAndBandwidth = connection.Trim().Split(' ');
-            int router = int.Parse(routerAndBandwidth[0]);
+            Vertex router2 = new Vertex(int.Parse(routerAndBandwidth[0]));
+            Vertices.Add(router2);
+
             int bandwidth = int.Parse(routerAndBandwidth[1].Trim('(', ')'));
-            var nodeToAddToCurrent = new Node(router, bandwidth);
-            var nodeToAddCurrent = new Node(routerId, bandwidth);
             
-            if (!graph.ContainsKey(routerId))
+            Edge edge = new Edge(router1, router2, bandwidth);
+            Edges.Add(edge);
+
+            if (!graph.ContainsKey(router1))
             {
-                graph[routerId] = [];
+                graph[router1] = [];
             }
 
-            if (!graph.ContainsKey(router))
+            if (!graph.ContainsKey(router2))
             {
-                graph[router] = [];
+                graph[router2] = [];
             }
 
-            graph[routerId].Add(nodeToAddToCurrent);
-            graph[router].Add(nodeToAddCurrent);
         }
     }
 
-    public record Node(int router, int bandwidth)
+    public record Vertex(int router)
     {
         public int router = router;
+    }
+
+    public record Edge(Vertex vertex1, Vertex vertex2, int bandwidth)
+    {
+        public Vertex vertex1 = vertex1;
+        public Vertex vertex2 = vertex2;
+
         public int bandwidth = bandwidth;
     }
 }

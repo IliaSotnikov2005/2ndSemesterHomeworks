@@ -1,3 +1,4 @@
-﻿Graph graph = Graph.BuildGraphFromTopology("text.txt");
-Dictionary<int, int> d = Dijkstra.ShortestPath(graph, 1);
+﻿Graph graph = new Graph();
+graph.BuildGraphFromTopology("text.txt");
+KruskalsAlgorithm.Run(graph);
 Console.WriteLine($"Text");
