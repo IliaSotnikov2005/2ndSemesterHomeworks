@@ -1,4 +1,6 @@
 ﻿Graph graph = new Graph();
 graph.BuildGraphFromTopology("text.txt");
-KruskalsAlgorithm.Run(graph);
-Console.WriteLine($"Text");
+Console.WriteLine($"Input topology:\n{graph}");
+
+var newGraph = KruskalsAlgorithm.Run(graph);
+Console.WriteLine($"New topology:\n{newGraph}");
