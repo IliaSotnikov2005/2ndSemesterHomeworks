@@ -34,6 +34,11 @@ public class Graph
 
         string[] topology = File.ReadAllText(filename).Trim('\n').Split("\n");
 
+        if (topology[0] == string.Empty)
+        {
+            throw new FileIsEmptyException();
+        }
+
         foreach (var input in topology)
         {
             this.ParseInput(input);
