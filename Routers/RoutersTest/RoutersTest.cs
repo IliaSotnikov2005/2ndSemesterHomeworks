@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using RoutersGraph;
 
 namespace RoutersTest;
@@ -62,5 +61,11 @@ public class Tests
         graph.BuildGraphFromTopology("../../../../TestFiles/test2.txt");
 
         Assert.That(DFS.CheckThatAllVerticesReachable(graph), Is.False);
+    }
+
+    [Test]
+    public void Rofl()
+    {
+        Assert.That(false, Is.True);
     }
 }
