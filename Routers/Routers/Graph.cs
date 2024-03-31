@@ -56,6 +56,15 @@ public class Graph
         this.Vertices.Add(edge.Vertex2);
     }
 
+    /// <summary>
+    /// Writes the contents of the graph to a file.
+    /// </summary>
+    /// <param name="filename">The name of the file to write to.</param>
+    public void WriteToFile(string filename)
+    {
+        File.WriteAllText(filename, this.ToString());
+    }
+
     /// <inheritdoc/>
     public override string ToString()
     {

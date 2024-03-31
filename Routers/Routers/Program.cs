@@ -12,19 +12,28 @@ public static class Program
     /// <summary>
     /// Entry point for program.
     /// </summary>
-    public static void Main()
+    /// <param name="args">Input file and output file.</param>
+    public static void Main(string[] args)
     {
-        Graph graph = new Graph();
-        graph.BuildGraphFromTopology("text.txt");
-        Console.WriteLine($"Input topology:\n{graph}");
-
-        var newGraph = KruskalsAlgorithm.Run(graph);
-        if (!DFS.CheckThatAllVerticesReachable(newGraph))
+        if (args.Length == 2)
         {
-            Console.Error.WriteLine($"Not all vertices reachable");
-            return;
-        }
+            if (!File.Exists(args[0]))
+            {
+                Console.WriteLine("File with this pass doesn't exist");
+                return;
+            }
 
-        Console.WriteLine($"New topology:\n{newGraph}");
+            Graph graph = new Graph();
+            graph.BuildGraphFromTopology(args[0]);
+
+            var newGraph = KruskalsAlgorithm.Run(graph);
+            if (!DFS.CheckThatAllVerticesReachable(newGraph))
+            {
+                Console.Error.WriteLine($"Not all vertices reachable");
+                return;
+            }
+
+            newGraph.WriteToFile(args[1]);
+        }
     }
 }
