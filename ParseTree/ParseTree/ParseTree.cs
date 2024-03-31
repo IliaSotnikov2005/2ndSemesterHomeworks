@@ -10,9 +10,9 @@ namespace ParseTreeSpace
     /// <summary>
     /// Parse tree class.
     /// </summary>
-    public class ParseTree(IEdgeContent content)
+    public class ParseTree(IVertexContent content)
     {
-        private IEdgeContent Content { get; set; } = content;
+        private IVertexContent Content { get; set; } = content;
 
         private ParseTree? LeftChild { get; set; } = null;
 
@@ -43,10 +43,10 @@ namespace ParseTreeSpace
         /// Evaluates expression in the tree.
         /// </summary>
         /// <returns>Result of calculus.</returns>
-        /// <exception cref="ArgumentException">If content of edge is not operand or operator.</exception>
+        /// <exception cref="ArgumentException">If content of vertex is not operand or operator.</exception>
         public int Evaluate()
         {
-            return this.EvaluateEdges().Value;
+            return this.EvaluateVertices().Value;
         }
 
         /// <inheritdoc/>
@@ -99,42 +99,42 @@ namespace ParseTreeSpace
             {
                 case "+":
                     {
-                        ParseTree edge = new (new Plus())
+                        ParseTree vertex = new (new Plus())
                         {
                             LeftChild = BuildTree(ref expression),
                             RightChild = BuildTree(ref expression),
                         };
-                        return edge;
+                        return vertex;
                     }
 
                 case "-":
                     {
-                        ParseTree edge = new (new Minus())
+                        ParseTree vertex = new (new Minus())
                         {
                             LeftChild = BuildTree(ref expression),
                             RightChild = BuildTree(ref expression),
                         };
-                        return edge;
+                        return vertex;
                     }
 
                 case "*":
                     {
-                        ParseTree edge = new (new Multiplication())
+                        ParseTree vertex = new (new Multiplication())
                         {
                             LeftChild = BuildTree(ref expression),
                             RightChild = BuildTree(ref expression),
                         };
-                        return edge;
+                        return vertex;
                     }
 
                 case "/":
                     {
-                        ParseTree edge = new (new Division())
+                        ParseTree vertex = new (new Division())
                         {
                             LeftChild = BuildTree(ref expression),
                             RightChild = BuildTree(ref expression),
                         };
-                        return edge;
+                        return vertex;
                     }
 
                 default:
@@ -144,7 +144,7 @@ namespace ParseTreeSpace
             }
         }
 
-        private Operand EvaluateEdges()
+        private Operand EvaluateVertices()
         {
             if (this.Content is Operand operand)
             {
@@ -152,14 +152,14 @@ namespace ParseTreeSpace
             }
             else if (this.Content is IOperator op)
             {
-                Operand leftValue = this.LeftChild?.EvaluateEdges() ?? new Operand(0);
-                Operand rightValue = this.RightChild?.EvaluateEdges() ?? new Operand(0);
+                Operand leftValue = this.LeftChild?.EvaluateVertices() ?? new Operand(0);
+                Operand rightValue = this.RightChild?.EvaluateVertices() ?? new Operand(0);
 
                 return op.Calculate(leftValue, rightValue);
             }
             else
             {
-                throw new ArgumentException("Edge content is not Operator or Operand object.");
+                throw new ArgumentException("Vertex content is not Operator or Operand object.");
             }
         }
     }

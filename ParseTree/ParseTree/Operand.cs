@@ -8,7 +8,7 @@ namespace ParseTreeSpace;
 /// Operand class.
 /// </summary>
 #pragma warning disable SA1009 // Closing parenthesis should be spaced correctly
-public class Operand(int value) : IEdgeContent
+public class Operand(int value) : IVertexContent
 #pragma warning restore SA1009 // Closing parenthesis should be spaced correctly
 {
     /// <summary>

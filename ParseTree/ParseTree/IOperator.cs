@@ -7,7 +7,7 @@ namespace ParseTreeSpace;
 /// <summary>
 /// Interface for opetarors.
 /// </summary>
-public interface IOperator : IEdgeContent
+public interface IOperator : IVertexContent
 {
     /// <summary>
     /// Calculates an expression consisting of two operands.
