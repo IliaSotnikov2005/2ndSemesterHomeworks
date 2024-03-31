@@ -62,10 +62,4 @@ public class Tests
 
         Assert.That(DFS.CheckThatAllVerticesReachable(graph), Is.False);
     }
-
-    [Test]
-    public void Rofl()
-    {
-        Assert.That(false, Is.True);
-    }
 }
