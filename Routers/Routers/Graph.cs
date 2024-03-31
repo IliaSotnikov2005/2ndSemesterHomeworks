@@ -86,38 +86,6 @@ public class Graph
         return sb.ToString();
     }
 
-    /// <summary>
-    /// Represents a vertex in the graph.
-    /// </summary>
-    public record Vertex(int router)
-    {
-        /// <summary>
-        /// Gets the ID of the router.
-        /// </summary>
-        public int Router { get; private set; } = router;
-    }
-
-    /// <summary>
-    /// Represents an edge in the graph.
-    /// </summary>
-    public record Edge(Vertex vertex1, Vertex vertex2, int bandwidth)
-    {
-        /// <summary>
-        /// Gets the first vertex in the edge.
-        /// </summary>
-        public Vertex Vertex1 { get; private set; } = vertex1;
-
-        /// <summary>
-        /// Gets the second vertex in the edge.
-        /// </summary>
-        public Vertex Vertex2 { get; private set; } = vertex2;
-
-        /// <summary>
-        /// Gets the bandwidth of the edge.
-        /// </summary>
-        public int Bandwidth { get; private set; } = bandwidth;
-    }
-
     private void ParseInput(string input)
     {
         string[] parts = input.Split(':');
@@ -138,4 +106,36 @@ public class Graph
             this.Edges.Add(edge);
         }
     }
+}
+
+/// <summary>
+/// Represents a vertex in the graph.
+/// </summary>
+public record Vertex(int router)
+{
+    /// <summary>
+    /// Gets the ID of the router.
+    /// </summary>
+    public int Router { get; private set; } = router;
+}
+
+/// <summary>
+/// Represents an edge in the graph.
+/// </summary>
+public record Edge(Vertex vertex1, Vertex vertex2, int bandwidth)
+{
+    /// <summary>
+    /// Gets the first vertex in the edge.
+    /// </summary>
+    public Vertex Vertex1 { get; private set; } = vertex1;
+
+    /// <summary>
+    /// Gets the second vertex in the edge.
+    /// </summary>
+    public Vertex Vertex2 { get; private set; } = vertex2;
+
+    /// <summary>
+    /// Gets the bandwidth of the edge.
+    /// </summary>
+    public int Bandwidth { get; private set; } = bandwidth;
 }

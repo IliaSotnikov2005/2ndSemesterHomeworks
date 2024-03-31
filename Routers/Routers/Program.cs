@@ -19,6 +19,11 @@ public static class Program
         Console.WriteLine($"Input topology:\n{graph}");
 
         var newGraph = KruskalsAlgorithm.Run(graph);
-        Console.WriteLine($"New topology:\n{newGraph}");
+        if (DFS.CheckThatAllVerticesReachable(newGraph))
+        {
+            Console.WriteLine($"New topology:\n{newGraph}");
+        }
+
+        Console.WriteLine($"Not all vertices reachable");
     }
 }

@@ -53,4 +53,13 @@ public class Tests
             Assert.That(expectedEdgesBandwidths, Does.Contain(edge.Bandwidth));
         }
     }
+
+    [Test]
+    public void CheckThatAllVerticesReachable_ReturnsCorrect()
+    {
+        Graph graph = new Graph();
+        graph.BuildGraphFromTopology("../../../../TestFiles/test2.txt");
+
+        Assert.That(DFS.CheckThatAllVerticesReachable(graph), Is.False);
+    }
 }
