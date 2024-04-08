@@ -48,11 +48,10 @@
             this.buttonErase = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonExtra = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
@@ -373,7 +372,7 @@
             this.tableLayoutPanel1.Controls.Add(this.buttonMultiplication, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.button4, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.button1, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 3, 4);
+            this.tableLayoutPanel1.Controls.Add(this.buttonExtra, 3, 4);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 118);
             this.tableLayoutPanel1.MinimumSize = new System.Drawing.Size(50, 50);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -385,7 +384,24 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(447, 560);
             this.tableLayoutPanel1.TabIndex = 18;
-            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
+            // 
+            // buttonExtra
+            // 
+            this.buttonExtra.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonExtra.AutoEllipsis = true;
+            this.buttonExtra.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonExtra.BackgroundImage")));
+            this.buttonExtra.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonExtra.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonExtra.Font = new System.Drawing.Font("Molot", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonExtra.Location = new System.Drawing.Point(336, 451);
+            this.buttonExtra.MinimumSize = new System.Drawing.Size(50, 50);
+            this.buttonExtra.Name = "buttonExtra";
+            this.buttonExtra.Size = new System.Drawing.Size(108, 106);
+            this.buttonExtra.TabIndex = 18;
+            this.buttonExtra.UseVisualStyleBackColor = true;
+            this.buttonExtra.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ExtraFeatureMouseClick);
             // 
             // tableLayoutPanel2
             // 
@@ -404,20 +420,6 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(453, 681);
             this.tableLayoutPanel2.TabIndex = 19;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(336, 451);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(108, 106);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 18;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
-            // 
             // Calculator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -429,11 +431,9 @@
             this.Name = "Calculator";
             this.Text = "Calculator";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -460,7 +460,7 @@
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button buttonExtra;
     }
 }
 
