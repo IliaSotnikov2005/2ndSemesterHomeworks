@@ -13,11 +13,14 @@ namespace Calculator
             Operand1,
             Operator,
             Operand2,
-            Result
+            Operand1FractionalPart,
+            Operand2FractionalPart
         }
 
         private float operand1 = 0;
         private float operand2 = 0;
+        private int operand1FractionalPartDigitCount = 0;
+        private int operand2FractionalPartDigitCount = 0;
         private char currentOperator = '\0';
         private string currentExpression = String.Empty;
         private State state = State.Operand1;
@@ -28,100 +31,223 @@ namespace Calculator
             {
                 case State.Operand1:
                     {
-                        currentExpression += input;
+                        if (!float.TryParse(currentExpression, out float result))
+                        {
+                            currentExpression = string.Empty;
+                        }
+
                         if (char.IsDigit(input))
                         {
                             operand1 = operand1 * 10 + float.Parse(input.ToString());
+                            currentExpression += input;
+                        }
+                        else if (input == '.')
+                        {
+                            state = State.Operand1FractionalPart;
+                            currentExpression += input;
                         }
                         else if (input == '+' || input == '-' || input == '*' || input == '/')
                         {
                             state = State.Operator;
                             currentOperator = input;
+                            currentExpression += input;
                         }
+                        else if (input == 'C')
+                        {
+                            SetDefaults();
+                        }
+
                         break;
                     }
                 case State.Operator:
                     {
                         if (char.IsDigit(input))
                         {
-                            currentExpression += input;
                             state = State.Operand2;
-                            operand2 = operand2 * 10 + float.Parse(input.ToString()); ;
+                            operand2 = operand2 * 10 + float.Parse(input.ToString());
+                            currentExpression += input;
                         }
+                        else if (input == 'C')
+                        {
+                            SetDefaults();
+                        }
+
+                        break;
                     }
-                    break;
                 case State.Operand2:
                     {
                         if (char.IsDigit(input))
                         {
-                            operand2 = operand2 * 10 + float.Parse(input.ToString()); ;
+                            operand2 = operand2 * 10 + float.Parse(input.ToString());
+                            currentExpression += input;
+                        }
+                        else if (input == '.')
+                        {
+                            state = State.Operand2FractionalPart;
+                            currentExpression += input;
                         }
                         else if (input == '+' || input == '-' || input == '*' || input == '/')
                         {
                             state = State.Operator;
-                            if (currentOperator == '+')
+                            try
                             {
-                                operand1 += operand2;
+                                Calculate();
+                                currentExpression += input;
                             }
-                            else if (currentOperator == '-')
+                            catch (DivideByZeroException)
                             {
-                                operand1 -= operand2;
+                                state = State.Operand1;
+                                SetDefaults();
+                                currentExpression = "ERROR";
                             }
-                            else if (currentOperator == '*')
-                            {
-                                operand1 *= operand2;
-                            }
-                            else if (currentOperator == '/')
-                            {
-                                if (Math.Abs(operand2) < 0.00000000001)
-                                {
-                                    throw new DivideByZeroException("Division by zero.");
-                                }
 
-                                operand1 /= operand2;
-                            }
-                            currentExpression = operand1.ToString() + input;
-                            operand2 = 0;
                             currentOperator = input;
                         }
                         else if (input == '=')
                         {
                             state = State.Operand1;
-                            if (currentOperator == '+')
+                            try
                             {
-                                operand1 += operand2;
+                                Calculate();
                             }
-                            else if (currentOperator == '-')
+                            catch (DivideByZeroException)
                             {
-                                operand1 -= operand2;
+                                state = State.Operand1;
+                                SetDefaults();
+                                currentExpression = "ERROR";
                             }
-                            else if (currentOperator == '*')
-                            {
-                                operand1 *= operand2;
-                            }
-                            else if (currentOperator == '/')
-                            {
-                                if (Math.Abs(operand2) < 0.00000000001)
-                                {
-                                    throw new DivideByZeroException("Division by zero.");
-                                }
-
-                                operand1 /= operand2;
-                            }
-                            currentExpression = operand1.ToString();
-                            operand2 = 0;
-                            currentOperator = '\0';
                         }
+                        else if (input == 'C')
+                        {
+                            SetDefaults();
+                        }
+
                         break;
                     }
-                case State.Result:
+                case State.Operand1FractionalPart:
                     {
+                        if (char.IsDigit(input))
+                        {
+                            operand1FractionalPartDigitCount++;
+                            operand1 += (float)Math.Pow(0.1, operand1FractionalPartDigitCount) * float.Parse(input.ToString());
+                            currentExpression += input;
+                        }
+                        else if (input == '+' || input == '-' || input == '*' || input == '/')
+                        {
+                            state = State.Operator;
+                            currentOperator = input;
+                            currentExpression += input;
+                        }
+                        else if (input == '=')
+                        {
+                            state = State.Operand1;
+                            try
+                            {
+                                Calculate();
+                            }
+                            catch (DivideByZeroException)
+                            {
+                                state = State.Operand1;
+                                SetDefaults();
+                                currentExpression = "ERROR";
+                            }
+                        }
+                        else if (input == 'C')
+                        {
+                            SetDefaults();
+                        }
+
+                        break;
+                    }
+                case State.Operand2FractionalPart:
+                    {
+                        if (char.IsDigit(input))
+                        {
+                            operand2FractionalPartDigitCount++;
+                            operand2 += (float)Math.Pow(0.1, operand2FractionalPartDigitCount) * float.Parse(input.ToString());
+                            currentExpression += input;
+                        }
+                        else if (input == '+' || input == '-' || input == '*' || input == '/')
+                        {
+                            state = State.Operator;
+                            try
+                            {
+                                Calculate();
+                            }
+                            catch (DivideByZeroException)
+                            {
+                                state = State.Operand1;
+                                SetDefaults();
+                                currentExpression = "ERROR";
+                            }
+
+                            currentExpression += input;
+                        }
+                        else if (input == '=')
+                        {
+                            state = State.Operand1;
+                            try
+                            {
+                                Calculate();
+                            }
+                            catch (DivideByZeroException)
+                            {
+                                state = State.Operand1;
+                                SetDefaults();
+                                currentExpression = "ERROR";
+                            }
+                        }
+                        else if (input == 'C')
+                        {
+                            SetDefaults();
+                        }
+
                         break;
                     }
             }
         }
 
-        public string GetValue()
+        private void Calculate()
+        {
+            if (currentOperator == '+')
+            {
+                operand1 += operand2;
+            }
+            else if (currentOperator == '-')
+            {
+                operand1 -= operand2;
+            }
+            else if (currentOperator == '*')
+            {
+                operand1 *= operand2;
+            }
+            else if (currentOperator == '/')
+            {
+                if (Math.Abs(operand2) < 0.00000000001)
+                {
+                    throw new DivideByZeroException("Division by zero.");
+                }
+
+                operand1 /= operand2;
+            }
+
+            operand2 = 0;
+            operand1FractionalPartDigitCount = 0;
+            operand2FractionalPartDigitCount = 0;
+            currentExpression = operand1.ToString();
+            currentOperator = '\0';
+        }
+
+        private void SetDefaults()
+        {
+            operand1 = 0;
+            operand2 = 0;
+            currentExpression = String.Empty;
+            currentOperator = '\0';
+            operand1FractionalPartDigitCount = 0;
+            operand2FractionalPartDigitCount = 0;
+        }
+        public string GetExpresiion()
         {
             return currentExpression;
         }

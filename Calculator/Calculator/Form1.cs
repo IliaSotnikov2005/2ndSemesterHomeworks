@@ -34,7 +34,13 @@ namespace Calculator
         {
             Button buttonSender = sender as Button;
             calculator.ProcessInput(buttonSender.Text[0]);
-            textBox1.Text = calculator.GetValue();
+            textBox1.Text = calculator.GetExpresiion();
+        }
+
+        private void textBox1_Resize(object sender, EventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            tb.Font = new Font(tb.Font.FontFamily, tb.Height / 2);
         }
     }
 }

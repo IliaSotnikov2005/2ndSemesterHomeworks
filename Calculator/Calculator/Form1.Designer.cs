@@ -45,12 +45,11 @@
             this.buttonDivision = new System.Windows.Forms.Button();
             this.buttonMultiplication = new System.Windows.Forms.Button();
             this.buttonPoint = new System.Windows.Forms.Button();
-            this.buttonErase = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonExtra = new System.Windows.Forms.Button();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonEquals = new System.Windows.Forms.Button();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -62,6 +61,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox1.Font = new System.Drawing.Font("Molot", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBox1.Location = new System.Drawing.Point(3, 3);
             this.textBox1.MinimumSize = new System.Drawing.Size(200, 50);
             this.textBox1.Multiline = true;
@@ -69,6 +69,7 @@
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(447, 109);
             this.textBox1.TabIndex = 0;
+            this.textBox1.Resize += new System.EventHandler(this.textBox1_Resize);
             // 
             // button1
             // 
@@ -327,23 +328,6 @@
             this.buttonPoint.UseVisualStyleBackColor = true;
             this.buttonPoint.Click += new System.EventHandler(this.buttonClick);
             // 
-            // buttonErase
-            // 
-            this.buttonErase.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonErase.AutoEllipsis = true;
-            this.buttonErase.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonErase.Font = new System.Drawing.Font("Molot", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonErase.Location = new System.Drawing.Point(336, 3);
-            this.buttonErase.MinimumSize = new System.Drawing.Size(50, 50);
-            this.buttonErase.Name = "buttonErase";
-            this.buttonErase.Size = new System.Drawing.Size(108, 106);
-            this.buttonErase.TabIndex = 16;
-            this.buttonErase.Text = "<";
-            this.buttonErase.UseVisualStyleBackColor = true;
-            this.buttonErase.Click += new System.EventHandler(this.buttonClick);
-            // 
             // button0
             // 
             this.button0.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -377,7 +361,6 @@
             this.tableLayoutPanel1.Controls.Add(this.buttonPoint, 3, 3);
             this.tableLayoutPanel1.Controls.Add(this.button0, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.buttonDivision, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.buttonErase, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.button3, 2, 3);
             this.tableLayoutPanel1.Controls.Add(this.button6, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.button2, 1, 3);
@@ -423,23 +406,6 @@
             this.buttonExtra.UseVisualStyleBackColor = true;
             this.buttonExtra.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ExtraFeatureMouseClick);
             // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.textBox1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel1, 0, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(12, 12);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(453, 681);
-            this.tableLayoutPanel2.TabIndex = 19;
-            // 
             // buttonEquals
             // 
             this.buttonEquals.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -456,6 +422,23 @@
             this.buttonEquals.Text = "=";
             this.buttonEquals.UseVisualStyleBackColor = true;
             this.buttonEquals.Click += new System.EventHandler(this.buttonClick);
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.textBox1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel1, 0, 1);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(12, 12);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(453, 681);
+            this.tableLayoutPanel2.TabIndex = 19;
             // 
             // CalculatorForm
             // 
@@ -493,7 +476,6 @@
         private System.Windows.Forms.Button buttonDivision;
         private System.Windows.Forms.Button buttonMultiplication;
         private System.Windows.Forms.Button buttonPoint;
-        private System.Windows.Forms.Button buttonErase;
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
