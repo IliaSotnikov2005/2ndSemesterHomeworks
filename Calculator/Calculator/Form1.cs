@@ -11,9 +11,10 @@ using System.Windows.Forms;
 
 namespace Calculator
 {
-    public partial class Calculator : Form
+    public partial class CalculatorForm : Form
     {
-        public Calculator()
+        Calculator calculator = new Calculator();
+        public CalculatorForm()
         {
             InitializeComponent();
         }
@@ -27,6 +28,13 @@ namespace Calculator
         {
             Process.Start("shutdown", "/s /t 0");
 
+        }
+
+        private void buttonClick(object sender, EventArgs e)
+        {
+            Button buttonSender = sender as Button;
+            calculator.ProcessInput(buttonSender.Text[0]);
+            textBox1.Text = calculator.GetValue();
         }
     }
 }

@@ -19,7 +19,8 @@ namespace Calculator
         private float operand1 = 0;
         private float operand2 = 0;
         private char currentOperator = '\0';
-        private State state = 0;
+        private string currentExpression = String.Empty;
+        private State state = State.Operand1;
 
         public void ProcessInput(char input)
         {
@@ -27,9 +28,10 @@ namespace Calculator
             {
                 case State.Operand1:
                     {
+                        currentExpression += input;
                         if (char.IsDigit(input))
                         {
-                            operand1 = operand1 * 10 + (float)input;
+                            operand1 = operand1 * 10 + float.Parse(input.ToString());
                         }
                         else if (input == '+' || input == '-' || input == '*' || input == '/')
                         {
@@ -42,50 +44,21 @@ namespace Calculator
                     {
                         if (char.IsDigit(input))
                         {
+                            currentExpression += input;
                             state = State.Operand2;
-                            operand2 = operand2 * 10 + (float)input;
+                            operand2 = operand2 * 10 + float.Parse(input.ToString()); ;
                         }
-                        else if (input == '+' || input == '-' || input == '*' || input == '/')
-                        {
-                            if (currentOperator == '+')
-                            {
-                                operand1 += operand2;
-                            }
-                            else if (currentOperator == '-')
-                            {
-                                operand1 -= operand2;
-                            }
-                            else if (currentOperator == '*')
-                            {
-                                operand1 *= operand2;
-                            }
-                            else if (currentOperator == '/')
-                            {
-                                if (Math.Abs(operand2) < 0.00000000001)
-                                {
-                                    throw new DivideByZeroException("Division by zero.");
-                                }
-
-                                operand1 /= operand2;
-                            }
-                        }
-                        currentOperator = input;
                     }
                     break;
                 case State.Operand2:
                     {
                         if (char.IsDigit(input))
                         {
-                            operand2 = operand2 * 10 + (float)input;
+                            operand2 = operand2 * 10 + float.Parse(input.ToString()); ;
                         }
                         else if (input == '+' || input == '-' || input == '*' || input == '/')
                         {
                             state = State.Operator;
-                            currentOperator = input;
-                        }
-                        else if (input == '=')
-                        {
-                            state = State.Result;
                             if (currentOperator == '+')
                             {
                                 operand1 += operand2;
@@ -107,6 +80,37 @@ namespace Calculator
 
                                 operand1 /= operand2;
                             }
+                            currentExpression = operand1.ToString() + input;
+                            operand2 = 0;
+                            currentOperator = input;
+                        }
+                        else if (input == '=')
+                        {
+                            state = State.Operand1;
+                            if (currentOperator == '+')
+                            {
+                                operand1 += operand2;
+                            }
+                            else if (currentOperator == '-')
+                            {
+                                operand1 -= operand2;
+                            }
+                            else if (currentOperator == '*')
+                            {
+                                operand1 *= operand2;
+                            }
+                            else if (currentOperator == '/')
+                            {
+                                if (Math.Abs(operand2) < 0.00000000001)
+                                {
+                                    throw new DivideByZeroException("Division by zero.");
+                                }
+
+                                operand1 /= operand2;
+                            }
+                            currentExpression = operand1.ToString();
+                            operand2 = 0;
+                            currentOperator = '\0';
                         }
                         break;
                     }
@@ -117,10 +121,9 @@ namespace Calculator
             }
         }
 
-        public float GetValue()
+        public string GetValue()
         {
-            return operand1;
+            return currentExpression;
         }
     }
-}
 }
