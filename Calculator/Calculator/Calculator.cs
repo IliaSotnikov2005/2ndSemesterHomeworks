@@ -17,10 +17,11 @@ namespace Calculator
         private int operand2FractionalPartDigitCount = 0;
         private char currentOperator = '\0';
         private string currentExpression = string.Empty;
-        private State state = State.Operand1;
+        private State state = State.Start;
 
         private enum State
         {
+            Start,
             Operand1,
             Operator,
             Operand2,
@@ -36,13 +37,25 @@ namespace Calculator
         {
             switch (this.state)
             {
-                case State.Operand1:
+                case State.Start:
                     {
                         if (!float.TryParse(this.currentExpression, out float result))
                         {
                             this.currentExpression = string.Empty;
                         }
 
+                        if (char.IsDigit(input))
+                        {
+                            this.operand1 = (this.operand1 * 10) + float.Parse(input.ToString());
+                            this.currentExpression += input;
+                            this.state = State.Operand1;
+                        }
+
+                        break;
+                    }
+
+                case State.Operand1:
+                    {
                         if (char.IsDigit(input))
                         {
                             this.operand1 = (this.operand1 * 10) + float.Parse(input.ToString());
@@ -266,6 +279,7 @@ namespace Calculator
             this.currentOperator = '\0';
             this.operand1FractionalPartDigitCount = 0;
             this.operand2FractionalPartDigitCount = 0;
+            this.state = State.Start;
         }
     }
 }
