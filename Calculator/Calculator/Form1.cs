@@ -37,7 +37,7 @@ namespace Calculator
         {
             Button buttonSender = sender as Button;
             this.calculator.ProcessInput(buttonSender.Text[0]);
-            this.textBox1.Text = this.calculator.GetExpresiion();
+            this.output.Text = this.calculator.GetExpresiion();
         }
 
         private void TextBox1_Resize(object sender, EventArgs e)
