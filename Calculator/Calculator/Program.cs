@@ -1,18 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿// <copyright file="Program.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Calculator
 {
+    using System;
+    using System.Windows.Forms;
+
+    /// <summary>
+    /// Program class.
+    /// </summary>
     internal static class Program
     {
         /// <summary>
-        /// Главная точка входа для приложения.
+        /// Enter point of the program.
         /// </summary>
         [STAThread]
-        static void Main()
+        public static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

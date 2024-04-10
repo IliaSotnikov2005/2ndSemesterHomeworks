@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Calculator</name>
+    </assembly>
+    <members>
+        <member name="T:Calculator.Calculator">
+            <summary>
+            Calculator class.
+            </summary>
+        </member>
+        <member name="M:Calculator.Calculator.ProcessInput(System.Char)">
+            <summary>
+            Process the input.
+            </summary>
+            <param name="input">Input for calculator.</param>
+        </member>
+        <member name="M:Calculator.Calculator.GetExpresiion">
+            <summary>
+            Get current expression.
+            </summary>
+            <returns>Current expression.</returns>
+        </member>
+        <member name="T:Calculator.CalculatorForm">
+            <summary>
+            Calculator form class.
+            </summary>
+        </member>
+        <member name="M:Calculator.CalculatorForm.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Calculator.CalculatorForm"/> class.
+            </summary>
+        </member>
+        <member name="F:Calculator.CalculatorForm.components">
+            <summary>
+            Обязательная переменная конструктора.
+            </summary>
+        </member>
+        <member name="M:Calculator.CalculatorForm.Dispose(System.Boolean)">
+            <summary>
+            Освободить все используемые ресурсы.
+            </summary>
+            <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+        </member>
+        <member name="M:Calculator.CalculatorForm.InitializeComponent">
+            <summary>
+            Требуемый метод для поддержки конструктора — не изменяйте 
+            содержимое этого метода с помощью редактора кода.
+            </summary>
+        </member>
+        <member name="T:Calculator.Program">
+            <summary>
+            Program class.
+            </summary>
+        </member>
+        <member name="M:Calculator.Program.Main">
+            <summary>
+            Enter point of the program.
+            </summary>
+        </member>
+        <member name="T:Calculator.Properties.Resources">
+            <summary>
+              Класс ресурсов со строгим типом для поиска локализованных строк и пр.
+            </summary>
+        </member>
+        <member name="P:Calculator.Properties.Resources.ResourceManager">
+            <summary>
+              Возврат кэшированного экземпляра ResourceManager, используемого этим классом.
+            </summary>
+        </member>
+        <member name="P:Calculator.Properties.Resources.Culture">
+            <summary>
+              Переопределяет свойство CurrentUICulture текущего потока для всех
+              подстановки ресурсов с помощью этого класса ресурсов со строгим типом.
+            </summary>
+        </member>
+    </members>
+</doc>
