@@ -9,17 +9,16 @@
             Calculator class.
             </summary>
         </member>
+        <member name="P:Calculator.Calculator.CurrentExpression">
+            <summary>
+            Gets current expression.
+            </summary>
+        </member>
         <member name="M:Calculator.Calculator.ProcessInput(System.Char)">
             <summary>
             Process the input.
             </summary>
             <param name="input">Input for calculator.</param>
-        </member>
-        <member name="M:Calculator.Calculator.GetExpresiion">
-            <summary>
-            Get current expression.
-            </summary>
-            <returns>Current expression.</returns>
         </member>
         <member name="T:Calculator.CalculatorForm">
             <summary>

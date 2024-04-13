@@ -11,12 +11,9 @@ namespace Calculator
     /// </summary>
     public class Calculator
     {
-        private float operand1 = 0;
-        private float operand2 = 0;
-        private int operand1FractionalPartDigitCount = 0;
-        private int operand2FractionalPartDigitCount = 0;
+        private string operand1 = string.Empty;
+        private string operand2 = string.Empty;
         private char currentOperator = '\0';
-        private string currentExpression = string.Empty;
         private State state = State.Start;
 
         private enum State
@@ -30,6 +27,11 @@ namespace Calculator
         }
 
         /// <summary>
+        /// Gets current expression.
+        /// </summary>
+        public string CurrentExpression { get; private set; } = string.Empty;
+
+        /// <summary>
         /// Process the input.
         /// </summary>
         /// <param name="input">Input for calculator.</param>
@@ -39,15 +41,15 @@ namespace Calculator
             {
                 case State.Start:
                     {
-                        if (!float.TryParse(this.currentExpression, out float result))
+                        if (!float.TryParse(this.CurrentExpression, out float result))
                         {
-                            this.currentExpression = string.Empty;
+                            this.CurrentExpression = string.Empty;
                         }
 
                         if (char.IsDigit(input))
                         {
-                            this.operand1 = (this.operand1 * 10) + float.Parse(input.ToString());
-                            this.currentExpression += input;
+                            this.operand1 += input.ToString();
+                            this.CurrentExpression += input;
                             this.state = State.Operand1;
                         }
 
@@ -58,19 +60,45 @@ namespace Calculator
                     {
                         if (char.IsDigit(input))
                         {
-                            this.operand1 = (this.operand1 * 10) + float.Parse(input.ToString());
-                            this.currentExpression += input;
+                            this.operand1 += input.ToString();
+                            this.CurrentExpression += input;
                         }
                         else if (input == '.')
                         {
                             this.state = State.Operand1FractionalPart;
-                            this.currentExpression += input;
+                            this.CurrentExpression += input;
                         }
                         else if (input == '+' || input == '-' || input == '*' || input == '/')
                         {
                             this.state = State.Operator;
                             this.currentOperator = input;
-                            this.currentExpression += input;
+                            this.CurrentExpression += input;
+                        }
+                        else if (input == 'C')
+                        {
+                            this.SetDefaults();
+                        }
+
+                        break;
+                    }
+
+                case State.Operand1FractionalPart:
+                    {
+                        if (char.IsDigit(input))
+                        {
+                            this.operand1 += input.ToString();
+                            this.CurrentExpression += input;
+                        }
+                        else if (input == '+' || input == '-' || input == '*' || input == '/')
+                        {
+                            this.state = State.Operator;
+                            this.currentOperator = input;
+                            this.CurrentExpression += input;
+                        }
+                        else if (input == '=')
+                        {
+                            this.state = State.Operand1;
+                            this.TryCalculate();
                         }
                         else if (input == 'C')
                         {
@@ -85,8 +113,8 @@ namespace Calculator
                         if (char.IsDigit(input))
                         {
                             this.state = State.Operand2;
-                            this.operand2 = (this.operand2 * 10) + float.Parse(input.ToString());
-                            this.currentExpression += input;
+                            this.operand2 += input.ToString();
+                            this.CurrentExpression += input;
                         }
                         else if (input == 'C')
                         {
@@ -100,80 +128,26 @@ namespace Calculator
                     {
                         if (char.IsDigit(input))
                         {
-                            this.operand2 = (this.operand2 * 10) + float.Parse(input.ToString());
-                            this.currentExpression += input;
+                            this.operand2 += input.ToString();
+                            this.CurrentExpression += input;
                         }
                         else if (input == '.')
                         {
                             this.state = State.Operand2FractionalPart;
-                            this.currentExpression += input;
+                            this.CurrentExpression += input;
                         }
                         else if (input == '+' || input == '-' || input == '*' || input == '/')
                         {
                             this.state = State.Operator;
-                            try
-                            {
-                                this.Calculate();
-                                this.currentExpression += input;
-                            }
-                            catch (DivideByZeroException)
-                            {
-                                this.state = State.Operand1;
-                                this.SetDefaults();
-                                this.currentExpression = "ERROR";
-                            }
+                            this.TryCalculate();
 
                             this.currentOperator = input;
+                            this.CurrentExpression += input;
                         }
                         else if (input == '=')
                         {
                             this.state = State.Operand1;
-                            try
-                            {
-                                this.Calculate();
-                            }
-                            catch (DivideByZeroException)
-                            {
-                                this.state = State.Operand1;
-                                this.SetDefaults();
-                                this.currentExpression = "ERROR";
-                            }
-                        }
-                        else if (input == 'C')
-                        {
-                            this.SetDefaults();
-                        }
-
-                        break;
-                    }
-
-                case State.Operand1FractionalPart:
-                    {
-                        if (char.IsDigit(input))
-                        {
-                            this.operand1FractionalPartDigitCount++;
-                            this.operand1 += (float)Math.Pow(0.1, this.operand1FractionalPartDigitCount) * float.Parse(input.ToString());
-                            this.currentExpression += input;
-                        }
-                        else if (input == '+' || input == '-' || input == '*' || input == '/')
-                        {
-                            this.state = State.Operator;
-                            this.currentOperator = input;
-                            this.currentExpression += input;
-                        }
-                        else if (input == '=')
-                        {
-                            this.state = State.Operand1;
-                            try
-                            {
-                                this.Calculate();
-                            }
-                            catch (DivideByZeroException)
-                            {
-                                this.state = State.Operand1;
-                                this.SetDefaults();
-                                this.currentExpression = "ERROR";
-                            }
+                            this.TryCalculate();
                         }
                         else if (input == 'C')
                         {
@@ -187,39 +161,21 @@ namespace Calculator
                     {
                         if (char.IsDigit(input))
                         {
-                            this.operand2FractionalPartDigitCount++;
-                            this.operand2 += (float)Math.Pow(0.1, this.operand2FractionalPartDigitCount) * float.Parse(input.ToString());
-                            this.currentExpression += input;
+                            this.operand2 += input.ToString();
+                            this.CurrentExpression += input;
                         }
                         else if (input == '+' || input == '-' || input == '*' || input == '/')
                         {
                             this.state = State.Operator;
-                            try
-                            {
-                                this.Calculate();
-                            }
-                            catch (DivideByZeroException)
-                            {
-                                this.state = State.Operand1;
-                                this.SetDefaults();
-                                this.currentExpression = "ERROR";
-                            }
+                            this.TryCalculate();
 
-                            this.currentExpression += input;
+                            this.CurrentExpression += input;
+                            this.currentOperator = input;
                         }
                         else if (input == '=')
                         {
                             this.state = State.Operand1;
-                            try
-                            {
-                                this.Calculate();
-                            }
-                            catch (DivideByZeroException)
-                            {
-                                this.state = State.Operand1;
-                                this.SetDefaults();
-                                this.currentExpression = "ERROR";
-                            }
+                            this.TryCalculate();
                         }
                         else if (input == 'C')
                         {
@@ -231,54 +187,59 @@ namespace Calculator
             }
         }
 
-        /// <summary>
-        /// Get current expression.
-        /// </summary>
-        /// <returns>Current expression.</returns>
-        public string GetExpresiion()
+        private void TryCalculate()
         {
-            return this.currentExpression;
+            try
+            {
+                this.Calculate();
+            }
+            catch (DivideByZeroException)
+            {
+                this.state = State.Operand1;
+                this.SetDefaults();
+                this.CurrentExpression = "ERROR";
+            }
         }
 
         private void Calculate()
         {
+            float number1 = float.Parse(this.operand1.ToString());
+            float number2 = float.Parse(this.operand2.ToString());
+
             if (this.currentOperator == '+')
             {
-                this.operand1 += this.operand2;
+                number1 += number2;
             }
             else if (this.currentOperator == '-')
             {
-                this.operand1 -= this.operand2;
+                number1 -= number2;
             }
             else if (this.currentOperator == '*')
             {
-                this.operand1 *= this.operand2;
+                number1 *= number2;
             }
             else if (this.currentOperator == '/')
             {
-                if (Math.Abs(this.operand2) < 0.00000000001)
+                if (Math.Abs(number2) < 0.00000000001)
                 {
                     throw new DivideByZeroException("Division by zero.");
                 }
 
-                this.operand1 /= this.operand2;
+                number1 /= number2;
             }
 
-            this.operand2 = 0;
-            this.operand1FractionalPartDigitCount = 0;
-            this.operand2FractionalPartDigitCount = 0;
-            this.currentExpression = this.operand1.ToString();
+            this.operand1 = number1.ToString();
+            this.operand2 = string.Empty;
+            this.CurrentExpression = this.operand1.ToString();
             this.currentOperator = '\0';
         }
 
         private void SetDefaults()
         {
-            this.operand1 = 0;
-            this.operand2 = 0;
-            this.currentExpression = string.Empty;
+            this.operand1 = string.Empty;
+            this.operand2 = string.Empty;
+            this.CurrentExpression = string.Empty;
             this.currentOperator = '\0';
-            this.operand1FractionalPartDigitCount = 0;
-            this.operand2FractionalPartDigitCount = 0;
             this.state = State.Start;
         }
     }
