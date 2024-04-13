@@ -29,36 +29,6 @@ namespace Calculator
         {
         }
 
-        private void ExtraFeatureMouseClick(object sender, MouseEventArgs e)
-        {
-            string shutdownCommand = string.Empty;
-
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                shutdownCommand = "shutdown";
-            }
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-            {
-                shutdownCommand = "shutdown -h now";
-            }
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-            {
-                shutdownCommand = "poweroff";
-            }
-            else
-            {
-                return;
-            }
-
-            ProcessStartInfo psi = new ProcessStartInfo(shutdownCommand)
-            {
-                UseShellExecute = true,
-                CreateNoWindow = true,
-            };
-
-            Process.Start(psi);
-        }
-
         private void ButtonClick(object sender, EventArgs e)
         {
             Button buttonSender = sender as Button;

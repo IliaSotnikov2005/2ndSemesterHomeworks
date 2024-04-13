@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CalculatorForm));
             this.output = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -47,7 +46,6 @@
             this.buttonPoint = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.buttonExtra = new System.Windows.Forms.Button();
             this.buttonEquals = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
@@ -373,7 +371,6 @@
             this.tableLayoutPanel1.Controls.Add(this.buttonMultiplication, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.button4, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.button1, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.buttonExtra, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.buttonEquals, 3, 4);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 118);
             this.tableLayoutPanel1.MinimumSize = new System.Drawing.Size(50, 50);
@@ -386,24 +383,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(447, 560);
             this.tableLayoutPanel1.TabIndex = 18;
-            // 
-            // buttonExtra
-            // 
-            this.buttonExtra.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonExtra.AutoEllipsis = true;
-            this.buttonExtra.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("buttonExtra.BackgroundImage")));
-            this.buttonExtra.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonExtra.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonExtra.Font = new System.Drawing.Font("Molot", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonExtra.Location = new System.Drawing.Point(3, 451);
-            this.buttonExtra.MinimumSize = new System.Drawing.Size(50, 50);
-            this.buttonExtra.Name = "buttonExtra";
-            this.buttonExtra.Size = new System.Drawing.Size(105, 106);
-            this.buttonExtra.TabIndex = 18;
-            this.buttonExtra.UseVisualStyleBackColor = true;
-            this.buttonExtra.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ExtraFeatureMouseClick);
             // 
             // buttonEquals
             // 
@@ -478,7 +457,6 @@
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Button buttonExtra;
         private System.Windows.Forms.Button buttonEquals;
     }
 }
