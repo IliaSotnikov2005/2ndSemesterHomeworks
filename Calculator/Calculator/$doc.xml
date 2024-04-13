@@ -9,9 +9,14 @@
             Calculator class.
             </summary>
         </member>
+        <member name="E:Calculator.Calculator.PropertyChanged">
+            <summary>
+            Event handler for expression change.
+            </summary>
+        </member>
         <member name="P:Calculator.Calculator.CurrentExpression">
             <summary>
-            Gets current expression.
+            Gets currentExpression.
             </summary>
         </member>
         <member name="M:Calculator.Calculator.ProcessInput(System.Char)">

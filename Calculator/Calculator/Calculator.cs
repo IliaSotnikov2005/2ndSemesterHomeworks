@@ -5,17 +5,24 @@
 namespace Calculator
 {
     using System;
+    using System.ComponentModel;
     using System.Globalization;
 
     /// <summary>
     /// Calculator class.
     /// </summary>
-    public class Calculator
+    public class Calculator : INotifyPropertyChanged
     {
         private string operand1 = string.Empty;
         private string operand2 = string.Empty;
         private char currentOperator = '\0';
         private State state = State.Start;
+        private string currentExpression;
+
+        /// <summary>
+        /// Event handler for expression change.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private enum State
         {
@@ -28,9 +35,18 @@ namespace Calculator
         }
 
         /// <summary>
-        /// Gets current expression.
+        /// Gets currentExpression.
         /// </summary>
-        public string CurrentExpression { get; private set; } = string.Empty;
+        public string CurrentExpression
+        {
+            get => this.currentExpression;
+
+            private set
+            {
+                this.currentExpression = value;
+                this.NotifyPropertyChanged("CurrentExpression");
+            }
+        }
 
         /// <summary>
         /// Process the input.
@@ -144,7 +160,6 @@ namespace Calculator
                             this.TryCalculate();
 
                             this.currentOperator = input;
-                            this.operand2 += input;
                             this.CurrentExpression += input;
                         }
                         else if (input == '=')
@@ -244,6 +259,11 @@ namespace Calculator
             this.CurrentExpression = string.Empty;
             this.currentOperator = '\0';
             this.state = State.Start;
+        }
+
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

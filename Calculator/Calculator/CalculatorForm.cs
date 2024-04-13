@@ -23,6 +23,7 @@ namespace Calculator
         public CalculatorForm()
         {
             this.InitializeComponent();
+            this.output.DataBindings.Add("Text", this.calculator, "CurrentExpression", false, DataSourceUpdateMode.OnPropertyChanged);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -33,7 +34,7 @@ namespace Calculator
         {
             Button buttonSender = sender as Button;
             this.calculator.ProcessInput(buttonSender.Text[0]);
-            this.output.Text = this.calculator.CurrentExpression;
+            this.output.Refresh();
         }
 
         private void TextBox1_Resize(object sender, EventArgs e)
