@@ -7,6 +7,7 @@ namespace Calculator
     using System;
     using System.Diagnostics;
     using System.Drawing;
+    using System.Runtime.InteropServices;
     using System.Windows.Forms;
 
     /// <summary>
@@ -30,7 +31,32 @@ namespace Calculator
 
         private void ExtraFeatureMouseClick(object sender, MouseEventArgs e)
         {
-            Process.Start("shutdown", "/s /t 0");
+            string shutdownCommand = string.Empty;
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                shutdownCommand = "shutdown";
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                shutdownCommand = "shutdown -h now";
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                shutdownCommand = "poweroff";
+            }
+            else
+            {
+                return;
+            }
+
+            ProcessStartInfo psi = new ProcessStartInfo(shutdownCommand)
+            {
+                UseShellExecute = true,
+                CreateNoWindow = true,
+            };
+
+            Process.Start(psi);
         }
 
         private void ButtonClick(object sender, EventArgs e)

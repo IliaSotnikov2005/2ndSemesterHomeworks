@@ -5,6 +5,7 @@
 namespace Calculator
 {
     using System;
+    using System.Globalization;
 
     /// <summary>
     /// Calculator class.
@@ -66,6 +67,7 @@ namespace Calculator
                         else if (input == '.')
                         {
                             this.state = State.Operand1FractionalPart;
+                            this.operand1 += input;
                             this.CurrentExpression += input;
                         }
                         else if (input == '+' || input == '-' || input == '*' || input == '/')
@@ -142,6 +144,7 @@ namespace Calculator
                             this.TryCalculate();
 
                             this.currentOperator = input;
+                            this.operand2 += input;
                             this.CurrentExpression += input;
                         }
                         else if (input == '=')
@@ -203,8 +206,8 @@ namespace Calculator
 
         private void Calculate()
         {
-            float number1 = float.Parse(this.operand1.ToString());
-            float number2 = float.Parse(this.operand2.ToString());
+            float number1 = float.Parse(this.operand1, CultureInfo.InvariantCulture);
+            float number2 = float.Parse(this.operand2, CultureInfo.InvariantCulture);
 
             if (this.currentOperator == '+')
             {

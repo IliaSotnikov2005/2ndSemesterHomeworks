@@ -386,7 +386,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(447, 560);
             this.tableLayoutPanel1.TabIndex = 18;
-            this.tableLayoutPanel1.Click += new System.EventHandler(this.ButtonClick);
             // 
             // buttonExtra
             // 
