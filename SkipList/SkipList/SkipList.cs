@@ -150,7 +150,7 @@ public class SkipList<T> : IList<T> where T : IComparable<T>
         }
     }
 
-    public IEnumerator<T> GetEnumerator()
+    public IEnumerator<T> GetEnumerator() // TODO
     {
         var array = new T[Count];
         this.CopyTo(array, 0);
@@ -230,9 +230,11 @@ public class SkipList<T> : IList<T> where T : IComparable<T>
 
     public void RemoveAt(int index) => Remove(this[index]);
 
-    IEnumerator IEnumerable.GetEnumerator()
+    IEnumerator IEnumerable.GetEnumerator() // TODO
     {
-        throw new NotImplementedException();
+        var array = new T[Count];
+        this.CopyTo(array, 0);
+        return ((IEnumerable<T>)array).GetEnumerator();
     }
 
     private record SkipListElement(T value)

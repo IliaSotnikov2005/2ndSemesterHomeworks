@@ -6,3 +6,7 @@ foreach (var i in list)
 {
     Console.WriteLine(i);
 }
+foreach (var i in list)
+{
+    Console.WriteLine(i);
+}
