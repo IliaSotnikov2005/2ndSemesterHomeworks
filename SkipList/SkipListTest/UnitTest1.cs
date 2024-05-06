@@ -1,3 +1,5 @@
+using SkipList;
+
 namespace SkipListTest;
 
 public class Tests
@@ -28,7 +30,7 @@ public class Tests
         Assert.That(skipList, Has.Count.EqualTo(4));
 
         var array = skipList.ToArray();
-        Assert.That(new int[] {5, 10, 11, 15}, Is.EqualTo(array));
+        Assert.That(new int[] { 5, 10, 11, 15 }, Is.EqualTo(array));
     }
 
     [Test]
@@ -54,7 +56,7 @@ public class Tests
         skipList.Add(11);
 
         var array = skipList.ToArray();
-        Assert.That(new int[] {5, 10, 11, 15}, Is.EqualTo(array));
+        Assert.That(new int[] { 5, 10, 11, 15 }, Is.EqualTo(array));
     }
 
     [Test]
@@ -91,5 +93,20 @@ public class Tests
 
         Assert.That(enumerator.MoveNext(), Is.True);
         Assert.That(enumerator.Current, Is.EqualTo(5));
+    }
+
+    [Test]
+    public void EnumeratorThrowsException_WhenCollectionChangedDuringIteration()
+    {
+        var skipList = new SkipList<int>();
+        skipList.Add(5);
+        skipList.Add(15);
+
+        var enumerator = skipList.GetEnumerator();
+        enumerator.MoveNext();
+
+        skipList.Add(1);
+
+        Assert.Throws<InvalidOperationException>(() => enumerator.MoveNext());
     }
 }

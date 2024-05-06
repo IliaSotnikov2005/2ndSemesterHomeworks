@@ -1,4 +1,6 @@
-﻿SkipList<int> list = new SkipList<int>();
+﻿using SkipList;
+
+SkipList<int> list = new SkipList<int>();
 list.Add(10);
 list.Add(5);
 list.Add(15);
