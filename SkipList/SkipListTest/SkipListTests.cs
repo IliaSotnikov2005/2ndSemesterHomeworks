@@ -1,9 +1,19 @@
-using SkipList;
+// <copyright file="SkipListTests.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace SkipListTest;
 
+using SkipList;
+
+/// <summary>
+/// Tests for skip list.
+/// </summary>
 public class Tests
 {
+    /// <summary>
+    /// SkipList add test.
+    /// </summary>
     [Test]
     public void SkipList_Add_AddsItemToList()
     {
@@ -14,6 +24,9 @@ public class Tests
         Assert.That(skipList.Count, Is.EqualTo(1));
     }
 
+    /// <summary>
+    /// SkipList add many items test.
+    /// </summary>
     [Test]
     public void SkipList_Add_AddsManyItemsToList()
     {
@@ -33,6 +46,9 @@ public class Tests
         Assert.That(new int[] { 5, 10, 11, 15 }, Is.EqualTo(array));
     }
 
+    /// <summary>
+    /// Skip list remove test.
+    /// </summary>
     [Test]
     public void SkipList_Remove_RemovesItemFromList()
     {
@@ -46,6 +62,9 @@ public class Tests
         Assert.That(skipList, Has.Count.EqualTo(2));
     }
 
+    /// <summary>
+    /// Skip list copy test.
+    /// </summary>
     [Test]
     public void SkipList_CopyTo_CopiesItemsToArray()
     {
@@ -59,6 +78,9 @@ public class Tests
         Assert.That(new int[] { 5, 10, 11, 15 }, Is.EqualTo(array));
     }
 
+    /// <summary>
+    /// Skip list index test.
+    /// </summary>
     [Test]
     public void SkipList_IndexOf_ReturnsIndexOfItem()
     {
@@ -72,6 +94,9 @@ public class Tests
         Assert.That(index, Is.EqualTo(2));
     }
 
+    /// <summary>
+    /// Skip list indexer test.
+    /// </summary>
     [Test]
     public void SkipList_CallByIndex_ReturnsItem()
     {
@@ -83,6 +108,9 @@ public class Tests
         Assert.That(skipList[0], Is.EqualTo(1));
     }
 
+    /// <summary>
+    /// Skip list enumerator test.
+    /// </summary>
     [Test]
     public void SkipList_GetEnumerator_ReturnsEnumeratorOfItems()
     {
@@ -95,6 +123,9 @@ public class Tests
         Assert.That(enumerator.Current, Is.EqualTo(5));
     }
 
+    /// <summary>
+    /// Skip list enumerator exception test.
+    /// </summary>
     [Test]
     public void EnumeratorThrowsException_WhenCollectionChangedDuringIteration()
     {

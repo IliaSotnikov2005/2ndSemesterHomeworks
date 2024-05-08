@@ -1,33 +1,50 @@
-using System.Collections;
+// <copyright file="SkipList.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace SkipList;
 
-public class SkipList<T> : IList<T> where T : IComparable<T>
+using System.Collections;
+
+/// <summary>
+/// Skip list class.
+/// </summary>
+/// <typeparam name="T">Type of elements in skip list.</typeparam>
+public class SkipList<T> : IList<T>
+    where T : IComparable<T>
 {
-    private const int maxLevel = 4;
+    private const int MaxLevel = 4;
 
-    private SkipListElement header = new(default)
+    private readonly Random random = new ();
+    private readonly SkipListElement nil = new (default)
     {
-        Next = []
+        Next = new List<SkipListElement>(MaxLevel),
     };
 
-    private protected SkipListElement nil = new(default)
-    {
-        Next = []
-    };
-
-    private readonly Random random = new();
+    private SkipListElement header;
 
     private bool invalidateEnumerator = false;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SkipList{T}"/> class.
+    /// </summary>
     public SkipList()
     {
-        for (int i = 0; i < maxLevel; ++i)
+        this.header = new (default)
         {
-            header.Next.Add(nil);
+            Next = [],
+        };
+
+        for (int i = 0; i < MaxLevel; ++i)
+        {
+            this.header.Next.Add(this.nil);
         }
     }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SkipList{T}"/> class.
+    /// </summary>
+    /// <param name="items">An array of items to be added to the SkipList.</param>
     public SkipList(T[] items)
         : this()
     {
@@ -37,16 +54,23 @@ public class SkipList<T> : IList<T> where T : IComparable<T>
         }
     }
 
+    /// <inheritdoc/>
+    public int Count { get; private set; } = 0;
+
+    /// <inheritdoc/>
+    public bool IsReadOnly => false;
+
+    /// <inheritdoc/>
     public T this[int index]
     {
         get
         {
-            if (index < 0 || index >= Count)
+            if (index < 0 || index >= this.Count)
             {
                 throw new ArgumentOutOfRangeException(nameof(index));
             }
 
-            var current = header.Next[0];
+            var current = this.header.Next[0];
 
             foreach (var item in this)
             {
@@ -64,20 +88,17 @@ public class SkipList<T> : IList<T> where T : IComparable<T>
         set => throw new NotSupportedException();
     }
 
-    public int Count { get; private set; } = 0;
-
-    public bool IsReadOnly => false;
-
+    /// <inheritdoc/>
     public void Add(T item)
     {
-        Stack<SkipListElement> update = new();
+        Stack<SkipListElement> update = new ();
 
-        SkipListElement current = header;
-        int level = maxLevel - 1;
+        SkipListElement current = this.header;
+        int level = MaxLevel - 1;
 
         while (level >= 0)
         {
-            if (current.Next[level] == nil)
+            if (current.Next[level] == this.nil)
             {
                 update.Push(current);
                 --level;
@@ -93,10 +114,10 @@ public class SkipList<T> : IList<T> where T : IComparable<T>
             }
         }
 
-        SkipListElement newElement = new(item);
+        SkipListElement newElement = new (item);
 
         int levelOfElement = 1;
-        for (int i = 1; i < maxLevel && CoinFlip(); ++i)
+        for (int i = 1; i < MaxLevel && this.CoinFlip(); ++i)
         {
             ++levelOfElement;
         }
@@ -108,31 +129,33 @@ public class SkipList<T> : IList<T> where T : IComparable<T>
             toUpdate.Next[i] = newElement;
         }
 
-        Count++;
+        this.Count++;
         this.invalidateEnumerator = true;
     }
 
+    /// <inheritdoc/>
     public void Clear()
     {
-        header = new(default)
+        this.header = new (default)
         {
-            Next = []
+            Next = [],
         };
 
-        for (int i = 0; i < maxLevel; ++i)
+        for (int i = 0; i < MaxLevel; ++i)
         {
-            header.Next.Add(nil);
+            this.header.Next.Add(this.nil);
         }
     }
 
+    /// <inheritdoc/>
     public bool Contains(T item)
     {
-        SkipListElement current = header;
-        int level = maxLevel - 1;
+        SkipListElement current = this.header;
+        int level = MaxLevel - 1;
 
         while (level >= 0)
         {
-            if (current.Next[level] == nil)
+            if (current.Next[level] == this.nil)
             {
                 --level;
             }
@@ -153,6 +176,7 @@ public class SkipList<T> : IList<T> where T : IComparable<T>
         return false;
     }
 
+    /// <inheritdoc/>
     public void CopyTo(T[] array, int arrayIndex)
     {
         ArgumentNullException.ThrowIfNull(array);
@@ -162,14 +186,14 @@ public class SkipList<T> : IList<T> where T : IComparable<T>
             throw new ArgumentOutOfRangeException(nameof(arrayIndex));
         }
 
-        if (array.Length - arrayIndex < Count)
+        if (array.Length - arrayIndex < this.Count)
         {
             throw new ArgumentException("Skip List larger than the interval for copying");
         }
 
-        var current = header.Next[0];
+        var current = this.header.Next[0];
 
-        while (current != nil)
+        while (current != this.nil)
         {
             array[arrayIndex] = current.Item!;
             ++arrayIndex;
@@ -177,14 +201,16 @@ public class SkipList<T> : IList<T> where T : IComparable<T>
         }
     }
 
+/// <inheritdoc/>
     public IEnumerator<T> GetEnumerator() => new Enumerator(this);
 
+/// <inheritdoc/>
     public int IndexOf(T item)
     {
-        var current = header.Next[0];
+        var current = this.header.Next[0];
         var index = 0;
 
-        while (current != nil)
+        while (current != this.nil)
         {
             if (item.CompareTo(current.Item) == 0)
             {
@@ -199,18 +225,20 @@ public class SkipList<T> : IList<T> where T : IComparable<T>
         return -1;
     }
 
+/// <inheritdoc/>
     public void Insert(int index, T item) => throw new NotSupportedException();
 
+/// <inheritdoc/>
     public bool Remove(T item)
     {
-        Stack<SkipListElement> update = new();
+        Stack<SkipListElement> update = new ();
 
-        SkipListElement current = header;
-        int level = maxLevel - 1;
+        SkipListElement current = this.header;
+        int level = MaxLevel - 1;
 
         while (level >= 0)
         {
-            if (current.Next[level] == nil)
+            if (current.Next[level] == this.nil)
             {
                 update.Push(current);
                 --level;
@@ -226,7 +254,7 @@ public class SkipList<T> : IList<T> where T : IComparable<T>
             }
             else if (current.Next[level].Item!.CompareTo(item) == 0)
             {
-                while (update.Count != maxLevel)
+                while (update.Count != MaxLevel)
                 {
                     update.Push(current);
                 }
@@ -247,18 +275,29 @@ public class SkipList<T> : IList<T> where T : IComparable<T>
             toUpdate.Next[i] = current.Next[i];
         }
 
-        Count--;
+        this.Count--;
         return true;
     }
 
-    public void RemoveAt(int index) => Remove(this[index]);
+/// <inheritdoc/>
+    public void RemoveAt(int index) => this.Remove(this[index]);
 
+/// <inheritdoc/>
     IEnumerator IEnumerable.GetEnumerator() => this.GetEnumerator();
 
-    private protected record SkipListElement(T? Value)
+/// <inheritdoc/>
+    private record SkipListElement(T? value)
     {
-        public T? Item { get; set; } = Value;
+        /// <summary>
+        /// Gets or sets item of the element.
+        /// </summary>
+        /// <value>The value to assign to the item.</value>
+        public T? Item { get; set; } = value;
 
+        /// <summary>
+        /// Gets or sets the skip list of items further down the list.
+        /// </summary>
+        /// <value>List of skip list elements.</value>
         public List<SkipListElement> Next { get; set; } = [];
     }
 
@@ -266,9 +305,9 @@ public class SkipList<T> : IList<T> where T : IComparable<T>
 
     private class Enumerator : IEnumerator<T>
     {
-        private SkipList<T> skiplist;
+        private readonly SkipList<T> skiplist;
 
-        private SkipListElement nil;
+        private readonly SkipListElement nil;
 
         private SkipListElement current;
 
@@ -284,18 +323,18 @@ public class SkipList<T> : IList<T> where T : IComparable<T>
         {
             get
             {
-                return this.current.Value!;
+                return this.current.Item!;
             }
         }
 
-        object IEnumerator.Current => (object)this.Current;
+        object IEnumerator.Current => this.Current;
 
         public bool MoveNext()
         {
             this.CheckIteratorValidity();
 
             this.current = this.current.Next[0];
-            return this.current != nil;
+            return this.current != this.nil;
         }
 
         public void Reset()
@@ -314,5 +353,4 @@ public class SkipList<T> : IList<T> where T : IComparable<T>
             }
         }
     }
-
 }
