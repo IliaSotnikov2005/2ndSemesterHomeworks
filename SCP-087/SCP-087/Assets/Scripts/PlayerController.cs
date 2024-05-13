@@ -26,6 +26,10 @@ public class PlayerController : MonoBehaviour
 
         Vector3 moveDirection = transform.forward * verticalInput + transform.right * horizontalInput;
 
+        if (Input.GetButtonDown("Jump"))
+        {
+            fallSpeed = jumpSpeed;
+        }
 
         if (controller.isGrounded)
         {
@@ -35,11 +39,6 @@ public class PlayerController : MonoBehaviour
         {
             fallSpeed -= gravity * Time.deltaTime;
             moveDirection.y = fallSpeed;
-        }
-
-        if (Input.GetButtonDown("Jump") && controller.isGrounded)
-        {
-            fallSpeed = jumpSpeed;
         }
 
         controller.Move(moveDirection * moveSpeed * Time.deltaTime);
