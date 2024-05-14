@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 
         if (controller.isGrounded)
         {
-            fallSpeed = 0f;
+            fallSpeed = -2f;
         }
         else
         {
