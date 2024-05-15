@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 public class Screamer : MonoBehaviour
 {
-    [SerializeField] GameObject babai;
+    [SerializeField] GameObject screamer;
     [SerializeField] GameObject screamerImage;
     [SerializeField] AudioSource screamerAudio;
 
@@ -13,9 +13,9 @@ public class Screamer : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            Vector3 direction = (other.transform.position - babai.transform.position).normalized;
-            babai.transform.LookAt(other.transform.position);
-            babai.transform.position = other.transform.position;
+            Vector3 direction = (other.transform.position - screamer.transform.position).normalized;
+            screamer.transform.LookAt(other.transform.position);
+            screamer.transform.position = other.transform.position;
             screamerImage.SetActive(true);
             screamerAudio.Play();
 

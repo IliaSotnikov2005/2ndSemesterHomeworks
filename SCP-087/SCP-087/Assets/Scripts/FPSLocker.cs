@@ -8,5 +8,6 @@ public class FPSLocker : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = fpsLock;
+        QualitySettings.vSyncCount = 0;
     }
 }

@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
+  m_AmbientSkyColor: {r: 0.03773582, g: 0.03773582, b: 0.03773582, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 17891043}
   - component: {fileID: 17891042}
   m_Layer: 0
-  m_Name: ScreamerAudio
+  m_Name: ScreamerAudioSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -330,7 +330,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4878b968081249548b790e5c0ce302bb, type: 2}
+  - {fileID: 2100000, guid: 780ad198917ac034ebcc2ec8c9d3af19, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -639,6 +639,7 @@ GameObject:
   - component: {fileID: 373298909}
   - component: {fileID: 373298911}
   - component: {fileID: 373298912}
+  - component: {fileID: 373298913}
   m_Layer: 0
   m_Name: BottomTrigger
   m_TagString: Untagged
@@ -707,9 +708,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dc7074ea23e18344a9e3f5354ad9f31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  babai: {fileID: 1846942495}
-  babaiTrigger: {fileID: 1780324788}
-  babaiOccurencePercent: 30
+  screamer: {fileID: 1607904909}
+  screamerOccurencePercent: {fileID: 0}
 --- !u!114 &373298912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -740,6 +740,18 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b8efd826481f9db478f498ee51387a96, type: 3}
   - {fileID: 8300000, guid: a1bd4ac5bafed6e4ab3052d5923ebe65, type: 3}
   audioSource: {fileID: 1441486869}
+--- !u!114 &373298913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373298907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb79cc5e712a09f4c8ca915fc32dc69c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   mainTheme: {fileID: 1548445269}
 --- !u!1001 &596963820
 PrefabInstance:
@@ -1052,12 +1064,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 678669576}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.61, y: 2.451, z: -2.82}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.7399999, y: 0.39999986, z: -1.5340276}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1989469603}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &681057401
 GameObject:
@@ -1418,7 +1430,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4878b968081249548b790e5c0ce302bb, type: 2}
+  - {fileID: 2100000, guid: 780ad198917ac034ebcc2ec8c9d3af19, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1525,7 +1537,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4878b968081249548b790e5c0ce302bb, type: 2}
+  - {fileID: 2100000, guid: 780ad198917ac034ebcc2ec8c9d3af19, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1888,7 +1900,7 @@ GameObject:
   - component: {fileID: 1293132585}
   - component: {fileID: 1293132584}
   m_Layer: 0
-  m_Name: FPS
+  m_Name: FPSLocker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2040,7 +2052,7 @@ GameObject:
   - component: {fileID: 1441486870}
   - component: {fileID: 1441486869}
   m_Layer: 0
-  m_Name: ScarySound
+  m_Name: ScarySoundSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2311,7 +2323,7 @@ GameObject:
   - component: {fileID: 1548445270}
   - component: {fileID: 1548445269}
   m_Layer: 0
-  m_Name: MainAudioTheme
+  m_Name: MainAudioSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2330,7 +2342,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 376f17d158a8e1243bc631d22ca7a858, type: 3}
   m_Resource: {fileID: 8300000, guid: 376f17d158a8e1243bc631d22ca7a858, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.412
+  m_Volume: 0.312
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -2677,7 +2689,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1607904910
 Transform:
   m_ObjectHideFlags: 0
@@ -2708,7 +2720,7 @@ GameObject:
   - component: {fileID: 1631797350}
   - component: {fileID: 1631797351}
   m_Layer: 0
-  m_Name: HeartAudio
+  m_Name: HeartbeatAudio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2838,6 +2850,7 @@ GameObject:
   - component: {fileID: 1696870313}
   - component: {fileID: 1696870312}
   - component: {fileID: 1696870314}
+  - component: {fileID: 1696870316}
   - component: {fileID: 1696870315}
   m_Layer: 0
   m_Name: TopTrigger
@@ -2907,9 +2920,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb408b51c4833884293146b22e68173e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  babay: {fileID: 1846942495}
-  screamerTrigger: {fileID: 1780324788}
+  screamer: {fileID: 1607904909}
+  screamerTrigger: {fileID: 0}
 --- !u!114 &1696870315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696870310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb79cc5e712a09f4c8ca915fc32dc69c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainTheme: {fileID: 1548445269}
+--- !u!114 &1696870316
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2939,7 +2965,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b8efd826481f9db478f498ee51387a96, type: 3}
   - {fileID: 8300000, guid: a1bd4ac5bafed6e4ab3052d5923ebe65, type: 3}
   audioSource: {fileID: 1441486869}
-  mainTheme: {fileID: 1548445269}
 --- !u!1001 &1710091710
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3209,7 +3234,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1780324789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3222,7 +3247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 677651d4e31cf144d9ae0fe7dc050a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  babai: {fileID: 1846942495}
+  screamer: {fileID: 1607904909}
   screamerImage: {fileID: 1060022382}
   screamerAudio: {fileID: 17891042}
 --- !u!65 &1780324790
@@ -3360,12 +3385,12 @@ GameObject:
   - component: {fileID: 1846942498}
   - component: {fileID: 1846942497}
   m_Layer: 0
-  m_Name: Babai
+  m_Name: ScreamerModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &1846942497
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3510,7 +3535,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 4878b968081249548b790e5c0ce302bb, type: 2}
+  - {fileID: 2100000, guid: 780ad198917ac034ebcc2ec8c9d3af19, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3843,6 +3868,7 @@ Transform:
   - {fileID: 974239968}
   - {fileID: 999833250}
   - {fileID: 21030822}
+  - {fileID: 678669578}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2016664728
@@ -3858,7 +3884,7 @@ GameObject:
   - component: {fileID: 2016664731}
   - component: {fileID: 2016664730}
   m_Layer: 0
-  m_Name: Floor (1)
+  m_Name: Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4098,6 +4124,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 108038271100546340, guid: d86ca2f4159e6a942abd8dfc52b38395, type: 3}
+      propertyPath: m_Range
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 108038271100546340, guid: d86ca2f4159e6a942abd8dfc52b38395, type: 3}
       propertyPath: m_DrawHalo
       value: 0
       objectReference: {fileID: 0}
@@ -4282,4 +4312,3 @@ SceneRoots:
   - {fileID: 1072074319}
   - {fileID: 1607904910}
   - {fileID: 1293132585}
-  - {fileID: 678669578}

@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BabaiHider : MonoBehaviour
+public class HideScreamer : MonoBehaviour
 {
-    [SerializeField] GameObject babay;
+    [SerializeField] GameObject screamer;
     [SerializeField] GameObject screamerTrigger;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            babay.SetActive(false);
+            screamer.SetActive(false);
             screamerTrigger.SetActive(false);
         }
     }
