@@ -19,7 +19,7 @@ public class NewBehaviourScript : MonoBehaviour
             audioSource.clip = audioClips[Random.Range(0, audioClips.Length)];
             audioSource.Play();
             StartCoroutine(Timer());
-            targetPitch = Random.Range(1f, 1.6f);
+            targetPitch = Random.Range(0.8f, 2f);
             StartCoroutine(ChangePitchOverTime());
         }
     }
