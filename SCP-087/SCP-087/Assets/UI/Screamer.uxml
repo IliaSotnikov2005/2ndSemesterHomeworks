@@ -1,0 +1,3 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="Screamer" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Textures/1659719314147994466.jpg?fileID=2800000&amp;guid=5388c27a5323c43429785d030b5cd524&amp;type=3#1659719314147994466&quot;);" />
+</ui:UXML>

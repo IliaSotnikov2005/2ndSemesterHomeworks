@@ -1,0 +1,6 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Textures/hqdefault.jpg?fileID=2800000&amp;guid=e81b9d2a1c187714e9b5d7913216ed64&amp;type=3#hqdefault&quot;);">
+        <ui:Label text="Very scary game about stairs" name="label" style="background-color: rgba(255, 0, 0, 0); -unity-font-definition: url(&quot;project://database/Library/unity%20default%20resources?fileID=10102&amp;guid=0000000000000000e000000000000000&amp;type=0#LegacyRuntime&quot;); font-size: 60px; color: rgb(255, 0, 0); -unity-text-align: upper-center; top: 0; left: 0; right: 0; position: relative; flex-basis: auto; flex-direction: column; align-items: auto; justify-content: flex-start; white-space: normal;" />
+        <ui:Button text="PLAY!!!" name="start-button" style="font-size: 50px; -unity-font-style: bold-and-italic; color: rgb(245, 245, 245); position: absolute; bottom: 0; right: 0; left: 0; top: auto; justify-content: flex-start; align-items: auto; background-color: rgb(84, 0, 0);" />
+    </ui:VisualElement>
+</ui:UXML>

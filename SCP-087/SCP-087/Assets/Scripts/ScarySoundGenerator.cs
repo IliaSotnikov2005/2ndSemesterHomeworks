@@ -7,6 +7,8 @@ public class NewBehaviourScript : MonoBehaviour
 {
     [SerializeField] AudioClip[] audioClips;
     [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioSource mainTheme;
+    private float targetPitch;
 
     private bool audioActive = false;
 
@@ -17,6 +19,8 @@ public class NewBehaviourScript : MonoBehaviour
             audioSource.clip = audioClips[Random.Range(0, audioClips.Length)];
             audioSource.Play();
             StartCoroutine(Timer());
+            targetPitch = Random.Range(1f, 1.6f);
+            StartCoroutine(ChangePitchOverTime());
         }
     }
 
@@ -25,5 +29,20 @@ public class NewBehaviourScript : MonoBehaviour
         audioActive = true;
         yield return new WaitForSeconds(audioClips[Random.Range(0, audioClips.Length)].length);
         audioActive = false;
+    }
+
+    IEnumerator ChangePitchOverTime()
+    {
+        float startPitch = mainTheme.pitch;
+        float timeElapsed = 0f;
+
+        while (timeElapsed < 3)
+        {
+            mainTheme.pitch = Mathf.Lerp(startPitch, targetPitch, timeElapsed / 3);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        mainTheme.pitch = targetPitch;
     }
 }

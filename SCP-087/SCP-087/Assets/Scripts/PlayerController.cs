@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     private CharacterController controller;
     public float gravity = 9.81f;
     private float fallSpeed = 0f;
-    public float jumpSpeed = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,11 +24,6 @@ public class PlayerController : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
 
         Vector3 moveDirection = transform.forward * verticalInput + transform.right * horizontalInput;
-
-        if (Input.GetButtonDown("Jump"))
-        {
-            fallSpeed = jumpSpeed;
-        }
 
         if (controller.isGrounded)
         {
