@@ -1,15 +1,25 @@
+// <copyright file="PlayerController.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 using UnityEngine;
 
+/// <summary>
+/// Controller for player.
+/// </summary>
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    [SerializeField]
+    private float moveSpeed = 5f;
+    [SerializeField]
+    private float gravity = 9.81f;
+
     private CharacterController controller;
-    public float gravity = 9.81f;
     private float fallSpeed = 0f;
 
     private void Start()
     {
-        controller = GetComponent<CharacterController>();
+        this.controller = this.GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -19,18 +29,18 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
-        Vector3 moveDirection = transform.forward * verticalInput + transform.right * horizontalInput;
+        Vector3 moveDirection = (this.transform.forward * verticalInput) + (this.transform.right * horizontalInput);
 
-        if (controller.isGrounded)
+        if (this.controller.isGrounded)
         {
-            fallSpeed = -2f;
+            this.fallSpeed = -2f;
         }
         else
         {
-            fallSpeed -= gravity * Time.deltaTime;
-            moveDirection.y = fallSpeed;
+            this.fallSpeed -= this.gravity * Time.deltaTime;
+            moveDirection.y = this.fallSpeed;
         }
 
-        controller.Move(moveSpeed * Time.deltaTime * moveDirection);
+        this.controller.Move(this.moveSpeed * Time.deltaTime * moveDirection);
     }
 }

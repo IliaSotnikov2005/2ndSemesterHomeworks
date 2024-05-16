@@ -1,10 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+// <copyright file="FlashlightController.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 using UnityEngine;
 
+/// <summary>
+/// Controller for the flashlight.
+/// </summary>
 public class FlashlightController : MonoBehaviour
 {
-    [SerializeField] private GameObject spotlight;
+    [SerializeField]
+    private GameObject spotlight;
 
     private bool isFlashlightOn = true;
 
@@ -12,15 +18,15 @@ public class FlashlightController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            isFlashlightOn = !isFlashlightOn;
+            this.isFlashlightOn = !this.isFlashlightOn;
 
-            if (isFlashlightOn)
+            if (this.isFlashlightOn)
             {
-                spotlight.SetActive(true);
+                this.spotlight.SetActive(true);
             }
             else
             {
-                spotlight.SetActive(false);
+                this.spotlight.SetActive(false);
             }
         }
     }

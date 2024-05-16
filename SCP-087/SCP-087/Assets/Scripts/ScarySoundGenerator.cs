@@ -1,29 +1,36 @@
+// <copyright file="ScarySoundGenerator.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
 using UnityEngine;
 
+/// <summary>
+/// Generates scary sound on each floor.
+/// </summary>
 public class ScarySoundGenerator : MonoBehaviour
 {
-    [SerializeField] private AudioClip[] audioClips;
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip[] audioClips;
+    [SerializeField]
+    private AudioSource audioSource;
 
     private bool audioActive = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && !audioActive)
+        if (other.CompareTag("Player") && !this.audioActive)
         {
-            audioSource.clip = audioClips[Random.Range(0, audioClips.Length)];
-            audioSource.Play();
-            StartCoroutine(Timer());
+            this.audioSource.clip = this.audioClips[Random.Range(0, this.audioClips.Length)];
+            this.audioSource.Play();
+            this.StartCoroutine(this.Timer());
         }
     }
 
     private IEnumerator Timer()
     {
-        audioActive = true;
-        yield return new WaitForSeconds(audioClips[Random.Range(0, audioClips.Length)].length);
-        audioActive = false;
+        this.audioActive = true;
+        yield return new WaitForSeconds(this.audioClips[Random.Range(0, this.audioClips.Length)].length);
+        this.audioActive = false;
     }
 }

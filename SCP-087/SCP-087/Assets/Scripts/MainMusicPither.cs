@@ -1,34 +1,41 @@
+// <copyright file="MainMusicPither.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Pithes main music on each floor.
+/// </summary>
 public class MainMusicPither : MonoBehaviour
 {
-    [SerializeField] private AudioSource mainTheme;
+    [SerializeField]
+    private AudioSource mainTheme;
 
     private float targetPitch;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
-            targetPitch = Random.Range(0.5f, 2f);
-            StartCoroutine(ChangePitchOverTime());
+            this.targetPitch = Random.Range(0.5f, 2f);
+            this.StartCoroutine(this.ChangePitchOverTime());
         }
     }
 
     private IEnumerator ChangePitchOverTime()
     {
-        float startPitch = mainTheme.pitch;
+        float startPitch = this.mainTheme.pitch;
         float timeElapsed = 0f;
 
         while (timeElapsed < 3)
         {
-            mainTheme.pitch = Mathf.Lerp(startPitch, targetPitch, timeElapsed / 3);
+            this.mainTheme.pitch = Mathf.Lerp(startPitch, this.targetPitch, timeElapsed / 3);
             timeElapsed += Time.deltaTime;
             yield return null;
         }
 
-        mainTheme.pitch = targetPitch;
+        this.mainTheme.pitch = this.targetPitch;
     }
 }

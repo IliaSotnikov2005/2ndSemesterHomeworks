@@ -1,10 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+// <copyright file="ScreamerOccurence.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 using UnityEngine;
 
+/// <summary>
+/// Responsible for the appearance of the screamer object on the map.
+/// </summary>
 public class ScreamerOccurence : MonoBehaviour
 {
-    [SerializeField] private GameObject screamer;
+    [SerializeField]
+    private GameObject screamer;
 
     private bool activated = false;
 
@@ -12,10 +18,10 @@ public class ScreamerOccurence : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (Random.Range(1, 101) <= GlobalReferences.ScreamerChanse || activated)
+            if (Random.Range(1, 101) <= GlobalReferences.ScreamerChanse || this.activated)
             {
-                activated = true;
-                screamer.SetActive(true);
+                this.activated = true;
+                this.screamer.SetActive(true);
             }
         }
     }
