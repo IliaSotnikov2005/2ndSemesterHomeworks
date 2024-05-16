@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class ScarySoundGenerator : MonoBehaviour
 {
-    [SerializeField] AudioClip[] audioClips;
-    [SerializeField] AudioSource audioSource;
+    [SerializeField] private AudioClip[] audioClips;
+    [SerializeField] private AudioSource audioSource;
 
     private bool audioActive = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" && !audioActive)
+        if (other.CompareTag("Player") && !audioActive)
         {
             audioSource.clip = audioClips[Random.Range(0, audioClips.Length)];
             audioSource.Play();

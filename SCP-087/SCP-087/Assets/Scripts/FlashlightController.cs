@@ -7,21 +7,21 @@ public class FlashlightController : MonoBehaviour
     [SerializeField] private GameObject spotlight;
 
     private bool isFlashlightOn = true;
-    // Update is called once per frame
-    void Update()
+
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
             isFlashlightOn = !isFlashlightOn;
-        }
 
-        if (isFlashlightOn)
-        {
-            spotlight.SetActive(true);
-        }
-        else
-        {
-            spotlight.SetActive(false);
+            if (isFlashlightOn)
+            {
+                spotlight.SetActive(true);
+            }
+            else
+            {
+                spotlight.SetActive(false);
+            }
         }
     }
 }

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class HideScreamer : MonoBehaviour
 {
-    [SerializeField] GameObject screamer;
-    [SerializeField] GameObject screamerTrigger;
+    [SerializeField] private GameObject screamer;
+    [SerializeField] private GameObject screamerTrigger;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             screamer.SetActive(false);
             screamerTrigger.SetActive(false);

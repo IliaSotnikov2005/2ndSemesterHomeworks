@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MainMusicPither : MonoBehaviour
 {
-    [SerializeField] AudioSource mainTheme;
+    [SerializeField] private AudioSource mainTheme;
 
     private float targetPitch;
 
@@ -17,7 +17,7 @@ public class MainMusicPither : MonoBehaviour
         }
     }
 
-    IEnumerator ChangePitchOverTime()
+    private IEnumerator ChangePitchOverTime()
     {
         float startPitch = mainTheme.pitch;
         float timeElapsed = 0f;

@@ -5,15 +5,14 @@ using UnityEngine.UIElements;
 
 public class Screamer : MonoBehaviour
 {
-    [SerializeField] GameObject screamer;
-    [SerializeField] GameObject screamerImage;
-    [SerializeField] AudioSource screamerAudio;
+    [SerializeField] private GameObject screamer;
+    [SerializeField] private GameObject screamerImage;
+    [SerializeField] private AudioSource screamerAudio;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.CompareTag("Player"))
         {
-            Vector3 direction = (other.transform.position - screamer.transform.position).normalized;
             screamer.transform.LookAt(other.transform.position);
             screamer.transform.position = other.transform.position;
             screamerImage.SetActive(true);
@@ -23,7 +22,7 @@ public class Screamer : MonoBehaviour
         }
     }
 
-    IEnumerator ReturnToMainMenu()
+    private IEnumerator ReturnToMainMenu()
     {
         yield return new WaitForSeconds(2f);
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Teleport : MonoBehaviour
 {
-    public Teleport target;
+    [SerializeField] private Teleport target;
 
     void OnTriggerEnter(Collider other)
     {

@@ -8,9 +8,9 @@ public class ScreamerOccurence : MonoBehaviour
 
     private bool activated = false;
 
-    void OnTriggerEnter(Collider collider)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collider.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             if (Random.Range(1, 101) <= GlobalReferences.ScreamerChanse || activated)
             {

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -9,15 +7,13 @@ public class PlayerController : MonoBehaviour
     public float gravity = 9.81f;
     private float fallSpeed = 0f;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    // Update is called once per frame
     private void Update()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -35,6 +31,6 @@ public class PlayerController : MonoBehaviour
             moveDirection.y = fallSpeed;
         }
 
-        controller.Move(moveDirection * moveSpeed * Time.deltaTime);
+        controller.Move(moveSpeed * Time.deltaTime * moveDirection);
     }
 }
