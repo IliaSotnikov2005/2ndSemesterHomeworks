@@ -113,6 +113,27 @@ public class Tests
     }
 
     /// <summary>
+    /// Checks that sort works with strings.
+    /// </summary>
+    [Test]
+    public void Sort_BasicTypes_WorksCorrectly()
+    {
+        List<string> list = ["failed credit", "drop out of university", "army", "factory", "drinking beer"];
+
+        var stringComparer = new StringComparer();
+
+        BubbleSort.Sort(list, stringComparer);
+        Assert.Multiple(() =>
+        {
+            Assert.That(list[0], Is.EqualTo("army"));
+            Assert.That(list[1], Is.EqualTo("drinking beer"));
+            Assert.That(list[2], Is.EqualTo("drop out of university"));
+            Assert.That(list[3], Is.EqualTo("factory"));
+            Assert.That(list[4], Is.EqualTo("failed credit"));
+        });
+    }
+
+    /// <summary>
     /// Custom object for the tests.
     /// </summary>
     public class CustomObject : IComparable<CustomObject>
@@ -175,6 +196,28 @@ public class Tests
             }
 
             return Math.Abs(x.Value).CompareTo(Math.Abs(y.Value));
+        }
+    }
+
+    /// <summary>
+    /// Custom comparer for the custom objects.
+    /// </summary>
+    public class StringComparer : IComparer<string>
+    {
+        /// <inheritdoc/>
+        public int Compare(string? x, string? y)
+        {
+            if (x == null)
+            {
+                throw new ArgumentNullException(nameof(x), "Null value");
+            }
+
+            if (y == null)
+            {
+                throw new ArgumentNullException(nameof(y), "Null value");
+            }
+
+            return x.CompareTo(y);
         }
     }
 }
