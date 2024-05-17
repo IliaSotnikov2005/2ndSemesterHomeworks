@@ -1,4 +1,4 @@
-// <copyright file="Operator.cs" company="PlaceholderCompany">
+// <copyright file="Operator.cs" company="IlyaSotnikov">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
@@ -7,12 +7,25 @@ namespace ParseTreeSpace;
 /// <summary>
 /// Plus class.
 /// </summary>
-public class Plus : IOperator
+public class Plus(IParseTreeElement leftChild, IParseTreeElement rightChild) : IParseTreeElement, IOperator
 {
+    /// <summary>
+    /// Gets or sets left expression.
+    /// </summary>
+    public IParseTreeElement LeftChild { get; set; } = leftChild;
+
+    /// <summary>
+    /// Gets or sets right expression.
+    /// </summary>
+    public IParseTreeElement RightChild { get; set; } = rightChild;
+
     /// <inheritdoc/>
-    public Operand Calculate(Operand operand1, Operand operand2)
+    public Operand Evaluate()
     {
-        return operand1 + operand2;
+        Operand leftValue = this.LeftChild.Evaluate();
+        Operand rightValue = this.RightChild.Evaluate();
+
+        return leftValue + rightValue;
     }
 
     /// <inheritdoc/>
@@ -25,12 +38,25 @@ public class Plus : IOperator
 /// <summary>
 /// Minus class.
 /// </summary>
-public class Minus : IOperator
+public class Minus(IParseTreeElement leftChild, IParseTreeElement rightChild) : IParseTreeElement, IOperator
 {
+    /// <summary>
+    /// Gets or sets left expression.
+    /// </summary>
+    public IParseTreeElement LeftChild { get; set; } = leftChild;
+
+    /// <summary>
+    /// Gets or sets right expression.
+    /// </summary>
+    public IParseTreeElement RightChild { get; set; } = rightChild;
+
     /// <inheritdoc/>
-    public Operand Calculate(Operand operand1, Operand operand2)
+    public Operand Evaluate()
     {
-        return operand1 - operand2;
+        Operand leftValue = this.LeftChild.Evaluate();
+        Operand rightValue = this.RightChild.Evaluate();
+
+        return leftValue - rightValue;
     }
 
     /// <inheritdoc/>
@@ -43,12 +69,25 @@ public class Minus : IOperator
 /// <summary>
 /// Multiplicatoin class.
 /// </summary>
-public class Multiplication : IOperator
+public class Multiplication(IParseTreeElement leftChild, IParseTreeElement rightChild) : IParseTreeElement, IOperator
 {
+    /// <summary>
+    /// Gets or sets left expression.
+    /// </summary>
+    public IParseTreeElement LeftChild { get; set; } = leftChild;
+
+    /// <summary>
+    /// Gets or sets right expression.
+    /// </summary>
+    public IParseTreeElement RightChild { get; set; } = rightChild;
+
     /// <inheritdoc/>
-    public Operand Calculate(Operand operand1, Operand operand2)
+    public Operand Evaluate()
     {
-        return operand1 * operand2;
+        Operand leftValue = this.LeftChild.Evaluate();
+        Operand rightValue = this.RightChild.Evaluate();
+
+        return leftValue * rightValue;
     }
 
     /// <inheritdoc/>
@@ -61,18 +100,31 @@ public class Multiplication : IOperator
 /// <summary>
 /// Division class.
 /// </summary>
-public class Division : IOperator
+public class Division(IParseTreeElement leftChild, IParseTreeElement rightChild) : IParseTreeElement, IOperator
 {
+    /// <summary>
+    /// Gets or sets left expression.
+    /// </summary>
+    public IParseTreeElement LeftChild { get; set; } = leftChild;
+
+    /// <summary>
+    /// Gets or sets right expression.
+    /// </summary>
+    public IParseTreeElement RightChild { get; set; } = rightChild;
+
     /// <inheritdoc/>
     /// <exception cref="DivideByZeroException">If division by zero.</exception>
-    public Operand Calculate(Operand operand1, Operand operand2)
+    public Operand Evaluate()
     {
-        if (operand2.Value == 0)
+        Operand leftValue = this.LeftChild.Evaluate();
+        Operand rightValue = this.RightChild.Evaluate();
+
+        if (rightValue.Value == 0)
         {
             throw new DivideByZeroException();
         }
 
-        return operand1 / operand2;
+        return leftValue / rightValue;
     }
 
     /// <inheritdoc/>

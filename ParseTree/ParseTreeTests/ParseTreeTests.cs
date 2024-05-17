@@ -8,7 +8,8 @@ public class ParseTreeTests
     [Test]
     public void Tree_ReturnsCorrectAnsver()
     {
-        var tree = ParseTree.BuildTreeFromFile("../../../../Files/1.txt");
+        ParseTree tree = new ParseTree();
+        tree.BuildTreeFromFile("../../../../Files/1.txt");
 
         Assert.That(tree.Evaluate(), Is.EqualTo(58));
     }
@@ -16,7 +17,8 @@ public class ParseTreeTests
     [Test]
     public void Tree_DivisionByZero_ThrowsException()
     {
-        var tree = ParseTree.BuildTreeFromFile("../../../../Files/2.txt");
+        ParseTree tree = new ParseTree();
+            tree.BuildTreeFromFile("../../../../Files/2.txt");
 
         Assert.Throws<DivideByZeroException>(() => tree.Evaluate());
     }
@@ -24,6 +26,7 @@ public class ParseTreeTests
     [Test]
     public void Tree_NotExistingFile_ThrowsException()
     {
-        Assert.Throws<FileNotFoundException>(() => ParseTree.BuildTreeFromFile("../../../../Files/1231.txt"));
+        ParseTree tree = new ParseTree();
+        Assert.Throws<FileNotFoundException>(() => tree.BuildTreeFromFile("../../../../Files/1231.txt"));
     }
 }

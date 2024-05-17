@@ -1,166 +1,130 @@
-// <copyright file="ParseTree.cs" company="PlaceholderCompany">
+// <copyright file="ParseTree.cs" company="IlyaSotnikov">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace ParseTreeSpace
+namespace ParseTreeSpace;
+
+using System.Text;
+using System.Text.RegularExpressions;
+
+/// <summary>
+/// Parse tree class.
+/// </summary>
+public class ParseTree()
 {
-    using System.Text;
-    using System.Text.RegularExpressions;
+    private IParseTreeElement? Root { get; set; }
 
     /// <summary>
-    /// Parse tree class.
+    /// Builds parse tree from file.
     /// </summary>
-    public class ParseTree(IVertexContent content)
+    /// <param name="filePath">Path to file with expression.</param>
+    /// <returns>A ParseTree object.</returns>
+    /// <exception cref="ArgumentException">If can't build parse tree.</exception>
+    public ParseTree BuildTreeFromFile(string filePath)
     {
-        private IVertexContent Content { get; set; } = content;
-
-        private ParseTree? LeftChild { get; set; } = null;
-
-        private ParseTree? RightChild { get; set; } = null;
-
-        /// <summary>
-        /// Builds parse tree from file.
-        /// </summary>
-        /// <param name="filePath">Path to file with expression.</param>
-        /// <returns>A ParseTree object.</returns>
-        /// <exception cref="ArgumentException">If can't build parse tree.</exception>
-        public static ParseTree BuildTreeFromFile(string filePath)
+        if (!File.Exists(filePath))
         {
-            if (!File.Exists(filePath))
+            throw new FileNotFoundException("File with expression is not found.");
+        }
+
+        string[] expression = Regex.Replace(File.ReadAllText(filePath), @"[()\s]+", " ").Trim().Split(" ");
+
+        this.Root = BuildTree(ref expression);
+
+        return this;
+    }
+
+    /// <summary>
+    /// Evaluates expression in the tree.
+    /// </summary>
+    /// <returns>Result of calculus.</returns>
+    /// <exception cref="ArgumentException">If content of vertex is not operand or operator.</exception>
+    public int Evaluate()
+    {
+        return this.Root != null ? this.Root.Evaluate().Value : 0;
+    }
+
+    /// <inheritdoc/>
+    public override string ToString()
+    {
+        if (this.Root == null)
+        {
+            return string.Empty;
+        }
+
+        var sb = new StringBuilder();
+        var stack = new Stack<IParseTreeElement>();
+        stack.Push(this.Root);
+
+        while (stack.Count > 0)
+        {
+            IParseTreeElement current = stack.Pop();
+
+            if (current is Operand)
             {
-                throw new FileNotFoundException("File with expression is not found.");
+                sb.Append($" {current} ");
+            }
+            else if (current is IOperator currentOperator)
+            {
+                sb.Append($"( {currentOperator} ");
+                stack.Push(currentOperator.RightChild);
+                stack.Push(currentOperator.LeftChild);
             }
 
-            string input = File.ReadAllText(filePath);
-            input = Regex.Replace(Regex.Replace(input, @"[()\s]+", " "), @"\s+", " ").Trim();
-            string[] expression = input.Split(" ");
-
-            ParseTree? root = BuildTree(ref expression) ?? throw new ArgumentException();
-            return root;
-        }
-
-        /// <summary>
-        /// Evaluates expression in the tree.
-        /// </summary>
-        /// <returns>Result of calculus.</returns>
-        /// <exception cref="ArgumentException">If content of vertex is not operand or operator.</exception>
-        public int Evaluate()
-        {
-            return this.EvaluateVertices().Value;
-        }
-
-        /// <inheritdoc/>
-        public override string ToString()
-        {
-            var sb = new StringBuilder();
-            var stack = new Stack<ParseTree>();
-            stack.Push(this);
-
-            while (stack.Count > 0)
+            if (stack.Count % 2 == 1 && current is not IOperator)
             {
-                ParseTree current = stack.Pop();
+                sb.Append(')');
+            }
+        }
 
-                if (current.LeftChild == null || current.RightChild == null)
+        sb.Append(')');
+        return sb.ToString();
+    }
+
+    private static IParseTreeElement BuildTree(ref string[] expression) // TODO ref??
+    {
+        if (expression.Length == 0)
+        {
+            throw new ArgumentException("Tree is invalid");
+        }
+
+        string element = expression[0];
+        expression = expression[1..];
+        if (int.TryParse(element, out int number))
+        {
+            return new Operand(number);
+        }
+
+        switch (element)
+        {
+            case "+":
                 {
-                    sb.Append($" {current.Content} ");
+                    var vertex = new Plus(BuildTree(ref expression), BuildTree(ref expression));
+                    return vertex;
                 }
-                else
+
+            case "-":
                 {
-                    sb.Append($"( {current.Content} ");
-                    stack.Push(current.RightChild);
-                    stack.Push(current.LeftChild);
+                    var vertex = new Minus(BuildTree(ref expression), BuildTree(ref expression));
+                    return vertex;
                 }
 
-                if ((stack.Count - 1) % 2 == 0 && current.Content is not IOperator)
+            case "*":
                 {
-                    sb.Append(')');
+                    var vertex = new Multiplication(BuildTree(ref expression), BuildTree(ref expression));
+                    return vertex;
                 }
-            }
 
-            sb.Append(')');
-            return sb.ToString();
-        }
+            case "/":
+                {
+                    var vertex = new Division(BuildTree(ref expression), BuildTree(ref expression));
+                    return vertex;
+                }
 
-        private static ParseTree? BuildTree(ref string[] expression)
-        {
-            if (expression.Length == 0)
-            {
-                return null;
-            }
-
-            string element = expression[0];
-            expression = expression[1..];
-            if (int.TryParse(element, out int number))
-            {
-                return new ParseTree(new Operand(number));
-            }
-
-            switch (element)
-            {
-                case "+":
-                    {
-                        ParseTree vertex = new (new Plus())
-                        {
-                            LeftChild = BuildTree(ref expression),
-                            RightChild = BuildTree(ref expression),
-                        };
-                        return vertex;
-                    }
-
-                case "-":
-                    {
-                        ParseTree vertex = new (new Minus())
-                        {
-                            LeftChild = BuildTree(ref expression),
-                            RightChild = BuildTree(ref expression),
-                        };
-                        return vertex;
-                    }
-
-                case "*":
-                    {
-                        ParseTree vertex = new (new Multiplication())
-                        {
-                            LeftChild = BuildTree(ref expression),
-                            RightChild = BuildTree(ref expression),
-                        };
-                        return vertex;
-                    }
-
-                case "/":
-                    {
-                        ParseTree vertex = new (new Division())
-                        {
-                            LeftChild = BuildTree(ref expression),
-                            RightChild = BuildTree(ref expression),
-                        };
-                        return vertex;
-                    }
-
-                default:
-                    {
-                        throw new ArgumentException();
-                    }
-            }
-        }
-
-        private Operand EvaluateVertices()
-        {
-            if (this.Content is Operand operand)
-            {
-                return operand;
-            }
-            else if (this.Content is IOperator op)
-            {
-                Operand leftValue = this.LeftChild?.EvaluateVertices() ?? new Operand(0);
-                Operand rightValue = this.RightChild?.EvaluateVertices() ?? new Operand(0);
-
-                return op.Calculate(leftValue, rightValue);
-            }
-            else
-            {
-                throw new ArgumentException("Vertex content is not Operator or Operand object.");
-            }
+            default:
+                {
+                    throw new ArgumentException("Invalid operator");
+                }
         }
     }
 }

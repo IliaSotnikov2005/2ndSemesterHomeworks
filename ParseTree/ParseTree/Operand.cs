@@ -1,4 +1,4 @@
-// <copyright file="Operand.cs" company="PlaceholderCompany">
+// <copyright file="Operand.cs" company="IlyaSotnikov">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
@@ -7,9 +7,7 @@ namespace ParseTreeSpace;
 /// <summary>
 /// Operand class.
 /// </summary>
-#pragma warning disable SA1009 // Closing parenthesis should be spaced correctly
-public class Operand(int value) : IVertexContent
-#pragma warning restore SA1009 // Closing parenthesis should be spaced correctly
+public class Operand(int value) : IVertexContent, IParseTreeElement
 {
     /// <summary>
     /// Gets or sets the value of operand.
@@ -64,4 +62,7 @@ public class Operand(int value) : IVertexContent
     {
         return this.Value.ToString();
     }
+
+    /// <inheritdoc/>
+    public Operand Evaluate() => this;
 }

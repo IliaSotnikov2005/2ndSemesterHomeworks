@@ -1,19 +1,21 @@
-// <copyright file="IOperator.cs" company="PlaceholderCompany">
+﻿// <copyright file="IOperator.cs" company="IlyaSotnikov">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
 namespace ParseTreeSpace;
 
 /// <summary>
-/// Interface for opetarors.
+/// Interface of operator in parse tree.
 /// </summary>
-public interface IOperator : IVertexContent
+public interface IOperator
 {
     /// <summary>
-    /// Calculates an expression consisting of two operands.
+    /// Gets or sets left expression.
     /// </summary>
-    /// <param name="operand1">The first operand.</param>
-    /// <param name="operand2">The second operand.</param>
-    /// <returns>Operand object.</returns>
-    public Operand Calculate(Operand operand1, Operand operand2);
+    public IParseTreeElement LeftChild { get; set; }
+
+    /// <summary>
+    /// Gets or sets right expression.
+    /// </summary>
+    public IParseTreeElement RightChild { get; set; }
 }
