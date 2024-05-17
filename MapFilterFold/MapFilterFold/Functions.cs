@@ -12,13 +12,14 @@ public static class Functions
     /// <summary>
     /// Applies a function to each item in a list and returns a new list with the results.
     /// </summary>
-    /// <typeparam name="T">The type of the items in the list.</typeparam>
+    /// <typeparam name="TInupt">The type of the items in the list.</typeparam>
+    /// <typeparam name="TOutput">The type of the items in reformed list.</typeparam>
     /// <param name="source">The list of items to operate on.</param>
     /// <param name="function">The function to apply to each item.</param>
     /// <returns>A new list with the results of applying the function to each item.</returns>
-    public static List<T> Map<T>(List<T> source, Func<T, T> function)
+    public static List<TOutput> Map<TInupt, TOutput>(List<TInupt> source, Func<TInupt, TOutput> function)
     {
-        var result = new List<T>();
+        var result = new List<TOutput>();
         foreach (var item in source)
         {
             result.Add(function(item));
@@ -51,14 +52,15 @@ public static class Functions
     /// <summary>
     /// Folds a list from left to right, applying a function to each item and combining the results.
     /// </summary>
-    /// <typeparam name="T">The type of the items in the list.</typeparam>
+    /// <typeparam name="TInput">The type of the items in the list.</typeparam>
+    /// <typeparam name="TOutput">The type of the value for accumulation.</typeparam>
     /// <param name="source">The list of items to operate on.</param>
     /// <param name="seed">The initial value for the fold operation.</param>
     /// <param name="function">The function to apply to each item for the fold operation.</param>
     /// <returns>The result of the fold operation.</returns>
-    public static T Fold<T>(List<T> source, T seed, Func<T, T, T> function)
+    public static TOutput Fold<TInput, TOutput>(List<TInput> source, TOutput seed, Func<TOutput, TInput, TOutput> function)
     {
-        T result = seed;
+        TOutput result = seed;
         foreach (var item in source)
         {
             result = function(result, item);
