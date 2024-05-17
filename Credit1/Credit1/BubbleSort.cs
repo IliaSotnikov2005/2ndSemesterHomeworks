@@ -2,6 +2,8 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
+namespace BubbleSort;
+
 /// <summary>
 /// Class of bubble sort algorithm.
 /// </summary>

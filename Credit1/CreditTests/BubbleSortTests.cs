@@ -3,6 +3,7 @@
 // </copyright>
 
 namespace BubbleSortTests;
+using BubbleSort;
 
 /// <summary>
 /// Tests for <see cref="BubbleSort"/>.
