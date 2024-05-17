@@ -246,7 +246,7 @@ namespace Calculator
                 number1 /= number2;
             }
 
-            this.operand1 = number1.ToString();
+            this.operand1 = number1.ToString(CultureInfo.InvariantCulture);
             this.operand2 = string.Empty;
             this.CurrentExpression = this.operand1.ToString();
             this.currentOperator = '\0';
