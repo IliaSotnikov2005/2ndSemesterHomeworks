@@ -65,7 +65,7 @@ public class Tests
     {
         List<CustomObject>? nullList = null;
 
-        Assert.Throws<ArgumentNullException>(() => BubbleSort.Sort(nullList, new CustomComparer()));
+        Assert.Throws<ArgumentNullException>(() => BubbleSort.Sort(nullList!, new CustomComparer()));
     }
 
     /// <summary>
@@ -83,7 +83,7 @@ public class Tests
 
         CustomComparer? nullComparer = null;
 
-        Assert.Throws<ArgumentNullException>(() => BubbleSort.Sort(list, nullComparer));
+        Assert.Throws<ArgumentNullException>(() => BubbleSort.Sort(list, nullComparer!));
     }
 
     /// <summary>
