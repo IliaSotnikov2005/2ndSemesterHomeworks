@@ -2,9 +2,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace UniqueListSpace;
-
-using System.Text;
+namespace UniqueList;
 
 /// <summary>
 /// Single linked list class.
@@ -77,20 +75,6 @@ public class SingleLinkedList<T>
         }
 
         this.Size--;
-    }
-
-    /// <inheritdoc/>
-    public override string ToString()
-    {
-        var sb = new StringBuilder();
-        Node? current = this.Head;
-        while (current != null)
-        {
-            sb.Append(current.Value!.ToString());
-            current = current.Next;
-        }
-
-        return sb.ToString();
     }
 
     /// <summary>
