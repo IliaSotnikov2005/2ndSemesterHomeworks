@@ -1,10 +1,4 @@
-﻿if (!StackCalculatorTests.Test())
-{
-    Console.WriteLine("Tests didn't passed.");
-    return;
-}
-
-Console.Write("Enter the expression: ");
+﻿Console.Write("Enter the expression: ");
 string expression = Console.ReadLine() ?? string.Empty;
 
 try
