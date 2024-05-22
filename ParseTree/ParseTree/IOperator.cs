@@ -2,7 +2,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace ParseTreeSpace;
+namespace ParseTree;
 
 /// <summary>
 /// Interface of operator in parse tree.

@@ -2,7 +2,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace ParseTreeSpace;
+namespace ParseTree;
 
 using System.Text;
 using System.Text.RegularExpressions;
@@ -81,7 +81,7 @@ public class ParseTree()
         return sb.ToString();
     }
 
-    private static IParseTreeElement BuildTree(ref string[] expression) // TODO ref??
+    private static IParseTreeElement BuildTree(ref string[] expression)
     {
         if (expression.Length == 0)
         {

@@ -2,12 +2,12 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace ParseTreeSpace;
+namespace ParseTree;
 
 /// <summary>
 /// Operand class.
 /// </summary>
-public class Operand(int value) : IVertexContent, IParseTreeElement
+public class Operand(int value) : IParseTreeElement
 {
     /// <summary>
     /// Gets or sets the value of operand.
