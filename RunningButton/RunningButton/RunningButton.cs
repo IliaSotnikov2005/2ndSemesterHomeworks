@@ -31,7 +31,7 @@ namespace RunningButton
             Application.Exit();
         }
 
-        private void Button_MouseEnter(object sender, EventArgs e)
+        private void Button_MouseEnterOrOnButton(object sender, EventArgs e)
         {
             Button button = (Button)sender;
 

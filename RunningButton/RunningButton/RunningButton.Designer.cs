@@ -44,8 +44,8 @@ namespace RunningButton
             this.button.Text = "Click me";
             this.button.UseVisualStyleBackColor = true;
             this.button.Click += new System.EventHandler(this.Button_Click);
-            this.button.MouseEnter += new System.EventHandler(this.Button_MouseEnter);
-            this.button.MouseHover += new System.EventHandler(this.Button_MouseEnter);
+            this.button.MouseEnter += new System.EventHandler(this.Button_MouseEnterOrOnButton);
+            this.button.MouseHover += new System.EventHandler(this.Button_MouseEnterOrOnButton);
             // 
             // RunningButton
             // 
