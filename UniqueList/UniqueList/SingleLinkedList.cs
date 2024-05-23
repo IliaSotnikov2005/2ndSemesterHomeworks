@@ -83,7 +83,7 @@ public class SingleLinkedList<T>
     /// </summary>
     /// <param name="index">Index of the element.</param>
     /// <returns>Node with given index.</returns>
-    ///<exception cref="IndexOutOfRangeException">If index out of range.</exception>
+    /// <exception cref="IndexOutOfRangeException">If index out of range.</exception>
     private protected Node GetNode(int index)
     {
         if (index < 0 || index >= this.Size)
