@@ -8,7 +8,7 @@ public class UniqueListTests
     [Test]
     public void Add_AddUniqueElements_ElementAddedSuccessfully()
     {
-        UniqueList<int> uniqueList = new UniqueList<int>();
+        UniqueList<int> uniqueList = new();
 
         uniqueList.Add(1);
         uniqueList.Add(2);
