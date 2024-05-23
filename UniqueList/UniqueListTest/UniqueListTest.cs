@@ -104,4 +104,28 @@ public class UniqueListTests
 
         Assert.Throws<ElementIsAlreadyInsideException>(() => uniqueList[0] = 2);
     }
+
+    [Test]
+    public void Add_NullThenNotNull_DoNotTrowException()
+    {
+        UniqueList<int?> uniqueList = new();
+
+        uniqueList.Add(1);
+        uniqueList.Add(null);
+
+        Assert.DoesNotThrow(() => uniqueList.Add(3));
+        Assert.Throws<ElementIsAlreadyInsideException>(() => uniqueList.Add(null));
+    }
+
+    [Test]
+    public void Add_NullTwoTimes_TrowsException()
+    {
+        UniqueList<int?> uniqueList = new();
+
+        uniqueList.Add(1);
+        uniqueList.Add(null);
+        uniqueList.Add(3);
+
+        Assert.Throws<ElementIsAlreadyInsideException>(() => uniqueList.Add(null));
+    }
 }

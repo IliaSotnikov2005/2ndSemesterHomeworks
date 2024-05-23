@@ -54,7 +54,16 @@ public class UniqueList<T> : SingleLinkedList<T>
         Node? current = this.Head;
         while (current != null)
         {
-            ArgumentNullException.ThrowIfNull(current.Value);
+            if (current.Value == null)
+            {
+                if (element == null)
+                {
+                    return true;
+                }
+
+                current = current.Next;
+                continue;
+            }
 
             if (current.Value.Equals(element))
             {
