@@ -21,9 +21,10 @@ public class SingleLinkedList<T>
     private protected Node? Head { get; set; }
 
     /// <summary>
-    /// Gives element of list by index.
+    /// Gets or sets element of list by index.
     /// </summary>
     /// <param name="index">Index of the element.</param>
+    /// <exception cref="IndexOutOfRangeException">If index out of range.</exception>
     public T this[int index]
     {
         get { return this.GetNode(index).Value; }
@@ -82,6 +83,7 @@ public class SingleLinkedList<T>
     /// </summary>
     /// <param name="index">Index of the element.</param>
     /// <returns>Node with given index.</returns>
+    ///<exception cref="IndexOutOfRangeException">If index out of range.</exception>
     private protected Node GetNode(int index)
     {
         if (index < 0 || index >= this.Size)
