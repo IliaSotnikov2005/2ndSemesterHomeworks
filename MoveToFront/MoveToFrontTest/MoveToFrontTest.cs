@@ -86,4 +86,18 @@ public class Tests
 
         Assert.That(result, Is.EqualTo(expectedResult));
     }
+
+    /// <summary>
+    /// Test for the MoveToFrontAlgorithm class works correctly with duplicate characters.
+    /// </summary>
+    [Test]
+    public void TestDublicatingString()
+    {
+        string input = "bbaaccb";
+        List<int> expectedResult = [1, 0, 1, 0, 2, 0, 2];
+
+        List<int> result = MoveToFrontAlghoritm.Run(input);
+
+        Assert.That(result, Is.EqualTo(expectedResult));
+    }
 }
