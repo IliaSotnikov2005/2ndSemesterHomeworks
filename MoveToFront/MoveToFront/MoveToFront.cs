@@ -27,9 +27,9 @@ public static class MoveToFrontAlghoritm
 
         List<char> alphabet = [.. "abcdefghijklmnopqrstuvwxyz"];
 
-        foreach (var i in input.ToLower())
+        foreach (var с in input.ToLower())
         {
-            int index = alphabet.IndexOf(i);
+            int index = alphabet.IndexOf(с);
             if (index == -1)
             {
                 throw new ArgumentException("Invalid input. Use only english letters");
@@ -38,7 +38,7 @@ public static class MoveToFrontAlghoritm
             result.Add(index);
 
             alphabet.RemoveAt(index);
-            alphabet.Insert(0, i);
+            alphabet.Insert(0, с);
         }
 
         return result;
