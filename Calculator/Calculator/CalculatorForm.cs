@@ -1,13 +1,11 @@
-﻿// <copyright file="Form1.cs" company="PlaceholderCompany">
+﻿// <copyright file="CalculatorForm.cs" company="IlyaSotnikov">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
 namespace Calculator
 {
     using System;
-    using System.Diagnostics;
     using System.Drawing;
-    using System.Runtime.InteropServices;
     using System.Windows.Forms;
 
     /// <summary>
@@ -15,7 +13,7 @@ namespace Calculator
     /// </summary>
     public partial class CalculatorForm : Form
     {
-        private Calculator calculator = new Calculator();
+        private readonly Calculator calculator = new ();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CalculatorForm"/> class.
@@ -32,14 +30,22 @@ namespace Calculator
 
         private void ButtonClick(object sender, EventArgs e)
         {
-            Button buttonSender = sender as Button;
+            if (sender is not Button buttonSender)
+            {
+                throw new ArgumentException("Sender is not a button");
+            }
+
             this.calculator.ProcessInput(buttonSender.Text[0]);
             this.output.Refresh();
         }
 
         private void TextBox1_Resize(object sender, EventArgs e)
         {
-            TextBox tb = sender as TextBox;
+            if (sender is not TextBox tb)
+            {
+                throw new ArgumentException("Sender is not a text box");
+            }
+
             tb.Font = new Font(tb.Font.FontFamily, tb.Height / 2);
         }
     }
