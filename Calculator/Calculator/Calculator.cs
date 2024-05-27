@@ -1,4 +1,4 @@
-﻿// <copyright file="Calculator.cs" company="PlaceholderCompany">
+﻿// <copyright file="Calculator.cs" company="IlyaSotnikov">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
