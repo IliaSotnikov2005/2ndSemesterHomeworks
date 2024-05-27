@@ -1,4 +1,4 @@
-// <copyright file="SkipListTests.cs" company="PlaceholderCompany">
+// <copyright file="SkipListTests.cs" company="IlyaSotnikov">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
@@ -17,8 +17,10 @@ public class Tests
     [Test]
     public void SkipList_Add_AddsItemToList()
     {
-        var skipList = new SkipList<int>();
-        skipList.Add(5);
+        var skipList = new SkipList<int>
+        {
+            5,
+        };
 
         Assert.That(skipList, Does.Contain(5));
         Assert.That(skipList.Count, Is.EqualTo(1));
@@ -30,11 +32,13 @@ public class Tests
     [Test]
     public void SkipList_Add_AddsManyItemsToList()
     {
-        var skipList = new SkipList<int>();
-        skipList.Add(5);
-        skipList.Add(15);
-        skipList.Add(10);
-        skipList.Add(11);
+        var skipList = new SkipList<int>
+        {
+            5,
+            15,
+            10,
+            11,
+        };
 
         Assert.That(skipList, Does.Contain(5));
         Assert.That(skipList, Does.Contain(10));
@@ -52,10 +56,12 @@ public class Tests
     [Test]
     public void SkipList_Remove_RemovesItemFromList()
     {
-        var skipList = new SkipList<int>();
-        skipList.Add(5);
-        skipList.Add(6);
-        skipList.Add(7);
+        var skipList = new SkipList<int>
+        {
+            5,
+            6,
+            7,
+        };
         skipList.Remove(5);
 
         Assert.That(skipList, Does.Not.Contain(5));
@@ -68,11 +74,13 @@ public class Tests
     [Test]
     public void SkipList_CopyTo_CopiesItemsToArray()
     {
-        var skipList = new SkipList<int>();
-        skipList.Add(5);
-        skipList.Add(15);
-        skipList.Add(10);
-        skipList.Add(11);
+        var skipList = new SkipList<int>
+        {
+            5,
+            15,
+            10,
+            11,
+        };
 
         var array = skipList.ToArray();
         Assert.That(new int[] { 5, 10, 11, 15 }, Is.EqualTo(array));
@@ -84,10 +92,12 @@ public class Tests
     [Test]
     public void SkipList_IndexOf_ReturnsIndexOfItem()
     {
-        var skipList = new SkipList<int>();
-        skipList.Add(3);
-        skipList.Add(2);
-        skipList.Add(1);
+        var skipList = new SkipList<int>
+        {
+            3,
+            2,
+            1,
+        };
 
         int index = skipList.IndexOf(3);
 
@@ -100,10 +110,12 @@ public class Tests
     [Test]
     public void SkipList_CallByIndex_ReturnsItem()
     {
-        var skipList = new SkipList<int>();
-        skipList.Add(3);
-        skipList.Add(2);
-        skipList.Add(1);
+        var skipList = new SkipList<int>
+        {
+            3,
+            2,
+            1,
+        };
 
         Assert.That(skipList[0], Is.EqualTo(1));
     }
@@ -118,9 +130,11 @@ public class Tests
         skipList.Add(5);
 
         IEnumerator<int> enumerator = skipList.GetEnumerator();
-
-        Assert.That(enumerator.MoveNext(), Is.True);
-        Assert.That(enumerator.Current, Is.EqualTo(5));
+        Assert.Multiple(() =>
+        {
+            Assert.That(enumerator.MoveNext(), Is.True);
+            Assert.That(enumerator.Current, Is.EqualTo(5));
+        });
     }
 
     /// <summary>
@@ -129,9 +143,11 @@ public class Tests
     [Test]
     public void EnumeratorThrowsException_WhenCollectionChangedDuringIteration()
     {
-        var skipList = new SkipList<int>();
-        skipList.Add(5);
-        skipList.Add(15);
+        var skipList = new SkipList<int>
+        {
+            5,
+            15,
+        };
 
         var enumerator = skipList.GetEnumerator();
         enumerator.MoveNext();

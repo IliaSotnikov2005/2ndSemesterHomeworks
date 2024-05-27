@@ -1,4 +1,4 @@
-// <copyright file="SkipList.cs" company="PlaceholderCompany">
+// <copyright file="SkipList.cs" company="IlyaSotnikov">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
