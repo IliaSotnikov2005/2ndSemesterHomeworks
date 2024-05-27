@@ -1,8 +1,8 @@
-// <copyright file="Graph.cs" company="PlaceholderCompany">
+// <copyright file="Graph.cs" company="IlyaSotnikov">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace RoutersGraph;
+namespace Routers;
 
 using System.Text;
 
@@ -25,6 +25,7 @@ public class Graph
     /// Builds the graph from the topology defined in the specified file.
     /// </summary>
     /// <param name="filename">The name of the file containing the topology.</param>
+    /// <exception cref="FileIsEmptyException">Throws if file is empty.</exception>
     public void BuildGraphFromTopology(string filename)
     {
         if (!File.Exists(filename))
@@ -115,36 +116,4 @@ public class Graph
             this.Edges.Add(edge);
         }
     }
-}
-
-/// <summary>
-/// Represents a vertex in the graph.
-/// </summary>
-public record Vertex(int router)
-{
-    /// <summary>
-    /// Gets the ID of the router.
-    /// </summary>
-    public int Router { get; private set; } = router;
-}
-
-/// <summary>
-/// Represents an edge in the graph.
-/// </summary>
-public record Edge(Vertex vertex1, Vertex vertex2, int bandwidth)
-{
-    /// <summary>
-    /// Gets the first vertex in the edge.
-    /// </summary>
-    public Vertex Vertex1 { get; private set; } = vertex1;
-
-    /// <summary>
-    /// Gets the second vertex in the edge.
-    /// </summary>
-    public Vertex Vertex2 { get; private set; } = vertex2;
-
-    /// <summary>
-    /// Gets the bandwidth of the edge.
-    /// </summary>
-    public int Bandwidth { get; private set; } = bandwidth;
 }

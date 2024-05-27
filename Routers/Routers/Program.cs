@@ -1,8 +1,8 @@
-﻿// <copyright file="Program.cs" company="PlaceholderCompany">
+﻿// <copyright file="Program.cs" company="IlyaSotnikov">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace RoutersGraph;
+namespace Routers;
 
 /// <summary>
 /// Program class.
@@ -23,7 +23,7 @@ public static class Program
                 return;
             }
 
-            Graph graph = new Graph();
+            Graph graph = new ();
             graph.BuildGraphFromTopology(args[0]);
 
             var newGraph = KruskalsAlgorithm.Run(graph);

@@ -1,13 +1,15 @@
-using RoutersGraph;
+using Routers;
 
 namespace RoutersTest;
+
+using NUnit.Framework;
 
 public class Tests
 {
     [Test]
     public void BuildGraphFromTopology_ThrowsFileNotFoundException_WhenFileDoesNotExist()
     {
-        Graph graph = new Graph();
+        Graph graph = new ();
         string filename = "nonexistent.txt";
 
         Assert.Throws<FileNotFoundException>(() => graph.BuildGraphFromTopology(filename));
@@ -16,7 +18,7 @@ public class Tests
     [Test]
     public void BuildGraphFromTopology_ThrowsFileIsEmptyException_WhenFileIsEmpty()
     {
-        Graph graph = new Graph();
+        Graph graph = new ();
         string filename = "../../../../TestFiles/testEmpty.txt";
 
         Assert.Throws<FileIsEmptyException>(() => graph.BuildGraphFromTopology(filename));
@@ -25,17 +27,19 @@ public class Tests
     [Test]
     public void BuildGraphFromTopology_ValidFile_CreatesGraph()
     {
-        Graph graph = new Graph();
+        Graph graph = new ();
         graph.BuildGraphFromTopology("../../../../TestFiles/test1.txt");
-
-        Assert.That(graph.Vertices.Count, Is.EqualTo(5));
-        Assert.That(graph.Edges.Count, Is.EqualTo(7));
+        Assert.Multiple(() =>
+        {
+            Assert.That(graph.Vertices.Count, Is.EqualTo(5));
+            Assert.That(graph.Edges.Count, Is.EqualTo(7));
+        });
     }
 
     [Test]
     public void Kruskal_ReturnsCorrect()
     {
-        Graph graph = new Graph();
+        Graph graph = new ();
         graph.BuildGraphFromTopology("../../../../TestFiles/test1.txt");
 
         Graph kruskalResult = KruskalsAlgorithm.Run(graph);
@@ -57,7 +61,7 @@ public class Tests
     [Test]
     public void CheckThatAllVerticesReachable_ReturnsCorrect()
     {
-        Graph graph = new Graph();
+        Graph graph = new ();
         graph.BuildGraphFromTopology("../../../../TestFiles/test2.txt");
 
         Assert.That(DFS.CheckThatAllVerticesReachable(graph), Is.False);

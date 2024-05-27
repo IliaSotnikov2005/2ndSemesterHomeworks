@@ -1,8 +1,8 @@
-// <copyright file="KruskalsAlgorithm.cs" company="PlaceholderCompany">
+// <copyright file="KruskalsAlgorithm.cs" company="IlyaSotnikov">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace RoutersGraph;
+namespace Routers;
 
 /// <summary>
 /// Kruskal's algorithm class.

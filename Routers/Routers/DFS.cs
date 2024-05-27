@@ -1,8 +1,8 @@
-// <copyright file="DFS.cs" company="PlaceholderCompany">
+// <copyright file="DFS.cs" company="IlyaSotnikov">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace RoutersGraph;
+namespace Routers;
 
 /// <summary>
 /// DFS class.
@@ -16,8 +16,8 @@ public static class DFS
     /// <returns>True if all vertices are reachable, false otherwise.</returns>
     public static bool CheckThatAllVerticesReachable(Graph graph)
     {
-        HashSet<Vertex> visited = new HashSet<Vertex>();
-        Stack<Vertex> stack = new Stack<Vertex>();
+        HashSet<Vertex> visited = [];
+        Stack<Vertex> stack = new ();
 
         Vertex vertex = graph.Vertices.ElementAt(0);
 
