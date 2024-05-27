@@ -44,7 +44,7 @@ public class Calculator : INotifyPropertyChanged
         private set
         {
             this.currentExpression = value;
-            this.NotifyPropertyChanged("CurrentExpression");
+            this.NotifyPropertyChanged(nameof(CurrentExpression));
         }
     }
 
