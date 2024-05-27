@@ -1,5 +1,6 @@
 namespace UniqueListTest;
 
+using NUnit.Framework;
 using UniqueList;
 
 [TestFixture]
@@ -127,5 +128,23 @@ public class UniqueListTests
         uniqueList.Add(3);
 
         Assert.Throws<ElementIsAlreadyInsideException>(() => uniqueList.Add(null));
+    }
+
+    [Test]
+    public void AccessingTheIndexDoesNotThrowException()
+    {
+        UniqueList<int?> list = new();
+
+        list.Add(null);
+        Assert.DoesNotThrow(() => list[0] = 1);
+    }
+
+    [Test]
+    public void SettintNullToNullDoesNotThrowException()
+    {
+        UniqueList<int?> list = new();
+
+        list.Add(null);
+        Assert.DoesNotThrow(() => list[0] = null);
     }
 }

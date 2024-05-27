@@ -39,7 +39,16 @@ public class UniqueList<T> : SingleLinkedList<T>
 
     private void TrySet(Node element, T value)
     {
-        ArgumentNullException.ThrowIfNull(element.Value);
+        if (element.Value == null)
+        {
+            if (this.Contains(value) && value != null)
+            {
+                throw new ElementIsAlreadyInsideException("Element is already inside");
+            }
+
+            element.Value = value;
+            return;
+        }
 
         if (this.Contains(value) && !element.Value.Equals(value))
         {
