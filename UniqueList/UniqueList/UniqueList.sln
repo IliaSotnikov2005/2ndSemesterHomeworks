@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniqueList", "UniqueList.csproj", "{0106FB65-CD92-4A5F-8BBA-267472B78F98}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniqueListTest", "..\UniqueListTest\UniqueListTest.csproj", "{17602254-388B-4257-896B-92FCC2F35F9A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0106FB65-CD92-4A5F-8BBA-267472B78F98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0106FB65-CD92-4A5F-8BBA-267472B78F98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0106FB65-CD92-4A5F-8BBA-267472B78F98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0106FB65-CD92-4A5F-8BBA-267472B78F98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17602254-388B-4257-896B-92FCC2F35F9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17602254-388B-4257-896B-92FCC2F35F9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17602254-388B-4257-896B-92FCC2F35F9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17602254-388B-4257-896B-92FCC2F35F9A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
