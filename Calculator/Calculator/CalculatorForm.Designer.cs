@@ -28,412 +28,392 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.output = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.buttonPlus = new System.Windows.Forms.Button();
-            this.buttonMinus = new System.Windows.Forms.Button();
-            this.buttonClear = new System.Windows.Forms.Button();
-            this.buttonDivision = new System.Windows.Forms.Button();
-            this.buttonMultiplication = new System.Windows.Forms.Button();
-            this.buttonPoint = new System.Windows.Forms.Button();
-            this.button0 = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.buttonEquals = new System.Windows.Forms.Button();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.SuspendLayout();
+            output = new TextBox();
+            button1 = new Button();
+            button2 = new Button();
+            button3 = new Button();
+            button4 = new Button();
+            button5 = new Button();
+            button6 = new Button();
+            button7 = new Button();
+            button8 = new Button();
+            button9 = new Button();
+            buttonPlus = new Button();
+            buttonMinus = new Button();
+            buttonClear = new Button();
+            buttonDivision = new Button();
+            buttonMultiplication = new Button();
+            buttonPoint = new Button();
+            button0 = new Button();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            buttonEquals = new Button();
+            tableLayoutPanel2 = new TableLayoutPanel();
+            tableLayoutPanel1.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
+            SuspendLayout();
             // 
             // output
             // 
-            this.output.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.output.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.output.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.output.Font = new System.Drawing.Font("Molot", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.output.Location = new System.Drawing.Point(3, 3);
-            this.output.MinimumSize = new System.Drawing.Size(200, 50);
-            this.output.Multiline = true;
-            this.output.Name = "output";
-            this.output.ReadOnly = true;
-            this.output.Size = new System.Drawing.Size(447, 109);
-            this.output.TabIndex = 0;
-            this.output.Resize += new System.EventHandler(this.TextBox1_Resize);
+            output.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            output.BackColor = SystemColors.ActiveBorder;
+            output.BorderStyle = BorderStyle.FixedSingle;
+            output.Font = new Font("Molot", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            output.Location = new Point(4, 3);
+            output.Margin = new Padding(4, 3, 4, 3);
+            output.MinimumSize = new Size(233, 57);
+            output.Multiline = true;
+            output.Name = "output";
+            output.ReadOnly = true;
+            output.Size = new Size(520, 127);
+            output.TabIndex = 0;
+            output.Resize += TextBox1_Resize;
             // 
             // button1
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.AutoEllipsis = true;
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Font = new System.Drawing.Font("Molot", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(3, 339);
-            this.button1.MinimumSize = new System.Drawing.Size(50, 50);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(105, 106);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.ButtonClick);
+            button1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            button1.AutoEllipsis = true;
+            button1.Cursor = Cursors.Hand;
+            button1.Font = new Font("Molot", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            button1.Location = new Point(4, 390);
+            button1.Margin = new Padding(4, 3, 4, 3);
+            button1.MinimumSize = new Size(58, 58);
+            button1.Name = "button1";
+            button1.Size = new Size(122, 123);
+            button1.TabIndex = 1;
+            button1.Text = "1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += ButtonClick;
             // 
             // button2
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.AutoEllipsis = true;
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.Font = new System.Drawing.Font("Molot", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(114, 339);
-            this.button2.MinimumSize = new System.Drawing.Size(50, 50);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(105, 106);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.ButtonClick);
+            button2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            button2.AutoEllipsis = true;
+            button2.Cursor = Cursors.Hand;
+            button2.Font = new Font("Molot", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            button2.Location = new Point(134, 390);
+            button2.Margin = new Padding(4, 3, 4, 3);
+            button2.MinimumSize = new Size(58, 58);
+            button2.Name = "button2";
+            button2.Size = new Size(122, 123);
+            button2.TabIndex = 2;
+            button2.Text = "2";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += ButtonClick;
             // 
             // button3
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.AutoEllipsis = true;
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.Font = new System.Drawing.Font("Molot", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button3.Location = new System.Drawing.Point(225, 339);
-            this.button3.MinimumSize = new System.Drawing.Size(50, 50);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(105, 106);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.ButtonClick);
+            button3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            button3.AutoEllipsis = true;
+            button3.Cursor = Cursors.Hand;
+            button3.Font = new Font("Molot", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            button3.Location = new Point(264, 390);
+            button3.Margin = new Padding(4, 3, 4, 3);
+            button3.MinimumSize = new Size(58, 58);
+            button3.Name = "button3";
+            button3.Size = new Size(122, 123);
+            button3.TabIndex = 3;
+            button3.Text = "3";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += ButtonClick;
             // 
             // button4
             // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.AutoEllipsis = true;
-            this.button4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button4.Font = new System.Drawing.Font("Molot", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button4.Location = new System.Drawing.Point(3, 227);
-            this.button4.MinimumSize = new System.Drawing.Size(50, 50);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(105, 106);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "4";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.ButtonClick);
+            button4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            button4.AutoEllipsis = true;
+            button4.Cursor = Cursors.Hand;
+            button4.Font = new Font("Molot", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            button4.Location = new Point(4, 261);
+            button4.Margin = new Padding(4, 3, 4, 3);
+            button4.MinimumSize = new Size(58, 58);
+            button4.Name = "button4";
+            button4.Size = new Size(122, 123);
+            button4.TabIndex = 4;
+            button4.Text = "4";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += ButtonClick;
             // 
             // button5
             // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.AutoEllipsis = true;
-            this.button5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button5.Font = new System.Drawing.Font("Molot", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button5.Location = new System.Drawing.Point(114, 227);
-            this.button5.MinimumSize = new System.Drawing.Size(50, 50);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(105, 106);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "5";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.ButtonClick);
+            button5.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            button5.AutoEllipsis = true;
+            button5.Cursor = Cursors.Hand;
+            button5.Font = new Font("Molot", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            button5.Location = new Point(134, 261);
+            button5.Margin = new Padding(4, 3, 4, 3);
+            button5.MinimumSize = new Size(58, 58);
+            button5.Name = "button5";
+            button5.Size = new Size(122, 123);
+            button5.TabIndex = 5;
+            button5.Text = "5";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += ButtonClick;
             // 
             // button6
             // 
-            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button6.AutoEllipsis = true;
-            this.button6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button6.Font = new System.Drawing.Font("Molot", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button6.Location = new System.Drawing.Point(225, 227);
-            this.button6.MinimumSize = new System.Drawing.Size(50, 50);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(105, 106);
-            this.button6.TabIndex = 6;
-            this.button6.Text = "6";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.ButtonClick);
+            button6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            button6.AutoEllipsis = true;
+            button6.Cursor = Cursors.Hand;
+            button6.Font = new Font("Molot", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            button6.Location = new Point(264, 261);
+            button6.Margin = new Padding(4, 3, 4, 3);
+            button6.MinimumSize = new Size(58, 58);
+            button6.Name = "button6";
+            button6.Size = new Size(122, 123);
+            button6.TabIndex = 6;
+            button6.Text = "6";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += ButtonClick;
             // 
             // button7
             // 
-            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button7.AutoEllipsis = true;
-            this.button7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button7.Font = new System.Drawing.Font("Molot", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button7.Location = new System.Drawing.Point(3, 115);
-            this.button7.MinimumSize = new System.Drawing.Size(50, 50);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(105, 106);
-            this.button7.TabIndex = 7;
-            this.button7.Text = "7";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.ButtonClick);
+            button7.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            button7.AutoEllipsis = true;
+            button7.Cursor = Cursors.Hand;
+            button7.Font = new Font("Molot", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            button7.Location = new Point(4, 132);
+            button7.Margin = new Padding(4, 3, 4, 3);
+            button7.MinimumSize = new Size(58, 58);
+            button7.Name = "button7";
+            button7.Size = new Size(122, 123);
+            button7.TabIndex = 7;
+            button7.Text = "7";
+            button7.UseVisualStyleBackColor = true;
+            button7.Click += ButtonClick;
             // 
             // button8
             // 
-            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button8.AutoEllipsis = true;
-            this.button8.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button8.Font = new System.Drawing.Font("Molot", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button8.Location = new System.Drawing.Point(114, 115);
-            this.button8.MinimumSize = new System.Drawing.Size(50, 50);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(105, 106);
-            this.button8.TabIndex = 8;
-            this.button8.Text = "8";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.ButtonClick);
+            button8.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            button8.AutoEllipsis = true;
+            button8.Cursor = Cursors.Hand;
+            button8.Font = new Font("Molot", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            button8.Location = new Point(134, 132);
+            button8.Margin = new Padding(4, 3, 4, 3);
+            button8.MinimumSize = new Size(58, 58);
+            button8.Name = "button8";
+            button8.Size = new Size(122, 123);
+            button8.TabIndex = 8;
+            button8.Text = "8";
+            button8.UseVisualStyleBackColor = true;
+            button8.Click += ButtonClick;
             // 
             // button9
             // 
-            this.button9.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button9.AutoEllipsis = true;
-            this.button9.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button9.Font = new System.Drawing.Font("Molot", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button9.Location = new System.Drawing.Point(225, 115);
-            this.button9.MinimumSize = new System.Drawing.Size(50, 50);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(105, 106);
-            this.button9.TabIndex = 9;
-            this.button9.Text = "9";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.ButtonClick);
+            button9.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            button9.AutoEllipsis = true;
+            button9.Cursor = Cursors.Hand;
+            button9.Font = new Font("Molot", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            button9.Location = new Point(264, 132);
+            button9.Margin = new Padding(4, 3, 4, 3);
+            button9.MinimumSize = new Size(58, 58);
+            button9.Name = "button9";
+            button9.Size = new Size(122, 123);
+            button9.TabIndex = 9;
+            button9.Text = "9";
+            button9.UseVisualStyleBackColor = true;
+            button9.Click += ButtonClick;
             // 
             // buttonPlus
             // 
-            this.buttonPlus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonPlus.AutoEllipsis = true;
-            this.buttonPlus.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonPlus.Font = new System.Drawing.Font("Molot", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonPlus.Location = new System.Drawing.Point(336, 115);
-            this.buttonPlus.MinimumSize = new System.Drawing.Size(50, 50);
-            this.buttonPlus.Name = "buttonPlus";
-            this.buttonPlus.Size = new System.Drawing.Size(108, 106);
-            this.buttonPlus.TabIndex = 10;
-            this.buttonPlus.Text = "+";
-            this.buttonPlus.UseVisualStyleBackColor = true;
-            this.buttonPlus.Click += new System.EventHandler(this.ButtonClick);
+            buttonPlus.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            buttonPlus.AutoEllipsis = true;
+            buttonPlus.Cursor = Cursors.Hand;
+            buttonPlus.Font = new Font("Molot", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonPlus.Location = new Point(394, 132);
+            buttonPlus.Margin = new Padding(4, 3, 4, 3);
+            buttonPlus.MinimumSize = new Size(58, 58);
+            buttonPlus.Name = "buttonPlus";
+            buttonPlus.Size = new Size(122, 123);
+            buttonPlus.TabIndex = 13;
+            buttonPlus.Text = "+";
+            buttonPlus.UseVisualStyleBackColor = true;
+            buttonPlus.Click += ButtonClick;
             // 
             // buttonMinus
             // 
-            this.buttonMinus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonMinus.AutoEllipsis = true;
-            this.buttonMinus.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonMinus.Font = new System.Drawing.Font("Molot", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonMinus.Location = new System.Drawing.Point(336, 227);
-            this.buttonMinus.MinimumSize = new System.Drawing.Size(50, 50);
-            this.buttonMinus.Name = "buttonMinus";
-            this.buttonMinus.Size = new System.Drawing.Size(108, 106);
-            this.buttonMinus.TabIndex = 11;
-            this.buttonMinus.Text = "-";
-            this.buttonMinus.UseVisualStyleBackColor = true;
-            this.buttonMinus.Click += new System.EventHandler(this.ButtonClick);
+            buttonMinus.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            buttonMinus.AutoEllipsis = true;
+            buttonMinus.Cursor = Cursors.Hand;
+            buttonMinus.Font = new Font("Molot", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonMinus.Location = new Point(394, 261);
+            buttonMinus.Margin = new Padding(4, 3, 4, 3);
+            buttonMinus.MinimumSize = new Size(58, 58);
+            buttonMinus.Name = "buttonMinus";
+            buttonMinus.Size = new Size(122, 123);
+            buttonMinus.TabIndex = 14;
+            buttonMinus.Text = "-";
+            buttonMinus.UseVisualStyleBackColor = true;
+            buttonMinus.Click += ButtonClick;
             // 
             // buttonClear
             // 
-            this.buttonClear.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClear.AutoEllipsis = true;
-            this.buttonClear.BackColor = System.Drawing.Color.DarkGray;
-            this.buttonClear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonClear.Font = new System.Drawing.Font("Molot", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonClear.ForeColor = System.Drawing.Color.Black;
-            this.buttonClear.Location = new System.Drawing.Point(3, 3);
-            this.buttonClear.MinimumSize = new System.Drawing.Size(50, 50);
-            this.buttonClear.Name = "buttonClear";
-            this.buttonClear.Size = new System.Drawing.Size(105, 106);
-            this.buttonClear.TabIndex = 1;
-            this.buttonClear.Text = "C";
-            this.buttonClear.UseVisualStyleBackColor = false;
-            this.buttonClear.Click += new System.EventHandler(this.ButtonClick);
+            buttonClear.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            buttonClear.AutoEllipsis = true;
+            buttonClear.BackColor = Color.DarkGray;
+            buttonClear.Cursor = Cursors.Hand;
+            buttonClear.Font = new Font("Molot", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonClear.ForeColor = Color.Black;
+            buttonClear.Location = new Point(4, 3);
+            buttonClear.Margin = new Padding(4, 3, 4, 3);
+            buttonClear.MinimumSize = new Size(58, 58);
+            buttonClear.Name = "buttonClear";
+            buttonClear.Size = new Size(122, 123);
+            buttonClear.TabIndex = 10;
+            buttonClear.Text = "C";
+            buttonClear.UseVisualStyleBackColor = false;
+            buttonClear.Click += ButtonClick;
             // 
             // buttonDivision
             // 
-            this.buttonDivision.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonDivision.AutoEllipsis = true;
-            this.buttonDivision.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonDivision.Font = new System.Drawing.Font("Molot", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonDivision.Location = new System.Drawing.Point(114, 3);
-            this.buttonDivision.MinimumSize = new System.Drawing.Size(50, 50);
-            this.buttonDivision.Name = "buttonDivision";
-            this.buttonDivision.Size = new System.Drawing.Size(105, 106);
-            this.buttonDivision.TabIndex = 2;
-            this.buttonDivision.Text = "/";
-            this.buttonDivision.UseVisualStyleBackColor = true;
-            this.buttonDivision.Click += new System.EventHandler(this.ButtonClick);
+            buttonDivision.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            buttonDivision.AutoEllipsis = true;
+            buttonDivision.Cursor = Cursors.Hand;
+            buttonDivision.Font = new Font("Molot", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonDivision.Location = new Point(134, 3);
+            buttonDivision.Margin = new Padding(4, 3, 4, 3);
+            buttonDivision.MinimumSize = new Size(58, 58);
+            buttonDivision.Name = "buttonDivision";
+            buttonDivision.Size = new Size(122, 123);
+            buttonDivision.TabIndex = 11;
+            buttonDivision.Text = "/";
+            buttonDivision.UseVisualStyleBackColor = true;
+            buttonDivision.Click += ButtonClick;
             // 
             // buttonMultiplication
             // 
-            this.buttonMultiplication.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonMultiplication.AutoEllipsis = true;
-            this.buttonMultiplication.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonMultiplication.Font = new System.Drawing.Font("Molot", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonMultiplication.Location = new System.Drawing.Point(225, 3);
-            this.buttonMultiplication.MinimumSize = new System.Drawing.Size(50, 50);
-            this.buttonMultiplication.Name = "buttonMultiplication";
-            this.buttonMultiplication.Size = new System.Drawing.Size(105, 106);
-            this.buttonMultiplication.TabIndex = 14;
-            this.buttonMultiplication.Text = "*";
-            this.buttonMultiplication.UseVisualStyleBackColor = true;
-            this.buttonMultiplication.Click += new System.EventHandler(this.ButtonClick);
+            buttonMultiplication.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            buttonMultiplication.AutoEllipsis = true;
+            buttonMultiplication.Cursor = Cursors.Hand;
+            buttonMultiplication.Font = new Font("Molot", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonMultiplication.Location = new Point(264, 3);
+            buttonMultiplication.Margin = new Padding(4, 3, 4, 3);
+            buttonMultiplication.MinimumSize = new Size(58, 58);
+            buttonMultiplication.Name = "buttonMultiplication";
+            buttonMultiplication.Size = new Size(122, 123);
+            buttonMultiplication.TabIndex = 12;
+            buttonMultiplication.Text = "*";
+            buttonMultiplication.UseVisualStyleBackColor = true;
+            buttonMultiplication.Click += ButtonClick;
             // 
             // buttonPoint
             // 
-            this.buttonPoint.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonPoint.AutoEllipsis = true;
-            this.buttonPoint.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonPoint.Font = new System.Drawing.Font("Molot", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonPoint.Location = new System.Drawing.Point(336, 339);
-            this.buttonPoint.MinimumSize = new System.Drawing.Size(50, 50);
-            this.buttonPoint.Name = "buttonPoint";
-            this.buttonPoint.Size = new System.Drawing.Size(108, 106);
-            this.buttonPoint.TabIndex = 15;
-            this.buttonPoint.Text = ".";
-            this.buttonPoint.UseVisualStyleBackColor = true;
-            this.buttonPoint.Click += new System.EventHandler(this.ButtonClick);
+            buttonPoint.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            buttonPoint.AutoEllipsis = true;
+            buttonPoint.Cursor = Cursors.Hand;
+            buttonPoint.Font = new Font("Molot", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonPoint.Location = new Point(394, 390);
+            buttonPoint.Margin = new Padding(4, 3, 4, 3);
+            buttonPoint.MinimumSize = new Size(58, 58);
+            buttonPoint.Name = "buttonPoint";
+            buttonPoint.Size = new Size(122, 123);
+            buttonPoint.TabIndex = 15;
+            buttonPoint.Text = ".";
+            buttonPoint.UseVisualStyleBackColor = true;
+            buttonPoint.Click += ButtonClick;
             // 
             // button0
             // 
-            this.button0.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button0.AutoEllipsis = true;
-            this.button0.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button0.Font = new System.Drawing.Font("Molot", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button0.Location = new System.Drawing.Point(114, 451);
-            this.button0.MinimumSize = new System.Drawing.Size(50, 50);
-            this.button0.Name = "button0";
-            this.button0.Size = new System.Drawing.Size(105, 106);
-            this.button0.TabIndex = 17;
-            this.button0.Text = "0";
-            this.button0.UseVisualStyleBackColor = true;
-            this.button0.Click += new System.EventHandler(this.ButtonClick);
+            button0.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            button0.AutoEllipsis = true;
+            button0.Cursor = Cursors.Hand;
+            button0.Font = new Font("Molot", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            button0.Location = new Point(134, 519);
+            button0.Margin = new Padding(4, 3, 4, 3);
+            button0.MinimumSize = new Size(58, 58);
+            button0.Name = "button0";
+            button0.Size = new Size(122, 125);
+            button0.TabIndex = 0;
+            button0.Text = "0";
+            button0.UseVisualStyleBackColor = true;
+            button0.Click += ButtonClick;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Controls.Add(this.buttonClear, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.buttonPoint, 3, 3);
-            this.tableLayoutPanel1.Controls.Add(this.button0, 1, 4);
-            this.tableLayoutPanel1.Controls.Add(this.buttonDivision, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button3, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.button6, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.button2, 1, 3);
-            this.tableLayoutPanel1.Controls.Add(this.buttonMinus, 3, 2);
-            this.tableLayoutPanel1.Controls.Add(this.button5, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.button7, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.buttonPlus, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button8, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.button9, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.buttonMultiplication, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button4, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.button1, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.buttonEquals, 3, 4);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 118);
-            this.tableLayoutPanel1.MinimumSize = new System.Drawing.Size(50, 50);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(447, 560);
-            this.tableLayoutPanel1.TabIndex = 18;
+            tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tableLayoutPanel1.AutoSize = true;
+            tableLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            tableLayoutPanel1.ColumnCount = 4;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel1.Controls.Add(buttonClear, 0, 0);
+            tableLayoutPanel1.Controls.Add(buttonPoint, 3, 3);
+            tableLayoutPanel1.Controls.Add(button0, 1, 4);
+            tableLayoutPanel1.Controls.Add(buttonDivision, 1, 0);
+            tableLayoutPanel1.Controls.Add(button3, 2, 3);
+            tableLayoutPanel1.Controls.Add(button6, 2, 2);
+            tableLayoutPanel1.Controls.Add(button2, 1, 3);
+            tableLayoutPanel1.Controls.Add(buttonMinus, 3, 2);
+            tableLayoutPanel1.Controls.Add(button5, 1, 2);
+            tableLayoutPanel1.Controls.Add(button7, 0, 1);
+            tableLayoutPanel1.Controls.Add(buttonPlus, 3, 1);
+            tableLayoutPanel1.Controls.Add(button8, 1, 1);
+            tableLayoutPanel1.Controls.Add(button9, 2, 1);
+            tableLayoutPanel1.Controls.Add(buttonMultiplication, 2, 0);
+            tableLayoutPanel1.Controls.Add(button4, 0, 2);
+            tableLayoutPanel1.Controls.Add(button1, 0, 3);
+            tableLayoutPanel1.Controls.Add(buttonEquals, 3, 4);
+            tableLayoutPanel1.Location = new Point(4, 136);
+            tableLayoutPanel1.Margin = new Padding(4, 3, 4, 3);
+            tableLayoutPanel1.MinimumSize = new Size(58, 58);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 5;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.Size = new Size(520, 647);
+            tableLayoutPanel1.TabIndex = 18;
             // 
             // buttonEquals
             // 
-            this.buttonEquals.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonEquals.AutoEllipsis = true;
-            this.buttonEquals.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonEquals.Font = new System.Drawing.Font("Molot", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonEquals.Location = new System.Drawing.Point(336, 451);
-            this.buttonEquals.MinimumSize = new System.Drawing.Size(50, 50);
-            this.buttonEquals.Name = "buttonEquals";
-            this.buttonEquals.Size = new System.Drawing.Size(108, 106);
-            this.buttonEquals.TabIndex = 19;
-            this.buttonEquals.Text = "=";
-            this.buttonEquals.UseVisualStyleBackColor = true;
-            this.buttonEquals.Click += new System.EventHandler(this.ButtonClick);
+            buttonEquals.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            buttonEquals.AutoEllipsis = true;
+            buttonEquals.Cursor = Cursors.Hand;
+            buttonEquals.Font = new Font("Molot", 26.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonEquals.Location = new Point(394, 519);
+            buttonEquals.Margin = new Padding(4, 3, 4, 3);
+            buttonEquals.MinimumSize = new Size(58, 58);
+            buttonEquals.Name = "buttonEquals";
+            buttonEquals.Size = new Size(122, 125);
+            buttonEquals.TabIndex = 16;
+            buttonEquals.Text = "=";
+            buttonEquals.UseVisualStyleBackColor = true;
+            buttonEquals.Click += ButtonClick;
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.output, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel1, 0, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(12, 12);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(453, 681);
-            this.tableLayoutPanel2.TabIndex = 19;
+            tableLayoutPanel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tableLayoutPanel2.ColumnCount = 1;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel2.Controls.Add(output, 0, 0);
+            tableLayoutPanel2.Controls.Add(tableLayoutPanel1, 0, 1);
+            tableLayoutPanel2.Location = new Point(14, 14);
+            tableLayoutPanel2.Margin = new Padding(4, 3, 4, 3);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 2;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 17F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 83F));
+            tableLayoutPanel2.Size = new Size(528, 786);
+            tableLayoutPanel2.TabIndex = 19;
             // 
             // CalculatorForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(477, 705);
-            this.Controls.Add(this.tableLayoutPanel2);
-            this.MinimumSize = new System.Drawing.Size(300, 400);
-            this.Name = "CalculatorForm";
-            this.Text = "Calculator";
-            this.Load += new System.EventHandler(this.Form1_Load);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel2.PerformLayout();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ButtonFace;
+            ClientSize = new Size(556, 813);
+            Controls.Add(tableLayoutPanel2);
+            Margin = new Padding(4, 3, 4, 3);
+            MinimumSize = new Size(347, 456);
+            Name = "CalculatorForm";
+            Text = "Calculator";
+            Load += Form1_Load;
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel2.ResumeLayout(false);
+            tableLayoutPanel2.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion
