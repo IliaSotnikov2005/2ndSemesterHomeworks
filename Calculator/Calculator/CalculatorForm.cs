@@ -2,51 +2,50 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace Calculator
+namespace Calculator;
+
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+
+/// <summary>
+/// Calculator form class.
+/// </summary>
+public partial class CalculatorForm : Form
 {
-    using System;
-    using System.Drawing;
-    using System.Windows.Forms;
+    private readonly Calculator calculator = new ();
 
     /// <summary>
-    /// Calculator form class.
+    /// Initializes a new instance of the <see cref="CalculatorForm"/> class.
     /// </summary>
-    public partial class CalculatorForm : Form
+    public CalculatorForm()
     {
-        private readonly Calculator calculator = new ();
+        this.InitializeComponent();
+        this.output.DataBindings.Add("Text", this.calculator, "CurrentExpression", false, DataSourceUpdateMode.OnPropertyChanged);
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CalculatorForm"/> class.
-        /// </summary>
-        public CalculatorForm()
+    private void Form1_Load(object sender, EventArgs e)
+    {
+    }
+
+    private void ButtonClick(object sender, EventArgs e)
+    {
+        if (sender is not Button buttonSender)
         {
-            this.InitializeComponent();
-            this.output.DataBindings.Add("Text", this.calculator, "CurrentExpression", false, DataSourceUpdateMode.OnPropertyChanged);
+            throw new ArgumentException("Sender is not a button");
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        this.calculator.ProcessInput(buttonSender.Text[0]);
+        this.output.Refresh();
+    }
+
+    private void TextBox1_Resize(object sender, EventArgs e)
+    {
+        if (sender is not TextBox tb)
         {
+            throw new ArgumentException("Sender is not a text box");
         }
 
-        private void ButtonClick(object sender, EventArgs e)
-        {
-            if (sender is not Button buttonSender)
-            {
-                throw new ArgumentException("Sender is not a button");
-            }
-
-            this.calculator.ProcessInput(buttonSender.Text[0]);
-            this.output.Refresh();
-        }
-
-        private void TextBox1_Resize(object sender, EventArgs e)
-        {
-            if (sender is not TextBox tb)
-            {
-                throw new ArgumentException("Sender is not a text box");
-            }
-
-            tb.Font = new Font(tb.Font.FontFamily, tb.Height / 2);
-        }
+        tb.Font = new Font(tb.Font.FontFamily, tb.Height / 2);
     }
 }
