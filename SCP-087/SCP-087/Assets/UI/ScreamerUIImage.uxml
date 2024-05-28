@@ -1,0 +1,3 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Textures/1659719314147994466.jpg?fileID=2800000&amp;guid=e2f007c04daaaf143828ecb636ad51a6&amp;type=3#1659719314147994466&quot;);" />
+</ui:UXML>
