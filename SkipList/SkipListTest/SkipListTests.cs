@@ -5,6 +5,7 @@
 namespace SkipListTest;
 
 using SkipList;
+using NUnit.Framework;
 
 /// <summary>
 /// Tests for skip list.
