@@ -10,5 +10,5 @@ public static class GlobalReferences
     /// <summary>
     /// Gets or sets chance of screamer occurence.
     /// </summary>
-    public static int ScreamerChanse { get; set; }
+    public static int ScreamerChanse { get; set; } = 100;
 }
