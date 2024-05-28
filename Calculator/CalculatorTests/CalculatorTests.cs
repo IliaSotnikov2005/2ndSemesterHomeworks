@@ -1,6 +1,7 @@
 namespace CalculatorTests;
 
 using Calculator;
+
 public class CalculatorTests
 {
     [Test]
