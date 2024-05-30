@@ -16,6 +16,7 @@ public static class NullElementsCounter
     /// <param name="isNuller">An object that defines which elements are "null".</param>
     /// <typeparam name="T">Type of elements.</typeparam>
     /// <returns>The count of "null" elements.</returns>
+    /// <exception cref="ArgumentNullException">Throws if list or isNuller is null.</exception>
     public static int CountNullElements<T>(List<T> list, INullChecker<T> isNuller)
     {
         ArgumentNullException.ThrowIfNull(list);
