@@ -15,5 +15,5 @@ public interface INullChecker<T>
     /// </summary>
     /// <param name="element">Element.</param>
     /// <returns>True if element is "null" else false.</returns>
-    public bool IsNull(T element);
+    public bool IsNull(T? element);
 }
